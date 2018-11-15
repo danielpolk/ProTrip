@@ -1,4 +1,4 @@
-# Pit Stop
+# PitStop
 
 ## Target Audience
 * Road trippers who want to want best local food options and the best gas prices across all of their pit stops.
