@@ -26,10 +26,10 @@
 ## Main Screen
 1. Login screen.
 2. Destination input.
-3A. Food choices
-3B. Gas prices
-3C. Local Events
-3D. Favorites - Search Next Pit Stop
+* Food choices
+* Gas prices
+* Local Events
+* Favorites - Search Next Pit Stop
 
 # Programming logic
 * 
