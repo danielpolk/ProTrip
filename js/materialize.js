@@ -6401,7 +6401,7 @@ $jscomp.polyfill = function (e, r, p, m) {
 
   var _defaults = {
     data: {}, // Autocomplete data set
-    limit: Infinity, // Limit of results the autocomplete shows
+    limit: 3, // Limit of results the autocomplete shows
     onAutocomplete: null, // Callback for when autocompleted
     minLength: 1, // Min characters before autocomplete starts
     sortFunction: function (a, b, inputString) {

@@ -65,3 +65,46 @@ footer.page-footer {
   margin: 0;
 }
 
+
+/* autocomplete styling */
+#myInput {
+  margin-bottom: 0px !important;
+}
+
+.autocomplete {
+  position: relative;
+  display: inline-block;
+}
+
+.autocomplete-items {
+  position: absolute;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  width: 100%;
+  top: 100%;
+  margin-left: 42px;
+}
+
+.autocomplete-items div {
+  padding: 12px;
+  text-align: left;
+  font-size: 20px;
+  font-weight: 500;
+  width: calc(100% - 3.75rem);
+  border-bottom: 1px solid white;
+  border-radius: 1px;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.488); 
+}
+
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #42A5F5; 
+}
+
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: #42A5F5 !important; 
+  color: white; 
+}
