@@ -47,12 +47,12 @@ firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
 
     // User is signed in.
-    document.getElementsById("user-sign-in").style.display = "none";
+    document.getElementById("user-sign-in").style.display = "none";
     console.log("user is signed in");
   } else {
 
     // No user is signed in.
-    document.getElementsById("user-sign-in").style.display = "block";
+    document.getElementById("user-sign-in").style.display = "block";
 
     console.log("user is NOT signed in");
 

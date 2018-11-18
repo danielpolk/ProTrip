@@ -73,11 +73,15 @@ footer.page-footer {
     padding: 0;
     opacity: .9;
     max-height: 90%;
-    width: 55%;
+    width: 50%;
     margin: auto;
     margin-top: 20px;
     overflow-y: auto;
     border-radius: 10px;
     will-change: top, opacity;
     z-index: 100000;
+ }
+
+ .border {
+   background-color: lightgrey;
  }
