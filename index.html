@@ -40,6 +40,44 @@
       <li><a class="btn-floating red darken-4"><i class="material-icons">favorite_border</i></a></li>
     </ul>
   </div>
+<!-- Sign-in pop-up -->
+  <div id="user-sign-in">
+    <div class="modal-content">
+      <div class="row">
+        <div class="col s12">
+          <p style="font-size: 30px">Sign-in or make an account to save your favorite searches.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6">
+          <span>Create an account</span>
+          <form class="new-user">
+              <input placeholder="Username" id="new-username" type="text" class="validate">
+              <label for="username">Username</label>
+              <input placeholder="Email" id="new-email" type="email" class="validate">
+              <label for="email">Email</label>
+              <input placeholder="Password" id="new-password" type="password" class="validate">
+              <label for="password">Password</label>              
+
+          </form>
+
+        </div>
+        <div class="col s6">
+          <span>User Sign-In</span>
+          <form class="existing-user">
+              <input placeholder="Username" id="username" type="text" class="validate">
+              <label for="username">Username</label>
+              <input placeholder="Email" id="email" type="email" class="validate">
+              <label for="email">Email</label>
+              <input placeholder="Password" id="password" type="password" class="validate">
+              <label for="password">Password</label>   
+
+          </form>
+          
+          </div>
+      </div>
+    </div>
+  </div>
 
   <div id="index-banner" class="parallax-container">
     <div class="section no-pad-bot">
@@ -66,7 +104,7 @@
               
         </div>
         <div class="row center">
-          <a href="http://materializecss.com/getting-started.html" id="submit-button" class="btn-large waves-effect waves-light blue lighten-1">Get Started</a>
+          <a href="http://materializecss.com/getting-started.html" id="submit-button" class="btn-large waves-effect waves-light blue lighten-1" style="z-index: 1000">Get Started</a>
         </div>
         <br><br>
 
@@ -267,7 +305,7 @@
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
   <script src="js/main.js"></script>
-  <script src="js/firebase.js"></script>
+  <script src="js/firebase2.js"></script>
   <script src="js/authentication.js"></script>
 
 
