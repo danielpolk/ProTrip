@@ -1,4 +1,29 @@
- //Current user sign-in
+
+$("#first-sign-in-new").on("click", function(){
+  event.preventDefault();
+
+  document.getElementById("login-btns").style.display = "none";
+  document.getElementById("create-account").style.display = "block";
+});
+
+$("#first-sign-in").on("click", function(){
+  event.preventDefault();
+
+  document.getElementById("login-btns").style.display = "none";
+  document.getElementById("current-user").style.display = "block";
+});
+
+$("#cancel-sign-in").on("click", function(){
+  event.preventDefault();
+
+  document.getElementById("login-btns").style.display = "none";
+  document.getElementById("user-sign-in").style.display = "none";
+    let ms = document.getElementById("main-section");
+    ms.classList.remove("blur-effect");
+});
+
+
+//Current user sign-in
 $("#sign-in").on("click", function login() {
 
   event.preventDefault();
@@ -48,11 +73,15 @@ firebase.auth().onAuthStateChanged(function(user) {
 
     // User is signed in.
     document.getElementById("user-sign-in").style.display = "none";
+    let ms = document.getElementById("main-section");
+    ms.classList.remove("blur-effect");
     console.log("user is signed in");
   } else {
 
     // No user is signed in.
     document.getElementById("user-sign-in").style.display = "block";
+    let ms = document.getElementById("main-section");
+    ms.classList.add("blur-effect");
 
     console.log("user is NOT signed in");
 

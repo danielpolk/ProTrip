@@ -41,43 +41,87 @@
     </ul>
   </div>
 <!-- Sign-in pop-up -->
-  <div id="user-sign-in">
+  <div class="container" id="user-sign-in">
     <div class="modal-content">
       <div class="row">
         <div class="col s12">
-          <p style="font-size: 30px">Sign-in or make an account to save your favorite searches.</p>
+            
+          <h4 class="center">Sign in save your favorite searches.</h4>
         </div>
       </div>
-      <div class="row">
-        <div class="col s6">
-          <span>Create an account</span>
+      <div class="row userSignIn">
+
+        <div id="login-btns">
+          <div class="row" style="margin-bottom: 10px;">
+              <div class="col s12">
+                  <div class="center">
+                      <button id="first-sign-in-new" class="btn-large waves-effect waves-light blue lighten-1" type="submit" name="action">Create a New Account
+                      </button>  
+                  </div>  
+              </div>
+          </div>
+          <div class="row" style="margin-bottom: 0px;">
+              
+                  <div class="center">
+                      <p>OR</p>
+                  </div>  
+              
+          </div>
+          <div class="row" style="margin-bottom: 20px;">
+              <div class="col s12">
+                  <div class="center">
+                      <button id="first-sign-in" class="btn-large waves-effect waves-light blue lighten-1" type="submit" name="action">Log In
+                      </button>  
+                  </div>  
+              </div>
+          </div>
+          <div class="row" style="margin-bottom: 0px;">
+              <div class="col s12">
+                  <div class="center">
+                      <button id="cancel-sign-in" class="btn-small waves-effect waves-light blue lighten-3" type="submit" name="action">Continue Without Signing In
+                      </button>  
+                  </div>  
+              </div>
+          </div>
+        </div>
+
+        <div id="create-account" class="col s12" style="display: none">
+          <span>Create a new account</span>
 
           <form class="new-user">
               <input placeholder="Username" id="new-username" type="text" class="validate">
-              <label for="username" style="color: black">Username</label>
+              <label for="username" >Username</label>
               <input placeholder="Email" id="new-email" type="email" class="validate">
               <label for="email">Email</label>
               <input placeholder="Password" id="new-password" type="password" class="validate">
-              <label for="password">Password</label>                 
+              <label for="password">Password</label>  
+              <div class="center">
+                  <button class="btn waves-effect waves-light blue lighten-1" type="submit" name="action">Create New Account
+                  </button>  
+              </div>               
           </form>
-
         </div>
-        <div class="col s6">
-          <span>User Sign-In</span>
-          <form class="existing-user">
 
+        <div class="col s12" id="current-user" style="display: none">
+          <span>Log In</span>
+
+          <form class="existing-user">
               <input placeholder="Email" id="email" type="email" class="validate">
               <label for="email">Email</label>
               <input placeholder="Password" id="password" type="password" class="validate">
               <label for="password">Password</label>   
-
+              <br>
+              <div class="center">
+                <button class="btn waves-effect waves-light blue lighten-1" type="submit" name="action">Log In
+                </button>  
+              </div>  
           </form>
-          
         </div>
+
       </div>
     </div>
   </div>
-
+<div id="main-section">
   <div id="index-banner" class="parallax-container">
     <div class="section no-pad-bot">
       <div class="container">
@@ -103,7 +147,7 @@
               
         </div>
         <div class="row center">
-          <a href="http://materializecss.com/getting-started.html" id="submit-button" class="btn-large waves-effect waves-light blue lighten-1" style="z-index: 1000">Get Started</a>
+          <a href="#" id="submit-button" class="btn-large waves-effect waves-light blue lighten-1" style="z-index: 1000">Get Started</a>
         </div>
         <br><br>
 
@@ -254,7 +298,7 @@
 
     </div>
   </div>
-
+</div>
 
   <footer class="page-footer blue blue darken-1">
     <div class="container">
