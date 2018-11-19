@@ -89,3 +89,8 @@ footer.page-footer {
   -webkit-filter: blur(5px) grayscale(50%);
  }
 
+ #cancel-sign-in {
+   border: none;
+   background: none;
+   border-bottom: 1px dotted white;
+ }
