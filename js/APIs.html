@@ -111,7 +111,6 @@
             var gasPriceStored = [];
             var queryURL = "http://api.mygasfeed.com/stations/radius/" + lat + "/" + lon +
                 "/1/reg/Price/bpxxw96ps2.json";
-            console.log("station url: " + queryURL)
             $.ajax({
                 url: queryURL,
                 method: "GET"
@@ -151,7 +150,6 @@
                     }).then(function (response) {
                         // var gasPriceStored = [];
                         console.log(response);
-                        console.log("before for loop" + response.restaurants[0].restaurant)
                         lon = response.restaurants[0].restaurant.location.longitude
                         lat = response.restaurants[0].restaurant.location.latitude
 
@@ -178,92 +176,114 @@
         resFinder();
         console.log("stored value" + storedCityID)
 
-        // ===== close by station feature?
 
         function gasStationAPI(response, nameStored, gasPriceStored) {
+            console.log(response)
             var gasPriceStored = [];
             var gasCityNameStored = [];
-            console.log(response)
-            for (var i = 0; i < (response.stations.length); i++) {
-                // console.log(response.stations[i]);
+            for (var i = 0; i < 6; i++) {
                 var stationName = response.stations[i].station;
                 var prices = response.stations[i].reg_price;
+                var gasAddress = response.stations[i].address
                 var gasCity = response.stations[i].city;
-                // var str = "hello world";
+                var state = response.stations[i].region;
+                var zipcode = response.stations[i].zip;
                 city = city.toLowerCase().replace(/\b[a-z]/g, function (letter) {
                     return letter.toUpperCase();
                 });
-                console.log("this is city name from gas station:" + city)
-                if (stationName !== "Unbranded" && prices !== "N/A" && gasCity === city) {
-                    var stationP = $('<p>');
-                    var priceP = $('<p>');
-                    stationP.text(stationName);
-                    priceP.text(prices);
-                    nameStored.push(stationName);
-                    gasPriceStored.push(prices);
+                // if (stationName !== "Unbranded" && prices !== "N/A" && gasCity === city) {
+                //     // var stationP = $('<p>');
+                //     // var priceP = $('<p>');
+                //     // stationP.text(stationName);
+                //     // priceP.text(prices);
+                //     // nameStored.push(stationName);
+                //     // gasPriceStored.push(prices);
 
-                    var gasC = $('<p>');
-                    gasC.text(gasCity);
-                    gasCityNameStored.push(gasCity);
-                }
-                $('#stations').text(nameStored);
-                $('#content').text(gasPriceStored);
-                $('#gasCity').text(gasCityNameStored)
+                //     // var gasC = $('<p>');
+                //     // gasC.text(gasCity);
+                //     gasCityNameStored.push(gasCity);
+                // }
+                
+                gasInfoDiv(stationName, prices, gasAddress, gasCity, state, zipcode)
+
             }
 
 
             // priceFinder()
         }
 
-        function createMenuDiv(a, rating, addr, menu) {
+        // function createMenuDiv(a, rating, addr, menu) {
 
-            //     <div class="card-header">
-            var card_header = $('<div>').addClass('card-header')
-            //     <div class="row">
+        //     //     <div class="card-header">
+        //     var card_header = $('<div>').addClass('card-header')
+        //     //     <div class="row">
+        //     var row = $('<div>').addClass('row');
+        //     //         <div class="col-lg-6">Name</div>
+        //     var restName = $('<div>').addClass('col-lg-6').text(a)
+        //     //         <div class="col-lg-6">Rating</div>
+        //     var rating = $("<div>").addClass('col-lg-6').text(rating);
+        //     row.append(restName).append(rating);
+        //     card_header.append(row)
+
+
+
+        //     //     </div>
+        //     // </div>
+        //     // <div class="card-body">
+        //     var card_body = $('<div>').addClass('card-body')
+        //     //     <div class="row">
+        //     var rowBody1 = $('<div>').addClass('row');
+        //     //         <div class="col-lg-6">Address</div>
+        //     var address = $('<div>').addClass('col-lg-6').text(addr)
+        //     //         <div class="col-lg-6">Pricing</div>
+
+        //     //     </div>
+        //     //     <div class="row">
+
+        //     //             <div class="col-lg-6">
+
+        //     //                 <div class="row">
+        //     //                         <div class="col-lg-12">Phone</div>
+        //     //                 </div>
+        //     //                 <div class="row">
+        //     //                         <div class="col-lg-12">Hours</div>
+        //     //                     </div>
+        //     //             </div>
+        //     //             <div class="col-lg-6">
+        //     var menuDiv = $('<div>').addClass('col-lg-6')
+        //     var menu_link = $('<a>').attr('target', '_blank').attr("href", menu).text('Menu Link');
+        //     menuDiv.append(menu_link)
+        //     rowBody1.append(address).append(menuDiv);
+        //     card_body.append(rowBody1);
+
+        //     $('#sample').append(card_header).append(card_body)
+        //     //                 Pictures
+        //     //             </div>
+        //     //     </div>
+        //     // </div>
+
+        // }
+
+        function gasInfoDiv(name, price, address, city, state, zip) {
+
+        if (name !== "Unbranded" && price !== "N/A") {
+
+            var card_header1 = $('<div>').addClass('card-header')
             var row = $('<div>').addClass('row');
-            //         <div class="col-lg-6">Name</div>
-            var restName = $('<div>').addClass('col-lg-6').text(a)
-            //         <div class="col-lg-6">Rating</div>
-            var rating = $("<div>").addClass('col-lg-6').text(rating);
-            row.append(restName).append(rating);
-            card_header.append(row)
+            var station = $('<div>').addClass('col-lg-6').text(name)
+            var gasAddr = $('<div>').addClass('col-lg-6').text(address +" "+ city +", "+ state +", "+ zip)
+            row.append(station).append(gasAddr)
+            card_header1.append(row)
 
+            var card_body1 = $('<div>').addClass('card-body')
+            var rowBody2 = $('<div>').addClass('row');
+            var gasPrice = $('<div>').addClass('col-lg-6').text(price)
+            rowBody2.append(price)
+            card_body1.append(rowBody2);
 
-
-            //     </div>
-            // </div>
-            // <div class="card-body">
-            var card_body = $('<div>').addClass('card-body')
-            //     <div class="row">
-            var rowBody1 = $('<div>').addClass('row');
-            //         <div class="col-lg-6">Address</div>
-            var address = $('<div>').addClass('col-lg-6').text(addr)
-            //         <div class="col-lg-6">Pricing</div>
-
-            //     </div>
-            //     <div class="row">
-
-            //             <div class="col-lg-6">
-
-            //                 <div class="row">
-            //                         <div class="col-lg-12">Phone</div>
-            //                 </div>
-            //                 <div class="row">
-            //                         <div class="col-lg-12">Hours</div>
-            //                     </div>
-            //             </div>
-            //             <div class="col-lg-6">
-            var menuDiv = $('<div>').addClass('col-lg-6')
-            var menu_link = $('<a>').attr('target', '_blank').attr("href", menu).text('Menu Link');
-            menuDiv.append(menu_link)
-            rowBody1.append(address).append(menuDiv);
-            card_body.append(rowBody1);
-
-            $('#sample').append(card_header).append(card_body)
-            //                 Pictures
-            //             </div>
-            //     </div>
-            // </div>
+            $('#sample').append(card_header1).append(card_body1)
+        }
+    
 
         }
 
@@ -271,18 +291,18 @@
             var qURL3 =
                 "https://developers.zomato.com/api/v2.1/restaurant?apikey=e54720b38895f113317f79aa68f4ca8e&res_id=" +
                 restID;
-                console.log("QURL3" + qURL3)
+            console.log("QURL3" + qURL3)
             $.ajax({
                 url: qURL3,
                 method: "GET"
             }).then(function (response) {
                 console.log("rest info: " + response.name)
 
-                    var restaurantName = response.name
-                    var rating = response.user_rating.aggregate_rating
-                    var restaurantAddress = response.location.address
-                    var menu_URL = response.menu_url
-                    createMenuDiv(restaurantName, rating, restaurantAddress, menu_URL)
+                var restaurantName = response.name
+                var rating = response.user_rating.aggregate_rating
+                var restaurantAddress = response.location.address
+                var menu_URL = response.menu_url
+                //createMenuDiv(restaurantName, rating, restaurantAddress, menu_URL)
 
             })
         }
