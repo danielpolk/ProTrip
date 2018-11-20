@@ -26,7 +26,7 @@
 */
 
 //gas station API function to be in the ajax call below it
-function gasStationAPI(lon, lat, city_input) {
+function gasStationFinder(lon, lat, city_input) {
     // var nameStored = [];
     // var gasPriceStored = [];
     var queryURL = "http://api.mygasfeed.com/stations/radius/" + lat + "/" + lon + "/1/reg/Price/bpxxw96ps2.json";
@@ -40,7 +40,7 @@ function gasStationAPI(lon, lat, city_input) {
     })
 };
 
-function gasStationResponse(response, city_input /* it used to be the array saved in the gasStationAPI function but moved to this function check after done */) {
+function gasStationResponse(response, city_input /* it used to be the array saved in the gasStationFinder function but moved to this function check after done */) {
     //push the value to the variables below to store 
     var gas_price_stored = [];
     var gas_city_name_stored = [];
@@ -75,33 +75,66 @@ function restaurantFinder() {
         e.preventDefault();
         // make sure that the input will be all lower case and trimmed
         city_input = $("#city_input").val().trim().toLowerCase();
+        state_input = $("#state_input").val();
+        
         //getting the city ID for Zomato API
         var queryURL = "https://developers.zomato.com/api/v2.1/cities?apikey=e54720b38895f113317f79aa68f4ca8e&q=" + city_input;
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            //getting the city ID from the first API call
-            var storedCityID = response.location_suggestions[0].id;
-            console.log(response);
-            //get another API call from Zomato API
-            var queryURL2 = "https://developers.zomato.com/api/v2.1/search?apikey=e54720b38895f113317f79aa68f4ca8e&entity_id=" + storedCityID + "&entity_type=city";
-            console.log("URL" + queryURL2)
-            $.ajax({
-                url: queryURL2,
-                method: "GET"
-            }).then(function (response) {
-                console.log(response);
-                console.log("before for loop" + response.restaurants[0].restaurant)
-                // get the longitude and latitude to use it for the Gas Feed API
-                lon = response.restaurants[0].restaurant.location.longitude
-                lat = response.restaurants[0].restaurant.location.latitude
-                console.log("this is lon: " + lon + " ; this is lat: " + lat)
-                // calling the gas feed api function to feed with longitudeand latitude from zomato API
-                gasStationAPI(lon, lat, city_input);
-            })
-        })
-    })
+            for (let index = 0; index < (response.location_suggestions.length); index++) {
+                var cityCheck = (JSON.stringify(response.location_suggestions[index].name)).toLowerCase();
+                var stateCheck = JSON.stringify(response.location_suggestions[index].state_name);
+            //    var helo= hello.toLowerCase();
+            // var hithere=cityCheck.includes(city_input)
+                if(cityCheck.includes(city_input) && state_input == stateCheck){
+                    //getting the city ID from the first API call
+                    var storedCityID = response.location_suggestions[0].id;
+                    console.log(response);
+                    //get another API call from Zomato API
+                    var queryURL2 = "https://developers.zomato.com/api/v2.1/search?apikey=e54720b38895f113317f79aa68f4ca8e&entity_id=" + storedCityID + "&entity_type=city";
+                    console.log("URL" + queryURL2)
+                    $.ajax({
+                        url: queryURL2,
+                        method: "GET"
+                    }).then(function (response) {
+                        console.log(response);
+                        console.log("before for loop" + response.restaurants[0].restaurant)
+                        // get the longitude and latitude to use it for the Gas Feed API
+                        lon = response.restaurants[0].restaurant.location.longitude
+                        lat = response.restaurants[0].restaurant.location.latitude
+                        console.log("this is lon: " + lon + " ; this is lat: " + lat)
+                        // calling the gas feed api function to feed with longitudeand latitude from zomato API
+                        gasStationFinder(lon, lat, city_input);
+                        eventFinder(city_input);
+                    })
+                }
+            }
+        });
+    });
 };
 restaurantFinder();
 
+
+function eventFinder(city_input){
+            var event_name_stored = [];
+            var event_date_stored = [];
+            var event_venue_stored = []; 
+            var queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?city="+ city_input +"&apikey=hhGX8q6JtGAAl35uFcsEeWLTAuCdjSVc&size=4";
+            console.log("Event url: " + queryURL)
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            }).then(function (response) {
+                for (var i = 0; i < (response._embedded.events.length); i++) {
+                    var event_name_stored = response._embedded.events[i].name;
+                    var event_date_stored = response._embedded.events[i].dates.start.localDate;
+                    var event_venue_stored = response._embedded.events[i]._embedded.venues[i];
+                    // creating the div for the gas station
+                    // create the element
+                    // create the text for element which will be variables below the for loop
+                    // push these variables to the div section
+                }
+            })
+        };
