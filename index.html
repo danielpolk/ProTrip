@@ -19,11 +19,11 @@
     <div class="nav-wrapper container">
       <a id="logo-container" href="#" class="brand-logo">PitStop</a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="#">Login</a></li>
+        <li><a class="account-info" href="#">Login</a></li>
       </ul>
 
       <ul id="nav-mobile" class="sidenav">
-        <li><a href="#">Account Login</a></li>
+        <li><a class="account-info" href="#">Account Login</a></li>
       </ul>
       <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">account_circle</i></a>
     </div>
@@ -40,7 +40,88 @@
       <li><a href="#favoritesSection" class="btn-floating red darken-4"><i class="material-icons">favorite_border</i></a></li>
     </ul>
   </div>
+<!-- Sign-in pop-up -->
+  <div class="container" id="user-sign-in">
+    <div class="modal-content">
+      <div class="row">
+        <div class="col s12">
+            
+          <h4 class="center">Sign in to save your favorite searches.</h4>
+        </div>
+      </div>
+      <div class="row userSignIn">
 
+        <div id="login-btns">
+          <div class="row" style="margin-bottom: 10px;">
+              <div class="col s12">
+                  <div class="center">
+                      <button id="first-sign-in-new" class="btn-large waves-effect waves-light blue lighten-1" type="submit" name="action">Create a New Account
+                      </button>  
+                  </div>  
+              </div>
+          </div>
+          <div class="row" style="margin-bottom: 0px;">
+              
+                  <div class="center">
+                      <p>OR</p>
+                  </div>  
+              
+          </div>
+          <div class="row" style="margin-bottom: 20px;">
+              <div class="col s12">
+                  <div class="center">
+                      <button id="first-sign-in" class="btn-large waves-effect waves-light blue lighten-1" type="submit" name="action">Log In
+                      </button>  
+                  </div>  
+              </div>
+          </div>
+          <div class="row" style="margin-bottom: 0px;">
+              <div class="col s12">
+                  <div class="center">
+                      <button id="cancel-sign-in" class="btn-small" type="submit" name="action">Continue Without Signing In
+                      </button>  
+                  </div>  
+              </div>
+          </div>
+        </div>
+
+        <div id="create-account" class="col s12" style="display: none">
+          <span>Create a new account</span>
+
+          <form class="new-user">
+              <input placeholder="Username" id="new-username" type="text" class="validate">
+              <label for="username" >Username</label>
+              <input placeholder="Email" id="new-email" type="email" class="validate">
+              <label for="email">Email</label>
+              <input placeholder="Password" id="new-password" type="password" class="validate">
+              <label for="password">Password</label>  
+              <div class="center">
+                  <button class="btn waves-effect waves-light blue lighten-1" id="new-member" type="submit" name="action">Create New Account
+                  </button>  
+              </div>               
+          </form>
+        </div>
+
+        <div class="col s12" id="current-user" style="display: none">
+          <span>Log In</span>
+
+          <form class="existing-user">
+              <input placeholder="Email" id="email" type="email" class="validate">
+              <label for="email">Email</label>
+              <input placeholder="Password" id="password" type="password" class="validate">
+              <label for="password">Password</label>   
+              <br>
+              <div class="center">
+                <button class="btn waves-effect waves-light blue lighten-1" id="sign-in" type="submit" name="action">Log In
+                </button>  
+              </div>  
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+<div id="main-section">
   <div id="index-banner" class="parallax-container">
     <div class="section no-pad-bot">
       <div class="container">
@@ -72,7 +153,9 @@
               
         </div>
         <div class="row center">
+
           <a href="#" id="submit-button" class="btn-large waves-effect waves-light blue lighten-1">Get Started</a>
+
         </div>
         <br><br>
 
@@ -99,7 +182,7 @@
         <div class="col s12 m4">
           <div class="icon-block">
             <h2 class="center"><i class="material-icons">local_gas_station</i><i class="material-icons">local_dining</i><i class="material-icons">local_activity</i></h2>
-            <h5 class="center">We'll give recommedations</h5>
+            <h5 class="center">We'll give recommendations</h5>
 
             <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
           </div>
@@ -232,7 +315,7 @@
 
     </div>
   </div>
-
+</div>
 
   <footer class="page-footer blue blue darken-1">
     <div class="container">
@@ -283,7 +366,7 @@
   <script src="js/api.js"></script>
   <script src="js/init.js"></script>
   <script src="js/main.js"></script>
-  <script src="js/firebase.js"></script>
+  <script src="js/firebase2.js"></script>
   <script src="js/authentication.js"></script>
 
 
