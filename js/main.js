@@ -156,5 +156,7 @@ var countries = [
   "Wisconsin",
   "Wyoming"
 ]
-/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+
+/*initiate the autocomplete function on the "state_input" element, and pass along the countries array as possible autocomplete values:*/
+
 autocomplete(document.getElementById("state_input"), countries);
