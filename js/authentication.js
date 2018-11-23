@@ -79,6 +79,10 @@ $("#new-member").on("click", function login(event) {
 
 });
 
+$("#new-account").on("click", function() {
+
+  noUserSignedIn();
+})
 
 //This is a listener for if the user is logged in or not
 firebase.auth().onAuthStateChanged(function(user) {
@@ -97,6 +101,7 @@ firebase.auth().onAuthStateChanged(function(user) {
       currentUser = snapshot.val();
       userName = currentUser.userName;
 
+      $(".account-info").removeAttr("onclick");
       $(".account-info").empty();
       $(".account-info").text(userName);
 
@@ -148,6 +153,7 @@ function noUserSignedIn() {
   currentUser;
   newMember = null;
 
+  $(".account-info").attr("onclick", "noUserSignedIn()");
   $(".account-info").empty();
   $(".account-info").text("Login");
 };
