@@ -34,10 +34,10 @@
       <i class="large material-icons">map</i>
     </a>
     <ul>
-      <li><a class="btn-floating teal darken-1"><i class="material-icons">local_gas_station</i></a></li>
-      <li><a class="btn-floating green darken-4"><i class="material-icons">local_dining</i></a></li>
-      <li><a class="btn-floating orange darken-2"><i class="material-icons">local_activity</i></a></li>
-      <li><a class="btn-floating red darken-4"><i class="material-icons">favorite_border</i></a></li>
+      <li><a href="#gasSection" class="btn-floating teal darken-1"><i class="material-icons">local_gas_station</i></a></li>
+      <li><a href="#foodSection" class="btn-floating green darken-4"><i class="material-icons">local_dining</i></a></li>
+      <li><a href="#activitiesSection" class="btn-floating orange darken-2"><i class="material-icons">local_activity</i></a></li>
+      <li><a href="#favoritesSection" class="btn-floating red darken-4"><i class="material-icons">favorite_border</i></a></li>
     </ul>
   </div>
 <!-- Sign-in pop-up -->
@@ -133,21 +133,29 @@
               <div class="row">
                 <div class="input-field col s12">
                   <i class="material-icons prefix">location_city</i>
-                  <input id="icon_city" type="text" class="validate">
-                  <label for="icon_city">City</label>
+                  <input id="city_input" type="text" class="validate">
+                  <label for="city_input">City</label>
                 </div>
-                <div class="input-field col s12">
-                  <i class="material-icons prefix">filter_hdr</i>
-                  <input id="icon_state" type="text" class="validate">
-                  <label for="icon_state">State</label>
-                </div>
+      
+                
+                <form autocomplete="off" action="/action_page.php">
+                  <div class="autocomplete input-field col s12">
+                    <i class="material-icons prefix">filter_hdr</i>
+                    <input id="state_input" type="text" name="myState">
+                    <label for="state_input">State</label>
+
+                  </div>
+                </form>
+                <!-- </div> -->
               </div>
             </form>
           </div>
               
         </div>
         <div class="row center">
-          <a href="#" id="submit-button" class="btn-large waves-effect waves-light blue lighten-1" style="z-index: 1000">Get Started</a>
+
+          <a href="#" id="submit-button" class="btn-large waves-effect waves-light blue lighten-1">Get Started</a>
+
         </div>
         <br><br>
 
@@ -209,7 +217,7 @@
   <div class="container">
     <div class="section">
 
-      <div class="row">
+      <div id="gasSection" class="row">
         <div class="col s12 center">
           <h3><i class="mdi-content-send brown-text"></i></h3>
           <h4>Gas</h4>
@@ -232,17 +240,21 @@
     <div class="parallax"><img src="../Project-1/assets/images/background15.jpg" alt="Unsplashed background img 3"></div>
   </div>
 
-  <div class="container">
+  <div id="foodSection" class="container">
     <div class="section">
 
       <div class="row">
         <div class="col s12 center">
           <h3><i class="mdi-content-send brown-text"></i></h3>
           <h4>Food</h4>
+          <!-- API food card starts -->
+            <div id="food_cards">
+            
+            </div>
+          <!-- API food card ends -->
           <p class="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
         </div>
       </div>
-
     </div>
   </div>
 
@@ -258,13 +270,18 @@
     <div class="parallax"><img src="../Project-1/assets/images/background17.jpg" alt="Unsplashed background img 3"></div>
   </div>
 
-  <div class="container">
+  <div id="activitiesSection" class="container">
     <div class="section">
 
       <div class="row">
         <div class="col s12 center">
           <h3><i class="mdi-content-send brown-text"></i></h3>
           <h4>Activities</h4>
+           <!-- API event card starts -->
+            <div id="event_cards">
+            
+            </div>
+          <!-- API event card ends -->
           <p class="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
         </div>
       </div>
@@ -285,7 +302,7 @@
   </div>
 
 
-  <div class="container">
+  <div id="favoritesSection" class="container">
     <div class="section">
 
       <div class="row">
@@ -346,6 +363,7 @@
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
+  <script src="js/api.js"></script>
   <script src="js/init.js"></script>
   <script src="js/main.js"></script>
   <script src="js/firebase2.js"></script>

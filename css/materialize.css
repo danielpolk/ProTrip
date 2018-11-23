@@ -3445,8 +3445,8 @@ table span.badge {
 }
 
 .col .row {
-  margin-left: -0.75rem;
-  margin-right: -0.75rem;
+  margin-left: -1.75rem;
+  margin-right: 1.25rem;
 }
 
 .section {
@@ -5520,6 +5520,7 @@ button.btn-floating {
   line-height: 54px;
   font-size: 15px;
   padding: 0 28px;
+  margin-left: 20px;
 }
 
 .btn-large i {
@@ -6125,17 +6126,17 @@ input[type=tel]:not(.browser-default),
 input[type=number]:not(.browser-default),
 input[type=search]:not(.browser-default),
 textarea.materialize-textarea {
-  background-color: transparent;
+  background-color: rgba(255, 255, 255, 0.488);
   border: none;
   border-bottom: 1px solid white;
-  border-radius: 0;
+  border-radius: 2px;
   outline: none;
   height: 3rem;
   width: 100%;
   font-size: 30px;
   color: white;
   margin: 0 0 8px 0;
-  padding: 0;
+  padding: 5px;
   -webkit-box-shadow: none;
           box-shadow: none;
   -webkit-box-sizing: content-box;
@@ -6521,9 +6522,10 @@ textarea.materialize-textarea + label:after, .select-wrapper + label:after {
 .input-field > label {
   color: white;
   position: absolute;
-  top: 0;
-  left: 0;
-  font-size: 1rem;
+  top: 12px !important;
+  left: 20px !important;
+  /* margin-left: 50px !important; */
+  font-size: 1.5rem;
   cursor: text;
   -webkit-transition: color .2s ease-out, -webkit-transform .2s ease-out;
   transition: color .2s ease-out, -webkit-transform .2s ease-out;
@@ -6537,8 +6539,8 @@ textarea.materialize-textarea + label:after, .select-wrapper + label:after {
 }
 
 .input-field > label:not(.label-icon).active {
-  -webkit-transform: translateY(-14px) scale(0.8);
-          transform: translateY(-14px) scale(0.8);
+  -webkit-transform: translateY(-30px) scale(0.8);
+          transform: translateY(-30px) scale(0.8);
   -webkit-transform-origin: 0 0;
           transform-origin: 0 0;
 }

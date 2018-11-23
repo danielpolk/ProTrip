@@ -65,6 +65,7 @@ footer.page-footer {
   margin: 0;
 }
 
+
  #user-sign-in{
     position: fixed;
     left: 0;
@@ -96,3 +97,68 @@ footer.page-footer {
    border-bottom: 1px dotted white;
  }
  
+
+/* autocomplete styling */
+#state_input {
+  margin-bottom: 0px !important;
+}
+
+.autocomplete {
+  position: relative;
+  display: inline-block;
+}
+
+.autocomplete-items {
+  position: absolute;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  width: 100%;
+  top: 100%;
+  margin-left: 43px;
+}
+
+.autocomplete-items div {
+  padding: 12px;
+  text-align: left;
+  font-size: 20px;
+  font-weight: 500;
+  width: calc(100% - 3.75rem);
+  border-bottom: 1px solid white;
+  border-radius: 1px;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.488); 
+}
+
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #42A5F5; 
+}
+
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: #42A5F5 !important; 
+  color: white; 
+}
+
+.fav-btn.btn-floating.halfway-fab{
+  top: 18px;
+  right: 18px;
+
+}
+
+.btn-small.rating-btn{
+      position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.card .card-image img {
+  height: 212px;
+}
+
+.card .card-image .card-title {
+  text-shadow: 1px 1px 2px black, 0 0 1em #d1d1d1, 0 0 0.2em #5a5a5a;
+  color: white;
+ 
+}
