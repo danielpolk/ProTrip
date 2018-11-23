@@ -70,9 +70,10 @@ footer.page-footer {
     left: 0;
     right: 0;
     background-color: rgba(87, 85, 85, 0.678);
-    padding: 20px;
-    max-height: 90%;
-    max-width: 30%;
+    padding: 10px;
+    max-height: 100%;
+    max-width: 50%;
+    width: fit-content;
     margin: auto;
     margin-top: 10px;
     overflow-y: auto;

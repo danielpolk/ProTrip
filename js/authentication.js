@@ -1,19 +1,30 @@
+let userId;
+let userName;
+let currentUser;
+let newMember = null;
 
-$("#first-sign-in-new").on("click", function(){
+$(document).ready(function() {
+
+    document.getElementById("user-sign-in").style.display = "none";
+    let ms = document.getElementById("main-section");
+    ms.classList.remove("blur-effect");
+});
+
+$("#first-sign-in-new").on("click", function(event){
   event.preventDefault();
 
   document.getElementById("login-btns").style.display = "none";
   document.getElementById("create-account").style.display = "block";
 });
 
-$("#first-sign-in").on("click", function(){
+$("#first-sign-in").on("click", function(event){
   event.preventDefault();
 
   document.getElementById("login-btns").style.display = "none";
   document.getElementById("current-user").style.display = "block";
 });
 
-$("#cancel-sign-in").on("click", function(){
+$("#cancel-sign-in").on("click", function(event){
   event.preventDefault();
 
   document.getElementById("login-btns").style.display = "none";
@@ -24,7 +35,7 @@ $("#cancel-sign-in").on("click", function(){
 
 
 //Current user sign-in
-$("#sign-in").on("click", function login() {
+$("#sign-in").on("click", function login(event) {
 
   event.preventDefault();
 
@@ -46,12 +57,14 @@ $("#sign-in").on("click", function login() {
 });
 
 //Creating a new user
-$("#new-member").on("click", function login() {
+$("#new-member").on("click", function login(event) {
 
   event.preventDefault();
 
-  let userEmail = $("#email").val().trim().toLowerCase();
-  let userPassword = $("#password").val().trim().toLowerCase();
+  userName = $("#new-username").val().trim().toLowerCase();
+  let userEmail = $("#new-email").val().trim().toLowerCase();
+  let userPassword = $("#new-password").val().trim().toLowerCase();
+  newMember = 1;
 
 
   //Creating a new user
@@ -59,7 +72,7 @@ $("#new-member").on("click", function login() {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
-
+   
     window.alert("Error: " + errorMessage);
     
   });
@@ -75,15 +88,27 @@ firebase.auth().onAuthStateChanged(function(user) {
     document.getElementById("user-sign-in").style.display = "none";
     let ms = document.getElementById("main-section");
     ms.classList.remove("blur-effect");
-    console.log("user is signed in");
+    userId = user.uid;
+    if (newMember === 1) {
+      writeUserData(userId, userName);
+    };
+
+    return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
+      currentUser = snapshot.val();
+      userName = currentUser.userName;
+
+      $(".account-info").empty();
+      $(".account-info").text(userName);
+
+    });
+
+    // `/users/${userId}`
+  
   } else {
 
-    // No user is signed in.
-    document.getElementById("user-sign-in").style.display = "block";
-    let ms = document.getElementById("main-section");
-    ms.classList.add("blur-effect");
-
     console.log("user is NOT signed in");
+
+    setTimeout(noUserSignedIn, 3000);
 
   }
 });
@@ -97,3 +122,32 @@ function logout() {
   });
 };
 
+//Writes new members info into database
+function writeUserData(userId, userName) {
+  firebase.database().ref('users/' + userId).set({
+    userName: userName,
+    locations: "",
+  });
+}
+
+//This is for the modal display to pop up if they aren't signed in
+function noUserSignedIn() {
+
+  // No user is signed in.
+  document.getElementById("user-sign-in").style.display = "block";
+  document.getElementById("login-btns").style.display = "block";
+  document.getElementById("create-account").style.display = "none";
+  document.getElementById("current-user").style.display = "none";
+
+
+  let ms = document.getElementById("main-section");
+  ms.classList.add("blur-effect");
+
+  userId;
+  userName;
+  currentUser;
+  newMember = null;
+
+  $(".account-info").empty();
+  $(".account-info").text("Login");
+};
