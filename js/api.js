@@ -29,7 +29,7 @@ console.log("we are live")
 function gasStationFinder(lon, lat, city_input) {
     // var nameStored = [];
     // var gasPriceStored = [];
-    var queryURL = "http://api.mygasfeed.com/stations/radius/" + lat + "/" + lon + "/7/reg/Price/bpxxw96ps2.json";
+    var queryURL = "http://api.mygasfeed.com/stations/radius/" + lat + "/" + lon + "/3/reg/Price/bpxxw96ps2.json";
     // console.log("station url: " + queryURL)
     $.ajax({
         url: queryURL,
@@ -45,7 +45,7 @@ function gasStationFinder(lon, lat, city_input) {
 function gasStationResponse(response, city_input) {
     
 
-    for (var i = 0; i < (15); i++) {
+    for (var i = 0; i < (3); i++) {
         var gas_station_name = response.stations[i].station;
         var gas_price = response.stations[i].reg_price;
         var gas_address = response.stations[i].address
@@ -67,7 +67,7 @@ function gasStationResponse(response, city_input) {
             var gas_div_col = $("<div>").addClass("col s12 m6")
             var gas_div = $("<div>").addClass("card")
             var gas_div_image = $("<div>").addClass("card-image")
-            var gas_main_img = $("<img>").attr("src", "assets/images/texaco.png")
+            // var gas_main_img = $("<img>").attr("src", "nothing")
             var gas_name_span = $("<span>").addClass("card-title").text(gas_station_name)
             var gas_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>")
             // var event_rating = $("<div class='btn-small rating-btn' style='background-color:#" + color_rating + "';>" + res_rating + "/5</div>")
@@ -77,7 +77,7 @@ function gasStationResponse(response, city_input) {
             var line_break2 = $("<br>");
             var line_break3 = $("<br>");
             var gas_address_span = $("<span>").addClass("left").text("Address: " + gas_address + " " + gas_city_name + ", " + gas_state + ", " + gas_zipcode);
-            gas_div_image.append(gas_main_img).append(gas_name_span).append(gas_fav_btn);
+            gas_div_image.append(gas_name_span).append(gas_fav_btn);
             gas_div_content.append(line_break1).append(line_break2).append(gas_address_span).append(line_break3);
             gas_div.append(gas_div_image).append(gas_div_content);
             gas_div_col.append(gas_div);
