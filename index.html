@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>PitStop</title>
 
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PitStop</title>
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
-
 </head>
+
 <body>
   <nav class="white" role="navigation">
     <div class="nav-wrapper container">
@@ -37,7 +36,7 @@
       <li><a href="#gasSection" class="btn-floating teal darken-1"><i class="material-icons">local_gas_station</i></a></li>
       <li><a href="#foodSection" class="btn-floating green darken-4"><i class="material-icons">local_dining</i></a></li>
       <li><a href="#activitiesSection" class="btn-floating orange darken-2"><i class="material-icons">local_activity</i></a></li>
-      <li><a href="#favoritesSection" class="btn-floating red darken-4"><i class="material-icons">favorite_border</i></a></li>
+      <li><a href="#favoritesSection" class="btn-floating red"><i class="material-icons">favorite</i></a></li>
     </ul>
   </div>
 <!-- Sign-in pop-up -->
@@ -136,8 +135,8 @@
                   <input id="city_input" type="text" class="validate">
                   <label for="city_input">City</label>
                 </div>
-      
-                
+
+
                 <form autocomplete="off" action="/action_page.php">
                   <div class="autocomplete input-field col s12">
                     <i class="material-icons prefix">filter_hdr</i>
@@ -150,7 +149,7 @@
               </div>
             </form>
           </div>
-              
+
         </div>
         <div class="row center">
 
@@ -169,13 +168,15 @@
     <div class="section">
 
       <!--   Icon Section   -->
-      <div class="row">
+      <div class="row initialInfo">
         <div class="col s12 m4">
           <div class="icon-block">
             <h2 class="center"><i class="material-icons">drive_eta</i></h2>
             <h5 class="center ">Tell us where you're going</h5>
 
-            <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
+            <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate
+              our custom components. Additionally, we refined animations and transitions to provide a smoother
+              experience for developers.</p>
           </div>
         </div>
 
@@ -184,7 +185,9 @@
             <h2 class="center"><i class="material-icons">local_gas_station</i><i class="material-icons">local_dining</i><i class="material-icons">local_activity</i></h2>
             <h5 class="center">We'll give recommendations</h5>
 
-            <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
+            <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate
+              our custom components. Additionally, we refined animations and transitions to provide a smoother
+              experience for developers.</p>
           </div>
         </div>
 
@@ -193,11 +196,23 @@
             <h2 class="center"><i class="material-icons">favorite</i></h2>
             <h5 class="center">Save the ones you like</h5>
 
-            <p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
+            <p class="light">By utilizing elements and principles of Material Design, we were able to create a
+              framework that incorporates components and animations that provide more feedback to users. Additionally,
+              a single underlying responsive system across all platforms allow for a more unified user experience.</p>
           </div>
         </div>
 
       </div>
+
+      <div class="row hiddenInfo hidden">
+          <div class="col s12">
+            <div class="icon-block">
+              <h1 class="center"><i class="material-icons">place</i></h1>
+              <h2 class="center" id="selectedCity"></h2>
+            </div>
+          </div>
+      </div>
+
 
     </div>
   </div>
@@ -214,14 +229,20 @@
     <div class="parallax"><img src="../Project-1/assets/images/background21.jpg" alt="Unsplashed background img 2"></div>
   </div>
 
-  <div class="container">
+  <div id="gasSection" class="container">
     <div class="section">
 
       <div id="gasSection" class="row">
         <div class="col s12 center">
           <h3><i class="mdi-content-send brown-text"></i></h3>
           <h4>Gas</h4>
-          <p class="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
+          <p class="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id
+            nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies
+            eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et
+            pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed.
+            Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam
+            eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+            posuere cubilia Curae;</p>
         </div>
       </div>
 
@@ -256,8 +277,10 @@
         </div>
       </div>
     </div>
+
   </div>
 
+  
 
   <div class="parallax-container valign-wrapper">
     <div class="section no-pad-bot">
@@ -327,7 +350,9 @@
       <div class="row">
         <div class="col l6 s12">
           <h5 class="white-text">Our Team</h5>
-          <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+          <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our
+            full time job. Any amount would help support and continue development on this project and is greatly
+            appreciated.</p>
 
 
         </div>
@@ -359,7 +384,7 @@
     </div>
     <div class="footer-copyright">
       <div class="container">
-      Made with love.
+        Made with love.
       </div>
     </div>
   </footer>
@@ -375,5 +400,6 @@
   <script src="js/authentication.js"></script>
 
 
-  </body>
+</body>
+
 </html>

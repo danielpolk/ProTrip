@@ -157,6 +157,22 @@ var countries = [
   "Wyoming"
 ]
 
+
+$("#submit-button").click(function() {
+
+  // Hide inital info
+  $(".initialInfo").addClass("hidden");
+
+  //Show hidden info
+  $(".hiddenInfo").removeClass("hidden");
+
+  //Show selected city.
+  var cityInput = $("#city_input").val();
+  var cityInputCaps = cityInput.toUpperCase();
+  $("#selectedCity").text(cityInputCaps);
+
+});
+
 /*initiate the autocomplete function on the "state_input" element, and pass along the countries array as possible autocomplete values:*/
 
 autocomplete(document.getElementById("state_input"), countries);

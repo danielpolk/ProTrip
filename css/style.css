@@ -141,6 +141,43 @@ footer.page-footer {
   color: white; 
 }
 
+
+.hidden {
+  display: none;
+}
+
+
+#favoriteBtn {
+  top: 10px !important;
+  right: 11px !important;
+}
+
+
+#restaurantName {
+  font-weight: 500 !important;
+}
+
+#cuisineType {
+  bottom: -25px !important;
+}
+
+#ratingBadge {
+  margin-right: -1px !important;
+  border-radius: 2px !important;
+  color: white;
+  font-weight: 600;
+  top: -40px !important;
+  right: 11px;
+  position: relative;
+  line-height: 29px;
+  height: 30px;
+}
+
+#showMoreBtn {
+margin-right: auto;
+margin-left: auto;
+width: 100%;
+}
 .fav-btn.btn-floating.halfway-fab{
   top: 18px;
   right: 18px;
