@@ -156,8 +156,6 @@ var countries = [
   "Wisconsin",
   "Wyoming"
 ]
-/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
-autocomplete(document.getElementById("myInput"), countries);
 
 
 $("#submit-button").click(function() {
@@ -169,8 +167,12 @@ $("#submit-button").click(function() {
   $(".hiddenInfo").removeClass("hidden");
 
   //Show selected city.
-  var cityInput = $("#icon_city").val();
+  var cityInput = $("#city_input").val();
   var cityInputCaps = cityInput.toUpperCase();
   $("#selectedCity").text(cityInputCaps);
 
 });
+
+/*initiate the autocomplete function on the "state_input" element, and pass along the countries array as possible autocomplete values:*/
+
+autocomplete(document.getElementById("state_input"), countries);
