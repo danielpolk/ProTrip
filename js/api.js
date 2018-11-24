@@ -29,7 +29,7 @@ console.log("we are live")
 function gasStationFinder(lon, lat, city_input) {
     // var nameStored = [];
     // var gasPriceStored = [];
-    var queryURL = "http://api.mygasfeed.com/stations/radius/" + lat + "/" + lon + "/1/reg/Price/bpxxw96ps2.json";
+    var queryURL = "http://api.mygasfeed.com/stations/radius/" + lat + "/" + lon + "/7/reg/Price/bpxxw96ps2.json";
     // console.log("station url: " + queryURL)
     $.ajax({
         url: queryURL,
@@ -37,19 +37,21 @@ function gasStationFinder(lon, lat, city_input) {
     }).then(function (response) {
 
         gasStationResponse(response, city_input);
+       
+        console.log("gas city input " + city_input);
     })
 };
 
-function gasStationResponse(response, city_input /* it used to be the array saved in the gasStationFinder function but moved to this function check after done */) {
-    //push the value to the variables below to store 
-    var gas_price_stored = [];
-    var gas_city_name_stored = [];
-    var gas_station_name_stored = [];
-    // console.log("gas station response" + response.stations[0])
-    for (var i = 0; i < (response.stations.length); i++) {
+function gasStationResponse(response, city_input) {
+    
+
+    for (var i = 0; i < (15); i++) {
         var gas_station_name = response.stations[i].station;
         var gas_price = response.stations[i].reg_price;
+        var gas_address = response.stations[i].address
         var gas_city_name = response.stations[i].city;
+        var gas_state = response.stations[i].region;
+        var gas_zipcode = response.stations[i].zip;
         // console.log('this is the city name' + i + ' ' + gas_city_name)
         //to return city name input with first letter upper case
         city_input = city_input.toLowerCase().replace(/\b[a-z]/g, function (letter) {
@@ -57,12 +59,35 @@ function gasStationResponse(response, city_input /* it used to be the array save
         });
         //exclude gas station name is unbranded and no gas price and city name other than user input
         if (gas_station_name !== "Unbranded" && gas_price !== "N/A" && gas_city_name === city_input) {
+            console.log("testing");
             // creating the div for the gas station
             // create the element
             // create the text for element which will be variables below the for loop
             // push these variables to the div section
+            var gas_div_col = $("<div>").addClass("col s12 m6")
+            var gas_div = $("<div>").addClass("card")
+            var gas_div_image = $("<div>").addClass("card-image")
+            var gas_main_img = $("<img>").attr("src", "assets/images/texaco.png")
+            var gas_name_span = $("<span>").addClass("card-title").text(gas_station_name)
+            var gas_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>")
+            // var event_rating = $("<div class='btn-small rating-btn' style='background-color:#" + color_rating + "';>" + res_rating + "/5</div>")
+            // console.log("this is the food rating " + event_rating)
+            var gas_div_content = $("<div>").addClass("card-content")
+            var line_break1 = $("<br>");
+            var line_break2 = $("<br>");
+            var line_break3 = $("<br>");
+            var gas_address_span = $("<span>").addClass("left").text("Address: " + gas_address + " " + gas_city_name + ", " + gas_state + ", " + gas_zipcode);
+            gas_div_image.append(gas_main_img).append(gas_name_span).append(gas_fav_btn);
+            gas_div_content.append(line_break1).append(line_break2).append(gas_address_span).append(line_break3);
+            gas_div.append(gas_div_image).append(gas_div_content);
+            gas_div_col.append(gas_div);
+
+        
+
+    
         }
         // here push the text to the div using the id
+        $("#gas_cards").append(gas_div_col);
     }
 }
 
