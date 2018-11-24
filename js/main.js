@@ -158,3 +158,19 @@ var countries = [
 ]
 /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
 autocomplete(document.getElementById("myInput"), countries);
+
+
+$("#submit-button").click(function() {
+
+  // Hide inital info
+  $(".initialInfo").addClass("hidden");
+
+  //Show hidden info
+  $(".hiddenInfo").removeClass("hidden");
+
+  //Show selected city.
+  var cityInput = $("#icon_city").val();
+  var cityInputCaps = cityInput.toUpperCase();
+  $("#selectedCity").text(cityInputCaps);
+
+});
