@@ -157,3 +157,5 @@ function noUserSignedIn() {
   $(".account-info").empty();
   $(".account-info").text("Login");
 };
+
+// var database = firebase.database();

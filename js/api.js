@@ -137,7 +137,9 @@ function eventFinder(city_input) {
         for (var i = 0; i < (response._embedded.events.length); i++) {
             var event_name = response._embedded.events[i].name;
             var event_date = response._embedded.events[i].dates.start.localDate;
+            var event_time = response._embedded.events[i].dates.start.localTime;
             var event_venue = response._embedded.events[i]._embedded.venues[0].address.line1;
+            var event_venue_name = response._embedded.events[i]._embedded.venues[0].name;
             var event_img = response._embedded.events[i].images[0].url;
             var event_link = response._embedded.events[i].url;
             // creating the div for the gas station
@@ -154,12 +156,13 @@ function eventFinder(city_input) {
             // console.log("this is the food rating " + event_rating)
             var event_div_content = $("<div>").addClass("card-content")
             var event_tickets = $("<a href='" + event_link + "' class='left'>Buy Tickets</a>")
-            var line_break1 = $("<br>")
-            var line_break2 = $("<br>")
-            var line_break3 = $("<br>")
-            var event_address_span = $("<span>").addClass("left").text("Address: " + event_venue)
+            var line_break1 = $("<br>");
+            var line_break2 = $("<br>");
+            var event_date_span = $("<span>").addClass("left").text("Show Date: "+event_date +" at "+event_time);
+            var line_break3 = $("<br>");
+            var event_address_span = $("<span>").addClass("left").text("Event Address: " + event_venue +" at "+event_venue_name);
             event_div_image.append(event_main_img).append(event_name_span).append(event_fav_btn);
-            event_div_content.append(event_tickets).append(line_break1).append(line_break2).append(event_address_span).append(line_break3);
+            event_div_content.append(event_tickets).append(line_break1).append(event_date_span).append(line_break2).append(event_address_span).append(line_break3);
             event_div.append(event_div_image).append(event_div_content);
             event_div_col.append(event_div);
 
@@ -210,5 +213,39 @@ function restaurantResponse(response) {
         $("#food_cards").append(food_div_col);
     }
     // here push the text to the div using the id
+    $(document.body).on("click", ".fav-btn", function(){
+    console.log($(this).parent())
+    console.log("test inner text " +$(this).parent().find(".material-icons").text())
+    // hello += $(this).parent().childNodes   .closest('tr').find('.sibbling').text()
+    
+    $(this).parent().find(".fav-btn").removeClass("fav-btn").addClass("rmv-btn")
+    $(this).parent().find(".material-icons").text("delete");
+    var divParent = $(this).parent();
+    var upperParent = divParent.parent();
+    var allUpperParents = upperParent.children()
+    var food_div_col = $("<div>").addClass("col s12 m6");
+    var food_div = $("<div>").addClass("card");
+    food_div.append(allUpperParents);
+    food_div_col.append(food_div);
+
+    database.ref().child('users/' + userId).push({
+            food_div_col: food_div_col,
+            food_div: food_div,
+            divParent: divParent,
+            upperParent: allUpperParents
+        })
+    
+    $("#fav_cards").append(food_div_col);
+
+
+       console.log("test user id "+ childSnapshot.val().food_div)
+    
+       
+});
 }
+
+// database.ref().orderByChild("dateAdded")
+
+
+
 

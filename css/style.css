@@ -147,6 +147,11 @@ footer.page-footer {
 
 }
 
+a.btn-floating.halfway-fab.rmv-btn{
+  top: 18px;
+  right: 18px;
+}
+
 .btn-small.rating-btn{
       position: absolute;
     top: 20px;
