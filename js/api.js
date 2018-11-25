@@ -59,7 +59,7 @@ function gasStationResponse(response, city_input) {
             return letter.toUpperCase();
         });
         //exclude gas station name is unbranded and no gas price and city name other than user input
-        if (gas_station_name !== "Unbranded" && gas_price !== "N/A" && gas_city_name !== city_input) {
+        if (gas_station_name !== "Unbranded" && gas_price !== "N/A" && gas_city_name === city_input) {
             console.log("testing");
             // creating the div for the gas station
             // create the element
