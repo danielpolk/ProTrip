@@ -68,7 +68,7 @@ function gasStationResponse(response, city_input) {
             var gas_div_col = $("<div>").addClass("col s12 m6")
             var gas_div = $("<div>").addClass("card")
             var gas_div_image = $("<div>").addClass("card-image")
-            var gas_main_img = $("<img>").attr("src", "http://nj1015.com/files/2018/06/RS7210_490883015.jpg?w=980&q=75")
+            var gas_main_img = $("<img>").attr("src", "assets/images/GasStationLogos/GasBackground.jpeg")
 
             var gas_name_span = $("<h2>").addClass("card-title").text(gas_station_name);
 
@@ -86,7 +86,6 @@ function gasStationResponse(response, city_input) {
 
             var gas_div_content = $("<div>").addClass("card-content")
             var prices = $('<h5>').addClass('gas-price').text("$" + gas_price + "/gal");
-            var line_break1 = $("<br>");
             var line_break2 = $("<br>");
             var line_break3 = $("<br>");
             var gas_address_span = $("<span>").addClass("left").text("Address: " + gas_address + " " + gas_city_name + ", " + gas_state + ", " + gas_zipcode);

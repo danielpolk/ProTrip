@@ -224,5 +224,11 @@ img#test {
 }
 
 #gasText {
-  text-align: center;
+  text-align: left;
 }
+
+.left {
+  text-align: left !important;
+}
+
+
