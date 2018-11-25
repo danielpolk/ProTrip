@@ -37,11 +37,13 @@ function gasStationFinder(lon, lat, city_input) {
     }).then(function (response) {
         console.log("gas response" + JSON.stringify(response));
         gasStationResponse(response, city_input);
+
+
     })
 };
 
+
 function gasStationResponse(response, city_input) {
-    
 
     for (var i = 0; i < (response.stations.length - 10); i++) {
         var gas_station_name = response.stations[i].station;
@@ -78,8 +80,7 @@ function gasStationResponse(response, city_input) {
             
             
             var gas_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>")
-            // var event_rating = $("<div class='btn-small rating-btn' style='background-color:#" + color_rating + "';>" + res_rating + "/5</div>")
-            // console.log("this is the food rating " + event_rating)
+
             var gas_div_content = $("<div>").addClass("card-content")
             var prices = $('<h5>').addClass('gas-price').text("$" + gas_price + "/gal");
             var line_break1 = $("<br>");
@@ -90,6 +91,10 @@ function gasStationResponse(response, city_input) {
             gas_div_content.append(prices).append(line_break2).append(gas_address_span).append(line_break3);
             gas_div.append(gas_div_image).append(gas_div_content);
             gas_div_col.append(gas_div);
+
+
+
+
         }
         // here push the text to the div using the id
         $("#gas_cards").append(gas_div_col);
@@ -190,7 +195,7 @@ function eventFinder(city_input) {
             var line_break2 = $("<br>");
             var event_date_span = $("<span>").addClass("left").text("Show Date: " + event_date + " at " + event_time);
             var line_break3 = $("<br>");
-            var event_address_span = $("<span>").addClass("left").text("Event Address: " + event_venue  + " at " + event_venue_name);
+            var event_address_span = $("<span>").addClass("left").text("Event Address: " + event_venue + " at " + event_venue_name);
             event_div_image.append(event_main_img).append(event_name_span).append(event_fav_btn);
             event_div_content.append(event_tickets).append(line_break1).append(event_date_span).append(line_break2).append(event_address_span).append(line_break3);
             event_div.append(event_div_image).append(event_div_content);
@@ -224,7 +229,7 @@ function restaurantResponse(response) {
         } else {
             var food_main_img = $("<img>").attr("src", res_main_img)
         }
-        
+
         var food_name_span = $("<span>").addClass("card-title white-text-with-blue-shadow").text(res_name)
         var food_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>")
         var food_rating = $("<div class='btn-small rating-btn' style='background-color:#" + color_rating + "';>" + res_rating + "/5</div>")
@@ -243,39 +248,35 @@ function restaurantResponse(response) {
         $("#food_cards").append(food_div_col);
     }
     // here push the text to the div using the id
-    $(document.body).on("click", ".fav-btn", function(){
-    console.log($(this).parent())
-    console.log("test inner text "  + $(this).parent().find(".material-icons").text())
-    // hello  + = $(this).parent().childNodes   .closest('tr').find('.sibbling').text()
-    
-    $(this).parent().find(".fav-btn").removeClass("fav-btn").addClass("rmv-btn")
-    $(this).parent().find(".material-icons").text("delete");
-    var divParent = $(this).parent();
-    var upperParent = divParent.parent();
-    var allUpperParents = upperParent.children()
-    var food_div_col = $("<div>").addClass("col s12 m6");
-    var food_div = $("<div>").addClass("card");
-    food_div.append(allUpperParents);
-    food_div_col.append(food_div);
+    $(document.body).on("click", ".fav-btn", function () {
+        console.log($(this).parent())
+        console.log("test inner text " + $(this).parent().find(".material-icons").text())
+        // hello += $(this).parent().childNodes   .closest('tr').find('.sibbling').text()
 
-    database.ref().child('users/' + userId).push({
+        $(this).parent().find(".fav-btn").removeClass("fav-btn").addClass("rmv-btn")
+        $(this).parent().find(".material-icons").text("delete");
+        var divParent = $(this).parent();
+        var upperParent = divParent.parent();
+        var allUpperParents = upperParent.children()
+        var food_div_col = $("<div>").addClass("col s12 m6");
+        var food_div = $("<div>").addClass("card");
+        food_div.append(allUpperParents);
+        food_div_col.append(food_div);
+
+        database.ref().child('users/' + userId).push({
             food_div_col: food_div_col,
             food_div: food_div,
             divParent: divParent,
             upperParent: allUpperParents
         })
-    
-    $("#fav_cards").append(food_div_col);
+
+        $("#fav_cards").append(food_div_col);
 
 
-       console.log("test user id " +  childSnapshot.val().food_div)
-    
-       
-});
+        console.log("test user id " + childSnapshot.val().food_div)
+
+
+    });
 }
 
-
-
-
-
-
+// database.ref().orderByChild("dateAdded")

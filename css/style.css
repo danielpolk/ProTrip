@@ -202,10 +202,9 @@ a.btn-floating.halfway-fab.rmv-btn{
 .card .card-image .card-title {
   text-shadow: 1px 1px 2px black, 0 0 1em #d1d1d1, 0 0 0.2em #5a5a5a;
   color: white;
+
  
 }
-
-
 
 .gas_logo {
   position: absolute;
@@ -216,11 +215,14 @@ a.btn-floating.halfway-fab.rmv-btn{
   background-size: contain;
   background-repeat: no-repeat;
 }
- img#test {
+
+
+img#test {
   position: absolute;
   width: 100%;
   height: 100%;
 }
- #gasText {
+
+#gasText {
   text-align: center;
 }
