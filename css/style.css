@@ -224,5 +224,15 @@ img#test {
 }
 
 #gasText {
+  margin-top: 65px;
+  margin-bottom: 65px;
+}
+
+#resText {
+  margin-top: 65px;
+  margin-bottom: 65px;
+}
+
+#selectedState {
   text-align: center;
 }

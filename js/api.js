@@ -29,8 +29,8 @@ console.log("we are live")
 function gasStationFinder(lon, lat, city_input) {
     // var nameStored = [];
     // var gasPriceStored = [];
-    var queryURL = "http://api.mygasfeed.com/stations/radius/" + lat + "/" + lon + "/7/reg/Price/bpxxw96ps2.json";
-    // console.log("station url: " + queryURL)
+    var queryURL = "http://api.mygasfeed.com/stations/radius/" + lat + "/" + lon + "/3/reg/Price/bpxxw96ps2.json";
+    console.log("station url: " + queryURL)
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -46,7 +46,7 @@ function gasStationFinder(lon, lat, city_input) {
 function gasStationResponse(response, city_input) {
 
 
-    for (var i = 0; i < (response.stations.length - 10); i++) {
+    for (var i = 0; i < (response.stations.length); i++) {
         var gas_station_name = response.stations[i].station;
         var gas_price = response.stations[i].reg_price;
         var gas_address = response.stations[i].address
@@ -59,7 +59,7 @@ function gasStationResponse(response, city_input) {
             return letter.toUpperCase();
         });
         //exclude gas station name is unbranded and no gas price and city name other than user input
-        if (gas_station_name !== "Unbranded" && gas_price !== "N/A" && gas_city_name !== city_input) {
+        if (gas_station_name !== "Unbranded" && gas_price !== "N/A" && gas_city_name === city_input) {
             console.log("testing");
             // creating the div for the gas station
             // create the element
@@ -68,7 +68,7 @@ function gasStationResponse(response, city_input) {
             var gas_div_col = $("<div>").addClass("col s12 m6")
             var gas_div = $("<div>").addClass("card")
             var gas_div_image = $("<div>").addClass("card-image")
-            var gas_main_img = $("<img>").attr("src", "http://nj1015.com/files/2018/06/RS7210_490883015.jpg?w=980&q=75")
+            var gas_main_img = $("<img>").attr("src", "assets/images/GasStationLogos/GasDivBackground.jpeg");
 
             var gas_name_span = $("<h2>").addClass("card-title").text(gas_station_name);
 
@@ -108,7 +108,11 @@ function gasStationResponse(response, city_input) {
 function restaurantFinder() {
     //get started button
     $("#submit-button").on("click", function (e) {
+        // $('#gas_cards').clear();
+        // $('#food_cards').clear();
+        // $('#event_cards').clear();
         // console.log("working")
+        $("#gasText").append("<p class='center'> Here are the lowest gas prices we found in " + $("#city_input").val() + "</p>")
         //prevent errors?
         e.preventDefault();
         // make sure that the input will be all lower case and trimmed
@@ -147,8 +151,10 @@ function restaurantFinder() {
                         // console.log(response.restaurants);
                         // console.log("before for loop" + response.restaurants[0].restaurant)
                         // get the longitude and latitude to use it for the Gas Feed API
-                        lon = response.restaurants[0].restaurant.location.longitude
+                        lon = response.restaurants[0].restaurant.location.longitude;
+                        console.log("sliced " + lon)
                         lat = response.restaurants[0].restaurant.location.latitude
+                        
                         // console.log("this is lon: " + lon + " ; this is lat: " + lat)
                         // calling the gas feed api function to feed with longitudeand latitude from zomato API
                         gasStationFinder(lon, lat, city_input);
@@ -171,7 +177,7 @@ function eventFinder(city_input) {
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        console.log(response)
+        console.log("event response: " + response)
         for (var i = 0; i < (response._embedded.events.length); i++) {
             var event_name = response._embedded.events[i].name;
             var event_date = response._embedded.events[i].dates.start.localDate;

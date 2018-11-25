@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
   // For the navbar's dropdown
   $(".dropdown-trigger").dropdown();
 
@@ -170,6 +169,11 @@ $("#submit-button").click(function() {
   var cityInput = $("#city_input").val();
   var cityInputCaps = cityInput.toUpperCase();
   $("#selectedCity").text(cityInputCaps);
+
+  //Show selected State.
+  var stateInput = $("#state_input").val();
+  var stateInputCaps = stateInput.toUpperCase();
+  $("#selectedState").text(stateInputCaps);
 
 });
 
