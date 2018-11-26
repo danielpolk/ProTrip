@@ -169,7 +169,9 @@ $("#submit-button").click(function() {
   //Show selected city.
   var cityInput = $("#city_input").val();
   var cityInputCaps = cityInput.toUpperCase();
-  $("#selectedCity").text(cityInputCaps);
+  var stateInput = $("#state_input").val();
+  var stateInputCaps = stateInput.toUpperCase();
+  $("#selectedCity").text(cityInputCaps + ", " + stateInputCaps);
 
 });
 
