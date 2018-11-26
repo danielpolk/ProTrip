@@ -29,13 +29,14 @@ console.log("we are live")
 function gasStationFinder(lon, lat, city_input) {
     // var nameStored = [];
     // var gasPriceStored = [];
-    var queryURL = "http://api.mygasfeed.com/stations/radius/" + lat + "/" + lon + "/7/reg/Price/bpxxw96ps2.json";
+    var queryURL = "http://api.mygasfeed.com/stations/radius/" + lat + "/" + lon + "/3/reg/Price/bpxxw96ps2.json";
     // console.log("station url: " + queryURL)
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        console.log("gas response" + JSON.stringify(response));
+        
+        console.log(response);
         gasStationResponse(response, city_input);
 
 
@@ -46,7 +47,7 @@ function gasStationFinder(lon, lat, city_input) {
 function gasStationResponse(response, city_input) {
 
 
-    for (var i = 0; i < (response.stations.length - 10); i++) {
+    for (var i = 0; i < 8; i++) {
         var gas_station_name = response.stations[i].station;
         var gas_price = response.stations[i].reg_price;
         var gas_address = response.stations[i].address
@@ -107,6 +108,7 @@ function gasStationResponse(response, city_input) {
 function restaurantFinder() {
     //get started button
     $("#submit-button").on("click", function (e) {
+        
         // console.log("working")
         //prevent errors?
         e.preventDefault();
@@ -122,6 +124,10 @@ function restaurantFinder() {
             url: queryURL,
             method: "GET"
         }).then(function (response) {
+            if (response.location_suggestions <= 0){
+                console.log("response null");
+            }
+            console.log(response);
             for (let index = 0; index < (response.location_suggestions.length); index++) {
                 var cityCheck = (JSON.stringify(response.location_suggestions[index].name)).toLowerCase();
                 // console.log(cityCheck)
