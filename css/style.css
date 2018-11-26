@@ -19,17 +19,20 @@ p {
   color: black;
 }
 
+/* Photo section styling */
 .parallax-container {
   min-height: 620px;
   line-height: 0;
   height: auto;
   color: rgba(255,255,255,.9);
 }
-  .parallax-container .section {
-    width: 100%;
-  }
+.parallax-container .section {
+  width: 100%;
+}
 
-
+#photoSection {
+  min-height: 320px;
+}
 
 
 @media only screen and (max-width : 992px) {
@@ -46,6 +49,12 @@ p {
   #index-banner .section {
     top: 0;
   }
+}
+
+
+#gasSection, #foodSection, #activitiesSection, #favoritesSection {
+  margin-top: 20px;
+  margin-bottom: 50px;
 }
 
 #gasIcon, #diningIcon, #activityIcon, #favoriteIcon {
