@@ -19,17 +19,20 @@ p {
   color: black;
 }
 
+/* Photo section styling */
 .parallax-container {
   min-height: 620px;
   line-height: 0;
   height: auto;
   color: rgba(255,255,255,.9);
 }
-  .parallax-container .section {
-    width: 100%;
-  }
+.parallax-container .section {
+  width: 100%;
+}
 
-
+#photoSection {
+  min-height: 320px;
+}
 
 
 @media only screen and (max-width : 992px) {
@@ -46,6 +49,12 @@ p {
   #index-banner .section {
     top: 0;
   }
+}
+
+
+#gasSection, #foodSection, #activitiesSection, #favoritesSection {
+  margin-top: 20px;
+  margin-bottom: 50px;
 }
 
 #gasIcon, #diningIcon, #activityIcon, #favoriteIcon {
@@ -127,7 +136,7 @@ footer.page-footer {
   border-bottom: 1px solid white;
   border-radius: 1px;
   cursor: pointer;
-  background-color: rgba(255, 255, 255, 0.488); 
+  background-color: rgba(87, 85, 85, 0.678); 
 }
 
 .autocomplete-items div:hover {
@@ -224,5 +233,11 @@ img#test {
 }
 
 #gasText {
-  text-align: center;
+  text-align: left;
 }
+
+.left {
+  text-align: left !important;
+}
+
+

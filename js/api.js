@@ -1,7 +1,6 @@
 /* 
 * input city id = icon_city
     ** the value of the input will be the city that goes into the food api
-
 * input state id = myInput
     ** we will check the value of the state to match the api state
 * submit button id = submit-button
@@ -45,6 +44,7 @@ function gasStationFinder(lon, lat, city_input) {
 
 function gasStationResponse(response, city_input) {
 
+
     for (var i = 0; i < (response.stations.length - 10); i++) {
         var gas_station_name = response.stations[i].station;
         var gas_price = response.stations[i].reg_price;
@@ -58,7 +58,7 @@ function gasStationResponse(response, city_input) {
             return letter.toUpperCase();
         });
         //exclude gas station name is unbranded and no gas price and city name other than user input
-        if (gas_station_name !== "Unbranded" && gas_price !== "N/A" && gas_city_name !== city_input) {
+        if (gas_station_name !== "Unbranded" && gas_price !== "N/A" && gas_city_name === city_input) {
             console.log("testing");
             // creating the div for the gas station
             // create the element
@@ -67,23 +67,23 @@ function gasStationResponse(response, city_input) {
             var gas_div_col = $("<div>").addClass("col s12 m6")
             var gas_div = $("<div>").addClass("card")
             var gas_div_image = $("<div>").addClass("card-image")
-            var gas_main_img = $("<img>").attr("src", "http://nj1015.com/files/2018/06/RS7210_490883015.jpg?w=980&q=75")
+            var gas_main_img = $("<img>").attr("src", "assets/images/GasStationLogos/GasBackground.jpeg")
+
             var gas_name_span = $("<h2>").addClass("card-title").text(gas_station_name);
-                var source = 'assets/images/' + gas_station_name + '.png"'
-                var test2 = '"gas_logo"'
-                var error1 = "style='background-image: url('assets/images/bucees.png');'"
-                var gas_logo = $('<div class=' + test2 + 'onerror=' +error1+'style="background-image: url(' + source + ')"></div>')
-            
-            // var source = 'assets/images/GasStationLogos/' + gas_station_name + '.png"'
-            // var test2 = '"gas_logo"'
-            // var gas_logo = $('<div class=' + test2 + ' style="background-image: url(' + source + ')"></div>')
-            
-            
+
+
+            var source = 'assets/images/GasStationLogos/' + gas_station_name + '.png"'
+         
+                var gas_logo = $('<div class="gas_logo" style="background-image: url(' + source + ')"></div>')
+          
+                //var gas_logo = $('<div class=' + test2 + 'style="background-image: url("https://www.freeiconspng.com/uploads/no-image-icon-4.png")"></div>')
+        
+
+
             var gas_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>")
 
             var gas_div_content = $("<div>").addClass("card-content")
             var prices = $('<h5>').addClass('gas-price').text("$" + gas_price + "/gal");
-            var line_break1 = $("<br>");
             var line_break2 = $("<br>");
             var line_break3 = $("<br>");
             var gas_address_span = $("<span>").addClass("left").text("Address: " + gas_address + " " + gas_city_name + ", " + gas_state + ", " + gas_zipcode);
@@ -110,9 +110,9 @@ function restaurantFinder() {
         e.preventDefault();
         // make sure that the input will be all lower case and trimmed
         city_input = $("#city_input").val().trim().toLowerCase();
-        // console.log("city input " + city_input)
+        // console.log("city input "+city_input)
         state_input = $("#state_input").val();
-        // console.log("state input " + String(state_input))
+        // console.log("state input "+String(state_input))
 
         //getting the city ID for Zomato API
         var queryURL = "https://developers.zomato.com/api/v2.1/cities?apikey=e54720b38895f113317f79aa68f4ca8e&q=" + city_input;
@@ -126,7 +126,7 @@ function restaurantFinder() {
                 var stateCheck = response.location_suggestions[index].state_name;
                 // console.log(String(stateCheck))
                 console.log("first statement " + stateCheck.toLowerCase().includes(state_input.toLowerCase()))
-                // console.log("second statement " + (state_input == stateCheck))
+                // console.log("second statement "+(state_input == stateCheck))
                 //    var helo= hello.toLowerCase();
                 // var hithere=cityCheck.includes(city_input)
                 if (cityCheck.includes(city_input) && stateCheck.toLowerCase().includes(state_input.toLowerCase())) {
@@ -161,7 +161,7 @@ restaurantFinder();
 
 
 function eventFinder(city_input) {
-    var city_name_nospace = city_input.split(' ').join(' + ');
+    var city_name_nospace = city_input.split(' ').join('+');
     var queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?city=" + city_name_nospace + "&apikey=hhGX8q6JtGAAl35uFcsEeWLTAuCdjSVc&size=8";
     // console.log("Event url: " + queryURL)
     $.ajax({
@@ -215,9 +215,9 @@ function restaurantResponse(response) {
         var res_main_img = response.restaurants[i].restaurant.featured_image;
         console.log("image source " + res_main_img)
         var color_rating = response.restaurants[i].restaurant.user_rating.rating_color;
-        // console.log("this is color rating " + color_rating)
+        // console.log("this is color rating "+color_rating)
         var res_rating = response.restaurants[i].restaurant.user_rating.aggregate_rating;
-        // console.log("this is res rating " + res_rating)
+        // console.log("this is res rating "+res_rating)
         var menu_link = response.restaurants[i].restaurant.menu_url;
         var res_address = response.restaurants[i].restaurant.location.address;
 
@@ -253,27 +253,28 @@ function restaurantResponse(response) {
         console.log("test inner text " + $(this).parent().find(".material-icons").text())
         // hello += $(this).parent().childNodes   .closest('tr').find('.sibbling').text()
 
-        $(this).parent().find(".fav-btn").removeClass("fav-btn").addClass("rmv-btn")
-        $(this).parent().find(".material-icons").text("delete");
+         $(this).parent().find(".fav-btn").removeClass("fav-btn").addClass("rmv-btn")
+         $(this).parent().find(".material-icons").text("delete");
         var divParent = $(this).parent();
         var upperParent = divParent.parent();
-        var allUpperParents = upperParent.children()
+        // var allUpperParents = upperParent.children()
         var food_div_col = $("<div>").addClass("col s12 m6");
         var food_div = $("<div>").addClass("card");
-        food_div.append(allUpperParents);
+        food_div.append(upperParent.children());
         food_div_col.append(food_div);
+
+        console.log('this is the food div '+JSON.stringify(food_div_col))
 
         database.ref().child('users/' + userId).push({
             food_div_col: food_div_col,
             food_div: food_div,
             divParent: divParent,
-            upperParent: allUpperParents
+            upperParent: upperParent
         })
 
+        // $(food_div_col).clone(true, true).appendTo("#fav_cards");
         $("#fav_cards").append(food_div_col);
-
-
-        console.log("test user id " + childSnapshot.val().food_div)
+        // console.log("test user id " + childSnapshot.val().food_div)
 
 
     });
