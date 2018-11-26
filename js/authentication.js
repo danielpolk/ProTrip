@@ -95,6 +95,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     userId = user.uid;
     if (newMember === 1) {
       writeUserData(userId, userName);
+      newMember = null;
     };
 
     return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
@@ -158,4 +159,3 @@ function noUserSignedIn() {
   $(".account-info").text("Login");
 };
 
-// var database = firebase.database();
