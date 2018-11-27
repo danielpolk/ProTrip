@@ -33,11 +33,14 @@
       <i class="large material-icons">map</i>
     </a>
     <ul>
-      <li><a href="#gasSection" class="btn-floating teal darken-1"><i class="material-icons">local_gas_station</i></a></li>
-      <li><a href="#foodSection" class="btn-floating green darken-4"><i class="material-icons">local_dining</i></a></li>
-      <li><a href="#activitiesSection" class="btn-floating orange darken-2"><i class="material-icons">local_activity</i></a></li>
-      <li><a href="#favoritesSection" class="btn-floating red"><i class="material-icons">favorite</i></a></li>
+      <li><a id="gas-action-btn" href="#gasSection" class="btn-floating teal darken-1"><i class="material-icons">local_gas_station</i></a></li>
+      <li><a id="food-action-btn" href="#foodSection" class="btn-floating green darken-4"><i class="material-icons">local_dining</i></a></li>
+      <li><a id="activities-action-btn" href="#activitiesSection" class="btn-floating orange darken-2"><i class="material-icons">local_activity</i></a></li>
+      <li><a id="fav-action-btn" href="#favoritesSection" class="btn-floating red"><i class="material-icons">favorite</i></a></li>
     </ul>
+    <a class="scrollToTop btn-floating btn-large deep-orange darken-1">
+      <i class="large material-icons">arrow_upward</i>
+    </a>
   </div>
 <!-- Sign-in pop-up -->
   <div class="container" id="user-sign-in">
@@ -164,7 +167,7 @@
   </div>
 
 
-  <div class="container">
+  <div id="titleSection" class="container">
     <div class="section">
 
       <!--   Icon Section   -->
@@ -172,33 +175,27 @@
         <div class="col s12 m4">
           <div class="icon-block">
             <h2 class="center"><i class="material-icons">drive_eta</i></h2>
-            <h5 class="center ">Tell us where you're going</h5>
+            <h5 class="center ">Tell us where <br> you're going</h5>
 
-            <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate
-              our custom components. Additionally, we refined animations and transitions to provide a smoother
-              experience for developers.</p>
+            <p class="light">We've designed PitStop to be your perfect road trip companion. Let us know where you plan on taking your next pit stop and we will do the rest. No matter how far you are from your next pit stop, we will give you the information you need right now to make that next stop the best one yet.</p>
           </div>
         </div>
 
         <div class="col s12 m4">
           <div class="icon-block">
-            <h2 class="center"><i class="material-icons">local_gas_station</i><i class="material-icons">local_dining</i><i class="material-icons">local_activity</i></h2>
-            <h5 class="center">We'll give recommendations</h5>
+            <h2 class="center"><i class="material-icons">local_dining</i><i class="material-icons">local_gas_station</i><i class="material-icons">local_activity</i></h2>
+            <h5 class="center">We'll pick the<br>best spots</h5>
 
-            <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate
-              our custom components. Additionally, we refined animations and transitions to provide a smoother
-              experience for developers.</p>
+            <p class="light">If you're on a road trip, it's easy to waste money. PitStop helps you save money and spend it at the right places. We've make sure to get you the best gas prices, so you can spend that extra cash on the best local food and activities at your next pit stop.</p>
           </div>
         </div>
 
         <div class="col s12 m4">
           <div class="icon-block">
             <h2 class="center"><i class="material-icons">favorite</i></h2>
-            <h5 class="center">Save the ones you like</h5>
+            <h5 class="center">Save your<br>favorites</h5>
 
-            <p class="light">By utilizing elements and principles of Material Design, we were able to create a
-              framework that incorporates components and animations that provide more feedback to users. Additionally,
-              a single underlying responsive system across all platforms allow for a more unified user experience.</p>
+            <p class="light">Our job is to get you the best choices and let you decide. As you browse the best options at the next pit stop, select the ones you like and quickly save them to your favorites. From here you can compare menus, prices, and addresses to make the best decision.</p>
           </div>
         </div>
 
@@ -209,6 +206,7 @@
             <div class="icon-block">
               <h1 class="center"><i class="material-icons">place</i></h1>
               <h2 class="center" id="selectedCity"></h2>
+              <br><br><br><br>
             </div>
           </div>
       </div>
@@ -218,40 +216,9 @@
   </div>
 
 
-  <div class="parallax-container valign-wrapper">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <div class="row center">
-          <h5 class="header col s12 light"><i class="material-icons" id="gasIcon">local_gas_station</i></h5>
-        </div>
-      </div>
-    </div>
-    <div class="parallax"><img src="../Project-1/assets/images/background21.jpg" alt="Unsplashed background img 2"></div>
-  </div>
-
-  <div id="gasSection" class="container">
-    <div class="section">
-
-      <div id="gasSection" class="row">
-        <div class="col s12 center">
-          <h3><i class="mdi-content-send brown-text"></i></h3>
-          <h4>Gas</h4>
-          <!-- API gas card starts -->
-          <p class="left-align light initialInfo" id="gasText">Let us help you find the cheapest gas prices at your next pit stop. Think of what you could spend those extra dollars on as you travel. Using our real-time gas price locator, we will help you save time and money finding the right gas pump to keep you fueled on your journey.</p>
-
-          <div id="gas_cards">
-            
-            
-          </div>
-        <!-- API gas card ends -->
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-
-  <div class="parallax-container valign-wrapper">
+<!-- Begin Food Section -->
+  
+  <div class="parallax-container valign-wrapper"  id="photoSection">
     <div class="section no-pad-bot">
       <div class="container">
         <div class="row center">
@@ -274,16 +241,50 @@
             
             </div>
           <!-- API food card ends -->
-          <p class="left-align light initialInfo">Don't settle for stopping at a fast food chain at your next pit stop. One of the best ways to make a road trip memorable is to discover some of the best local food places as you travel through towns. We'll help you discover those places by giving you some of the highest rated local restaurants. Favorite the ones you're interested in and browse the menu before you get there.</p>
+          <p class="left-align light initialInfo"><br>Don't settle for stopping at a fast food chain at your next pit stop. One of the best ways to make a road trip memorable is to discover some of the best local food places as you travel through towns. We'll help you discover those places by giving you some of the highest rated local restaurants. Favorite the ones you're interested in and browse the menu before you get there.</p>
         </div>
       </div>
     </div>
 
   </div>
 
+
+  <!-- Begin Gas Section -->
+
+  <div class="parallax-container valign-wrapper" id="photoSection">
+      <div class="section no-pad-bot">
+        <div class="container">
+          <div class="row center">
+            <h5 class="header col s12 light"><i class="material-icons" id="gasIcon">local_gas_station</i></h5>
+          </div>
+        </div>
+      </div>
+      <div class="parallax"><img src="../Project-1/assets/images/background21.jpg" alt="Unsplashed background img 2"></div>
+    </div>
+  
+    <div id="gasSection" class="container">
+      <div class="section">
+  
+        <div class="row">
+          <div class="col s12 center">
+            <h3><i class="mdi-content-send brown-text"></i></h3>
+            <h4>Gas</h4>
+            <!-- API gas card starts -->
+            <div id="gas_cards">
+              
+            </div>
+            <p class="left-align light initialInfo" id="gasText"><br>Let us help you find the cheapest gas prices at your next pit stop. Think of what you could spend those extra dollars on as you travel. Using our real-time gas price locator, we will help you save time and money finding the right gas pump to keep you fueled on your journey.</p>
+          <!-- API gas card ends -->
+          </div>
+        </div>
+  
+      </div>
+    </div>
   
 
-  <div class="parallax-container valign-wrapper">
+  <!-- Begin activities section. -->
+
+  <div class="parallax-container valign-wrapper"  id="photoSection">
     <div class="section no-pad-bot">
       <div class="container">
         <div class="row center">
@@ -306,7 +307,7 @@
             
             </div>
           <!-- API event card ends -->
-          <p class="left-align light initialInfo">Chances are wherever you're headed there could be great local events and activities happening. From exciting sports events to phenomonal concerts, we'll highlight some of the activities happening at this pit stop. Check out the dates and maybe make plans to come back to this pit stop in the future so you don't miss out on these activities.</p>
+          <p class="left-align light initialInfo"><br>Chances are wherever you're headed there could be great local events and activities happening. From exciting sports events to phenomonal concerts, we'll highlight some of the activities happening at this pit stop. Check out the dates and maybe make plans to come back to this pit stop in the future so you don't miss out on these activities.</p>
         </div>
       </div>
 
@@ -314,7 +315,9 @@
   </div>
 
 
-  <div class="parallax-container valign-wrapper">
+  <!-- Begin favorites section. -->
+
+  <div class="parallax-container valign-wrapper"  id="photoSection">
     <div class="section no-pad-bot">
       <div class="container">
         <div class="row center">
@@ -338,7 +341,7 @@
             
             </div>
           <!-- API food card ends -->
-          <p class="left-align light initialInfo">After logging in, all of your favorited gas stations, restaurants, and activities will be stored for you here. Come back to your favorites to reference the info you need to make your next pit stop the best one yet.</p>
+          <p class="left-align light initialInfo"><br>After logging in, all of your favorited gas stations, restaurants, and activities will be stored for you here. Come back to your favorites to reference the info you need to make your next pit stop the best one yet.</p>
         </div>
       </div>
 
