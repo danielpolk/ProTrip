@@ -241,3 +241,10 @@ img#test {
 }
 
 
+.scrollToTop{
+    text-decoration: none;
+    position: fixed;
+    bottom: 22px;
+    left: 4px;
+    display:none;
+}
