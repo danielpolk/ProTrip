@@ -262,3 +262,9 @@ img#test {
     left: 4px;
     display:none;
 }
+
+/* preloader styling starts */
+.preloader{
+  width:100px
+}
+/* preloader styling ends */
