@@ -80,6 +80,11 @@ $("#new-member").on("click", function login(event) {
 
 });
 
+$(".account-info").on("click", function() {
+
+  noUserSignedIn();
+})
+
 $(".no-mobile").on('click', function() {
 
   // let dropdownItems = ["Favorites", "Logout"];
@@ -149,7 +154,6 @@ $(document).on("click", "#Logout", function () {
   setTimeout(function(){$("#log-out-success").remove();}, 2000);
 
 });
-
 
 
 //This is a listener for if the user is logged in or not

@@ -260,11 +260,9 @@ $(document.body).on("click", ".fav-btn", function () {
     food_div.append(upperParent.children());
     food_div_col.append(food_div);
 
-    console.log('this is the food div '+JSON.stringify(food_div_col))
+    console.log('this is the food div '+JSON.stringify(divParent))
 
-    database.ref().child('users/' + userId).push({
-        food_div_col: food_div_col,
-        food_div: food_div,
+    database.ref().child('users/' + userId + "/locations/" + city_input).push({
         divParent: divParent,
         upperParent: upperParent
     })
@@ -276,8 +274,6 @@ $(document.body).on("click", ".fav-btn", function () {
 
 });
 
-
-    });
 
     // To remove the favorite from the database
     $(document.body).on("click", ".rmv-btn", function () {
