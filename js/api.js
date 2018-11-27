@@ -271,7 +271,8 @@ $(document.body).on("click", ".fav-btn", function () {
     $("#fav_cards").append(food_div_col);
     // console.log("test user id " + childSnapshot.val().food_div)
 
-
+    //hide favorites paragraph
+    $("#favParagraph").addClass("hidden");
 });
 
 
