@@ -108,7 +108,9 @@ function gasStationResponse(response, city_input) {
 function restaurantFinder() {
     //get started button
     $("#submit-button").on("click", function (e) {
-        
+        $('#gas_cards').html('')
+        $('#food_cards').html('')
+        $('#event_cards').html('')
         // console.log("working")
         //prevent errors?
         e.preventDefault();
