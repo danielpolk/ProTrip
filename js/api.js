@@ -59,7 +59,7 @@ function gasStationResponse(response, city_input) {
         });
         //exclude gas station name is unbranded and no gas price and city name other than user input
         if (gas_station_name !== "Unbranded" && gas_price !== "N/A" && gas_city_name === city_input) {
-            console.log("testing");
+            // console.log("testing");
             
             var gas_div_col = $("<div>").addClass("col s12 m6")
             var gas_div = $("<div>").addClass("card")
@@ -118,7 +118,7 @@ function restaurantFinder() {
                 // console.log(cityCheck)
                 var stateCheck = response.location_suggestions[index].state_name;
                 // console.log(String(stateCheck))
-                console.log("first statement " + stateCheck.toLowerCase().includes(state_input.toLowerCase()))
+                // console.log("first statement " + stateCheck.toLowerCase().includes(state_input.toLowerCase()))
                 // console.log("second statement "+(state_input == stateCheck))
                 //    var helo= hello.toLowerCase();
                 // var hithere=cityCheck.includes(city_input)
@@ -126,7 +126,7 @@ function restaurantFinder() {
                     // console.log("if is working")
                     //getting the city ID from the first API call
                     var storedCityID = response.location_suggestions[index].id;
-                    // console.log(response);
+                    console.log("city id " + storedCityID);
                     //get another API call from Zomato API
                     var queryURL2 = "https://developers.zomato.com/api/v2.1/search?apikey=e54720b38895f113317f79aa68f4ca8e&entity_id=" + storedCityID + "&entity_type=city";
                     // console.log("URL" + queryURL2)
@@ -134,7 +134,7 @@ function restaurantFinder() {
                         url: queryURL2,
                         method: "GET"
                     }).then(function (response) {
-                        // console.log(response.restaurants);
+                        console.log(response.restaurants);
                         // console.log("before for loop" + response.restaurants[0].restaurant)
                         // get the longitude and latitude to use it for the Gas Feed API
                         lon = response.restaurants[0].restaurant.location.longitude
@@ -161,7 +161,7 @@ function eventFinder(city_input) {
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        console.log(response)
+        // console.log(response);
         for (var i = 0; i < (response._embedded.events.length); i++) {
             var event_name = response._embedded.events[i].name;
             var event_date = response._embedded.events[i].dates.start.localDate;
@@ -170,6 +170,8 @@ function eventFinder(city_input) {
             var event_venue_name = response._embedded.events[i]._embedded.venues[0].name;
             var event_img = response._embedded.events[i].images[0].url;
             var event_link = response._embedded.events[i].url;
+            var event_id = response._embedded.events[i].id;
+
             // creating the div for the gas station
             // create the element
             // create the text for element which will be variables below the for loop
@@ -179,7 +181,7 @@ function eventFinder(city_input) {
             var event_div_image = $("<div>").addClass("card-image")
             var event_main_img = $("<img>").attr("src", event_img)
             var event_name_span = $("<span>").addClass("card-title").text(event_name)
-            var event_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>")
+            var event_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>").attr("id", event_id);
             // var event_rating = $("<div class='btn-small rating-btn' style='background-color:#" + color_rating + "';>" + res_rating + "/5</div>")
             // console.log("this is the food rating " + event_rating)
             var event_div_content = $("<div>").addClass("card-content")
@@ -206,13 +208,14 @@ function restaurantResponse(response) {
     for (var i = 0; i < 8; i++) {
         var res_name = response.restaurants[i].restaurant.name;
         var res_main_img = response.restaurants[i].restaurant.featured_image;
-        console.log("image source " + res_main_img)
+        // console.log("image source " + res_main_img)
         var color_rating = response.restaurants[i].restaurant.user_rating.rating_color;
         // console.log("this is color rating "+color_rating)
         var res_rating = response.restaurants[i].restaurant.user_rating.aggregate_rating;
         // console.log("this is res rating "+res_rating)
         var menu_link = response.restaurants[i].restaurant.menu_url;
         var res_address = response.restaurants[i].restaurant.location.address;
+        var res_id = response.restaurants[i].restaurant.id;
 
         var food_div_col = $("<div>").addClass("col s12 m6")
         var food_div = $("<div>").addClass("card")
@@ -224,7 +227,7 @@ function restaurantResponse(response) {
         }
 
         var food_name_span = $("<span>").addClass("card-title white-text-with-blue-shadow").text(res_name)
-        var food_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>")
+        var food_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>").attr("id", res_id);
         var food_rating = $("<div class='btn-small rating-btn' style='background-color:#" + color_rating + "';>" + res_rating + "/5</div>")
         // console.log("this is the food rating " + food_rating)
         var food_div_content = $("<div>").addClass("card-content")
@@ -246,7 +249,7 @@ function restaurantResponse(response) {
 // here push the text to the div using the id
 $(document.body).on("click", ".fav-btn", function () {
     console.log($(this).parent())
-    console.log("test inner text " + $(this).parent().find(".material-icons").text())
+    // console.log("test inner text " + $(this).parent().find(".material-icons").text())
     // hello += $(this).parent().childNodes   .closest('tr').find('.sibbling').text()
 
 
@@ -260,7 +263,7 @@ $(document.body).on("click", ".fav-btn", function () {
     food_div.append(upperParent.children());
     food_div_col.append(food_div);
 
-    console.log('this is the food div '+JSON.stringify(divParent))
+    // console.log('this is the food div '+JSON.stringify(divParent))
 
     database.ref().child('users/' + userId + "/locations/" + city_input).push({
         divParent: divParent,
