@@ -95,7 +95,11 @@ function gasStationResponse(response, city_input) {
 function restaurantFinder() {
     //get started button
     $("#submit-button").on("click", function (e) {
+        // $('#gas_cards').clear();
+        // $('#food_cards').clear();
+        // $('#event_cards').clear();
         // console.log("working")
+        $("#gasText").append("<p class='center'> Here are the lowest gas prices we found in " + $("#city_input").val() + "</p>")
         //prevent errors?
         e.preventDefault();
         $('html, body').animate({
@@ -137,8 +141,10 @@ function restaurantFinder() {
                         // console.log(response.restaurants);
                         // console.log("before for loop" + response.restaurants[0].restaurant)
                         // get the longitude and latitude to use it for the Gas Feed API
-                        lon = response.restaurants[0].restaurant.location.longitude
+                        lon = response.restaurants[0].restaurant.location.longitude;
+                        console.log("sliced " + lon)
                         lat = response.restaurants[0].restaurant.location.latitude
+                        
                         // console.log("this is lon: " + lon + " ; this is lat: " + lat)
                         // calling the gas feed api function to feed with longitudeand latitude from zomato API
                         gasStationFinder(lon, lat, city_input);
@@ -161,7 +167,7 @@ function eventFinder(city_input) {
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        console.log(response)
+        console.log("event response: " + response)
         for (var i = 0; i < (response._embedded.events.length); i++) {
             var event_name = response._embedded.events[i].name;
             var event_date = response._embedded.events[i].dates.start.localDate;
