@@ -255,10 +255,62 @@ img#test {
 }
 
 
+
+.dropdown {
+  width: 100%;
+  position: absolute;
+}
+
+#dropdown-menu {
+  width: 70px;
+}
+
+.dropdown-item {
+    display: block;
+    background-color: white;
+    position: relative;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1000;
+    opacity: 1;
+    color: black;
+}
+.dropdown-item:hover {
+  background-color: rgb(238, 234, 234);
+}
+
+#log-out-success {
+  position: fixed;
+  left: 0;
+  right: 0;
+  background-color: rgba(87, 85, 85, 0.678);
+  padding: 10px;
+  max-height: 100%;
+  max-width: 50%;
+  width: fit-content;
+  margin: auto;
+  margin-top: 10px;
+  overflow-y: auto;
+  border-radius: 80px;
+  will-change: top, opacity;
+  z-index: 100000;
+  border: .5px dotted black;
+  font-size: 20px;
+  box-shadow: 0 0 0 .2rem rgba(255, 255, 255, 0.541);
+  color: white;
+
+}
+
+.sidenav {
+  height: auto;
+  width: auto;
+  padding-bottom: 0;
+
 .scrollToTop{
     text-decoration: none;
     position: fixed;
     bottom: 22px;
     left: 4px;
     display:none;
+
 }

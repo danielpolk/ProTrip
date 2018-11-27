@@ -239,6 +239,7 @@ function restaurantResponse(response) {
         food_div_col.append(food_div);
 
         $("#food_cards").append(food_div_col);
+
     }
 };
 
@@ -247,6 +248,7 @@ $(document.body).on("click", ".fav-btn", function () {
     console.log($(this).parent())
     console.log("test inner text " + $(this).parent().find(".material-icons").text())
     // hello += $(this).parent().childNodes   .closest('tr').find('.sibbling').text()
+
 
         $(this).parent().find(".fav-btn").removeClass("fav-btn").addClass("rmv-btn")
         $(this).parent().find(".material-icons").text("delete");
@@ -273,6 +275,16 @@ $(document.body).on("click", ".fav-btn", function () {
 
 
 });
+
+
+    });
+
+    // To remove the favorite from the database
+    $(document.body).on("click", ".rmv-btn", function () {
+
+    });
+
+
 
 
 // database.ref().orderByChild("dateAdded")
