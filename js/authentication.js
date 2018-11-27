@@ -2,6 +2,8 @@ let userId;
 let userName;
 let currentUser;
 let newMember = null;
+let signedOut = null;
+let dropdownItems = ["Favorites", "Logout"];
 
 $(document).ready(function() {
 
@@ -32,7 +34,6 @@ $("#cancel-sign-in").on("click", function(event){
     let ms = document.getElementById("main-section");
     ms.classList.remove("blur-effect");
 });
-
 
 //Current user sign-in
 $("#sign-in").on("click", function login(event) {
@@ -79,10 +80,77 @@ $("#new-member").on("click", function login(event) {
 
 });
 
-$("#new-account").on("click", function() {
+$(".no-mobile").on('click', function() {
 
-  noUserSignedIn();
-})
+  // let dropdownItems = ["Favorites", "Logout"];
+  let listValue = this.getAttribute("value");
+
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      
+        if (listValue === "0") {
+
+          for (let i = 0; i < dropdownItems.length; i++) {
+          let newList = $("<li>");
+          let a = $("<a>").addClass("dropdown-item right").attr("id", dropdownItems[i]).text(dropdownItems[i]);
+          newList.html(a);
+          $("#dropdown-menu").append(newList);
+          $(".no-mobile").attr("value", "1");
+            };
+
+        } else {
+          $(".dropdown-item").remove();
+          $(".no-mobile").attr("value", "0");
+        };
+    };
+  });  
+
+});
+
+$(".sidenav-trigger").on('click', function() {
+
+  // let dropdownItems = ["Favorites", "Logout"];
+  let listValue = this.getAttribute("value");
+
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      
+        if (listValue === "0") {
+
+          for (let i = 0; i < dropdownItems.length; i++) {
+          let newList = $("<li>");
+          let a = $("<a>").addClass("dropdown-item left").attr("id", dropdownItems[i]).text(dropdownItems[i]);
+          newList.html(a);
+          $("#nav-mobile").append(newList);
+          $(".sidenav-trigger").attr("value", "1");
+            };
+
+        } 
+    };
+  });  
+
+});
+
+
+$(document).on("click", "#Logout", function () {
+
+  logout();
+
+  $(".dropdown-item").remove();
+  $(".no-mobile").attr("value", "0");
+
+  let newDiv = $("<div>").attr("id", "log-out-success").addClass("container");
+  let newText = $("<span>").text("Log out successful.")
+  newDiv.append(newText);
+  $("body").prepend(newDiv);
+
+  signedOut = 1;
+  $(".account-info").text("Login");
+  setTimeout(function(){$("#log-out-success").remove();}, 2000);
+
+});
+
+
 
 //This is a listener for if the user is logged in or not
 firebase.auth().onAuthStateChanged(function(user) {
@@ -113,9 +181,10 @@ firebase.auth().onAuthStateChanged(function(user) {
   } else {
 
     console.log("user is NOT signed in");
+    if (signedOut === null) {
 
     setTimeout(noUserSignedIn, 3000);
-
+    }
   }
 });
 

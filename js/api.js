@@ -248,7 +248,9 @@ function restaurantResponse(response) {
         food_div_col.append(food_div);
 
         $("#food_cards").append(food_div_col);
-    }
+    }};
+
+
     // here push the text to the div using the id
     $(document.body).on("click", ".fav-btn", function () {
         console.log($(this).parent())
@@ -279,6 +281,12 @@ function restaurantResponse(response) {
 
 
     });
-}
+
+    // To remove the favorite from the database
+    $(document.body).on("click", ".rmv-btn", function () {
+
+    });
+
+
 
 // database.ref().orderByChild("dateAdded")
