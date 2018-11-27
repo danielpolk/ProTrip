@@ -1,7 +1,6 @@
 /* 
 * input city id = icon_city
     ** the value of the input will be the city that goes into the food api
-
 * input state id = myInput
     ** we will check the value of the state to match the api state
 * submit button id = submit-button
@@ -75,9 +74,8 @@ function gasStationResponse(response, city_input) {
 
 
             var source = 'assets/images/GasStationLogos/' + gas_station_name + '.png"'
-            var test2 = '"gas_logo"'
          
-                var gas_logo = $('<div class=' + test2 + ' style="background-image: url(' + source + ')"></div>')
+                var gas_logo = $('<div class="gas_logo" style="background-image: url(' + source + ')"></div>')
           
                 //var gas_logo = $('<div class=' + test2 + 'style="background-image: url("https://www.freeiconspng.com/uploads/no-image-icon-4.png")"></div>')
         
@@ -114,6 +112,9 @@ function restaurantFinder() {
         // console.log("working")
         //prevent errors?
         e.preventDefault();
+        $('html, body').animate({
+        scrollTop: $("#titleSection").offset().top
+        }, 800);
         // make sure that the input will be all lower case and trimmed
         city_input = $("#city_input").val().trim().toLowerCase();
         // console.log("city input "+city_input)
@@ -257,36 +258,39 @@ function restaurantResponse(response) {
 
         $("#food_cards").append(food_div_col);
     }
-    // here push the text to the div using the id
-    $(document.body).on("click", ".fav-btn", function () {
-        console.log($(this).parent())
-        console.log("test inner text " + $(this).parent().find(".material-icons").text())
-        // hello += $(this).parent().childNodes   .closest('tr').find('.sibbling').text()
+};
+
+// here push the text to the div using the id
+$(document.body).on("click", ".fav-btn", function () {
+    console.log($(this).parent())
+    console.log("test inner text " + $(this).parent().find(".material-icons").text())
+    // hello += $(this).parent().childNodes   .closest('tr').find('.sibbling').text()
 
         $(this).parent().find(".fav-btn").removeClass("fav-btn").addClass("rmv-btn")
         $(this).parent().find(".material-icons").text("delete");
-        var divParent = $(this).parent();
-        var upperParent = divParent.parent();
-        var allUpperParents = upperParent.children()
-        var food_div_col = $("<div>").addClass("col s12 m6");
-        var food_div = $("<div>").addClass("card");
-        food_div.append(allUpperParents);
-        food_div_col.append(food_div);
+    var divParent = $(this).parent();
+    var upperParent = divParent.parent();
+    // var allUpperParents = upperParent.children()
+    var food_div_col = $("<div>").addClass("col s12 m6");
+    var food_div = $("<div>").addClass("card");
+    food_div.append(upperParent.children());
+    food_div_col.append(food_div);
 
-        database.ref().child('users/' + userId).push({
-            food_div_col: food_div_col,
-            food_div: food_div,
-            divParent: divParent,
-            upperParent: allUpperParents
-        })
+    console.log('this is the food div '+JSON.stringify(food_div_col))
 
-        $("#fav_cards").append(food_div_col);
+    database.ref().child('users/' + userId).push({
+        food_div_col: food_div_col,
+        food_div: food_div,
+        divParent: divParent,
+        upperParent: upperParent
+    })
+
+    // $(food_div_col).clone(true, true).appendTo("#fav_cards");
+    $("#fav_cards").append(food_div_col);
+    // console.log("test user id " + childSnapshot.val().food_div)
 
 
-        console.log("test user id " + childSnapshot.val().food_div)
+});
 
-
-    });
-}
 
 // database.ref().orderByChild("dateAdded")
