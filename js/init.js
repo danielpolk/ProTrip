@@ -31,3 +31,31 @@ $(window).scroll(function(){
         return false;
     });
 
+
+//smooth scrolling effect for each section
+//gas button scroll effect
+$("#gas-action-btn").click(function() {
+    $('html, body').animate({
+        scrollTop: $("#gasSection").offset().top
+    }, 800);
+});
+//food button scroll effect
+$("#food-action-btn").click(function() {
+    $('html, body').animate({
+        scrollTop: $("#foodSection").offset().top
+    }, 800);
+});
+// activities button scroll effect
+$("#activities-action-btn").click(function() {
+    $('html, body').animate({
+        scrollTop: $("#activitiesSection").offset().top
+    }, 800);
+});
+// fav button scroll effect
+$("#fav-action-btn").click(function() {
+    $('html, body').animate({
+        scrollTop: $("#favoritesSection").offset().top
+    }, 800);
+});
+
+
