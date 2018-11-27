@@ -28,7 +28,7 @@ console.log("we are live")
 function gasStationFinder(lon, lat, city_input) {
     // var nameStored = [];
     // var gasPriceStored = [];
-    var queryURL = "http://api.mygasfeed.com/stations/radius/" + lat + "/" + lon + "/7/reg/Price/bpxxw96ps2.json";
+    var queryURL = "http://api.mygasfeed.com/stations/radius/" + lat + "/" + lon + "/4/reg/Price/bpxxw96ps2.json";
     // console.log("station url: " + queryURL)
     $.ajax({
         url: queryURL,
@@ -45,7 +45,7 @@ function gasStationFinder(lon, lat, city_input) {
 function gasStationResponse(response, city_input) {
 
 
-    for (var i = 0; i < (response.stations.length - 10); i++) {
+    for (var i = 0; i < 8; i++) {
         var gas_station_name = response.stations[i].station;
         var gas_price = response.stations[i].reg_price;
         var gas_address = response.stations[i].address
@@ -60,27 +60,17 @@ function gasStationResponse(response, city_input) {
         //exclude gas station name is unbranded and no gas price and city name other than user input
         if (gas_station_name !== "Unbranded" && gas_price !== "N/A" && gas_city_name === city_input) {
             console.log("testing");
-            // creating the div for the gas station
-            // create the element
-            // create the text for element which will be variables below the for loop
-            // push these variables to the div section
+            
             var gas_div_col = $("<div>").addClass("col s12 m6")
             var gas_div = $("<div>").addClass("card")
             var gas_div_image = $("<div>").addClass("card-image")
             var gas_main_img = $("<img>").attr("src", "assets/images/GasStationLogos/GasBackground.jpeg")
-
             var gas_name_span = $("<h2>").addClass("card-title").text(gas_station_name);
-
-
             var source = 'assets/images/GasStationLogos/' + gas_station_name + '.png"'
-         
-                var gas_logo = $('<div class="gas_logo" style="background-image: url(' + source + ')"></div>')
-          
-                //var gas_logo = $('<div class=' + test2 + 'style="background-image: url("https://www.freeiconspng.com/uploads/no-image-icon-4.png")"></div>')
-        
-
-
-            var gas_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>")
+            var test2 = '"gas_logo"'
+            var gas_logo = $('<div class=' + test2 + ' style="background-image: url(' + source + ')"></div>')
+            var gas_fav_btn = $("<a id ='gasFav'><i class='material-icons’>favorite_border</i></a>")
+            // var event_fav_btn = $("<a class=''><i class='material-icons'>favorite_border</i></a>")
 
             var gas_div_content = $("<div>").addClass("card-content")
             var prices = $('<h5>').addClass('gas-price').text("$" + gas_price + "/gal");
