@@ -181,7 +181,7 @@ function eventFinder(city_input) {
             var event_div_image = $("<div>").addClass("card-image")
             var event_main_img = $("<img>").attr("src", event_img)
             var event_name_span = $("<span>").addClass("card-title").text(event_name)
-            var event_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>").attr("id", event_id);
+            var event_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>").attr("id", event_id).attr("value", "event");
             // var event_rating = $("<div class='btn-small rating-btn' style='background-color:#" + color_rating + "';>" + res_rating + "/5</div>")
             // console.log("this is the food rating " + event_rating)
             var event_div_content = $("<div>").addClass("card-content")
@@ -227,7 +227,7 @@ function restaurantResponse(response) {
         }
 
         var food_name_span = $("<span>").addClass("card-title white-text-with-blue-shadow").text(res_name)
-        var food_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>").attr("id", res_id);
+        var food_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>").attr("id", res_id).attr("value", "restaurant");
         var food_rating = $("<div class='btn-small rating-btn' style='background-color:#" + color_rating + "';>" + res_rating + "/5</div>")
         // console.log("this is the food rating " + food_rating)
         var food_div_content = $("<div>").addClass("card-content")
@@ -249,39 +249,43 @@ function restaurantResponse(response) {
 // here push the text to the div using the id
 $(document.body).on("click", ".fav-btn", function () {
     console.log($(this).parent())
-    // console.log("test inner text " + $(this).parent().find(".material-icons").text())
-    // hello += $(this).parent().childNodes   .closest('tr').find('.sibbling').text()
 
+    let eventId = this.getAttribute("id");
+    let value = this.getAttribute("value");
 
-        $(this).parent().find(".fav-btn").removeClass("fav-btn").addClass("rmv-btn")
-        $(this).parent().find(".material-icons").text("delete");
+    $(this).parent().find(".fav-btn").removeClass("fav-btn").addClass("rmv-btn")
+    $(this).parent().find(".material-icons").text("delete");
     var divParent = $(this).parent();
-    var upperParent = divParent.parent();
-    // var allUpperParents = upperParent.children()
+    var upperParent = divParent.parent().clone();
     var food_div_col = $("<div>").addClass("col s12 m6");
     var food_div = $("<div>").addClass("card");
     food_div.append(upperParent.children());
     food_div_col.append(food_div);
 
-    // console.log('this is the food div '+JSON.stringify(divParent))
-
-    database.ref().child('users/' + userId + "/locations/" + city_input).push({
-        divParent: divParent,
-        upperParent: upperParent
+    database.ref().child('users/' + userId + "/locations/" + city_input + "/" + value).push({
+        id: eventId,
     })
 
-    // $(food_div_col).clone(true, true).appendTo("#fav_cards");
-    $("#fav_cards").append(food_div_col);
-    // console.log("test user id " + childSnapshot.val().food_div)
-
+    food_div_col.appendTo("#fav_cards");
 
 });
 
 
     // To remove the favorite from the database
-    $(document.body).on("click", ".rmv-btn", function () {
+$(document.body).on("click", ".rmv-btn", function () {
 
-    });
+let eventId = this.getAttribute("id");
+let value = this.getAttribute("value");
+
+console.log("remove button clicked.");
+
+database.ref().child('users/' + userId + "/locations/" + city_input + "/" + value).push({
+    id: eventId,
+})
+
+
+
+});
 
 
 

@@ -82,13 +82,25 @@ $("#new-member").on("click", function login(event) {
 
 $(".account-info").on("click", function() {
 
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      console.log("User");
+      newUserSignIn();
+    } else {
+
   noUserSignedIn();
-})
+    };
+  });
+});
 
-$(".no-mobile").on('click', function() {
+// $(document).on('click', ".no-mobile", newUserSignIn());
 
-  // let dropdownItems = ["Favorites", "Logout"];
-  let listValue = this.getAttribute("value");
+
+function newUserSignIn() {
+
+  
+  let listValue = $(".no-mobile").attr("value");
+  console.log(listValue);
 
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
@@ -108,9 +120,8 @@ $(".no-mobile").on('click', function() {
           $(".no-mobile").attr("value", "0");
         };
     };
-  });  
-
-});
+  });
+};  
 
 $(".sidenav-trigger").on('click', function() {
 
@@ -120,7 +131,7 @@ $(".sidenav-trigger").on('click', function() {
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       
-        if (listValue === "0") {
+        if (listValue !== "0") {
 
           for (let i = 0; i < dropdownItems.length; i++) {
           let newList = $("<li>");
@@ -128,13 +139,16 @@ $(".sidenav-trigger").on('click', function() {
           newList.html(a);
           $("#nav-mobile").append(newList);
           $(".sidenav-trigger").attr("value", "1");
-            };
+          };
 
-        } 
-    };
-  });  
+        } else {
 
-});
+        };
+
+       };
+  });
+});  
+
 
 
 $(document).on("click", "#Logout", function () {
@@ -211,6 +225,8 @@ function writeUserData(userId, userName) {
 
 //This is for the modal display to pop up if they aren't signed in
 function noUserSignedIn() {
+
+  console.log("noUserSignedIn");
 
   // No user is signed in.
   document.getElementById("user-sign-in").style.display = "block";
