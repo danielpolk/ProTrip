@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PitStop</title>
@@ -35,11 +36,14 @@
       <i class="large material-icons">map</i>
     </a>
     <ul>
-      <li><a href="#gasSection" class="btn-floating teal darken-1"><i class="material-icons">local_gas_station</i></a></li>
-      <li><a href="#foodSection" class="btn-floating green darken-4"><i class="material-icons">local_dining</i></a></li>
-      <li><a href="#activitiesSection" class="btn-floating orange darken-2"><i class="material-icons">local_activity</i></a></li>
-      <li><a href="#favoritesSection" class="btn-floating red"><i class="material-icons">favorite</i></a></li>
+      <li><a id="gas-action-btn" href="#gasSection" class="btn-floating teal darken-1"><i class="material-icons">local_gas_station</i></a></li>
+      <li><a id="food-action-btn" href="#foodSection" class="btn-floating green darken-4"><i class="material-icons">local_dining</i></a></li>
+      <li><a id="activities-action-btn" href="#activitiesSection" class="btn-floating orange darken-2"><i class="material-icons">local_activity</i></a></li>
+      <li><a id="fav-action-btn" href="#favoritesSection" class="btn-floating red"><i class="material-icons">favorite</i></a></li>
     </ul>
+    <a class="scrollToTop btn-floating btn-large deep-orange darken-1">
+      <i class="large material-icons">arrow_upward</i>
+    </a>
   </div>
 <!-- Sign-in pop-up -->
   <div class="container" id="user-sign-in">

@@ -63,6 +63,7 @@ p {
   margin-bottom: auto;
 }
 
+
 .icon-block {
   padding: 0 15px;
 }
@@ -155,11 +156,24 @@ footer.page-footer {
   display: none;
 }
 
+#gasFav {
+  position: absolute;
+  top: 10px !important;
+  right: 11px !important;
+  color: red;
+}
+
+.heart-icon {
+  font-size: 3em;
+}
+
 
 #favoriteBtn {
   top: 10px !important;
   right: 11px !important;
 }
+
+
 
 
 #restaurantName {
@@ -241,6 +255,7 @@ img#test {
 }
 
 
+
 .dropdown {
   width: 100%;
   position: absolute;
@@ -290,4 +305,12 @@ img#test {
   height: auto;
   width: auto;
   padding-bottom: 0;
+
+.scrollToTop{
+    text-decoration: none;
+    position: fixed;
+    bottom: 22px;
+    left: 4px;
+    display:none;
+
 }
