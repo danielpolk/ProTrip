@@ -69,7 +69,7 @@ function gasStationResponse(response, city_input) {
             var source = 'assets/images/GasStationLogos/' + gas_station_name + '.png"'
             var test2 = '"gas_logo"'
             var gas_logo = $('<div class=' + test2 + ' style="background-image: url(' + source + ')"></div>')
-            var gas_fav_btn = $("<a id ='gasFav'><i class='material-icons’>favorite_border</i></a>")
+            var gas_fav_btn = $("<a id='gasFav'><i class='material-icons heart-icon'>favorite_border</i></a>")
             // var event_fav_btn = $("<a class=''><i class='material-icons'>favorite_border</i></a>")
 
             var gas_div_content = $("<div>").addClass("card-content")
@@ -95,12 +95,9 @@ function gasStationResponse(response, city_input) {
 function restaurantFinder() {
     //get started button
     $("#submit-button").on("click", function (e) {
-<<<<<<< HEAD
         $('#gas_cards').html('')
         $('#food_cards').html('')
         $('#event_cards').html('')
-=======
->>>>>>> master
         // console.log("working")
         //prevent errors?
         e.preventDefault();
@@ -245,6 +242,7 @@ function restaurantResponse(response) {
         food_div_col.append(food_div);
 
         $("#food_cards").append(food_div_col);
+
     }
 };
 
@@ -253,6 +251,7 @@ $(document.body).on("click", ".fav-btn", function () {
     console.log($(this).parent())
     console.log("test inner text " + $(this).parent().find(".material-icons").text())
     // hello += $(this).parent().childNodes   .closest('tr').find('.sibbling').text()
+
 
         $(this).parent().find(".fav-btn").removeClass("fav-btn").addClass("rmv-btn")
         $(this).parent().find(".material-icons").text("delete");
@@ -279,6 +278,16 @@ $(document.body).on("click", ".fav-btn", function () {
 
 
 });
+
+
+
+
+    // To remove the favorite from the database
+    $(document.body).on("click", ".rmv-btn", function () {
+
+    });
+
+
 
 
 // database.ref().orderByChild("dateAdded")
