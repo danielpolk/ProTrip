@@ -250,7 +250,8 @@ $(document.body).on("click", ".fav-btn", function () {
     // $(food_div_col).clone(true, true).appendTo("#fav_cards");
     $("#fav_cards").append(food_div_col);
 
-
+    //hide favorites paragraph
+    $("#favParagraph").addClass("hidden");
 });
 
 
