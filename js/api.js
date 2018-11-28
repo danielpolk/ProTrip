@@ -34,8 +34,11 @@ function gasStationFinder(lon, lat, city_input) {
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        console.log("gas response" + JSON.stringify(response));
+        // console.log("gas response" + JSON.stringify(response));
         gasStationResponse(response, city_input);
+        console.log(city_input);
+        console.log(response);
+ 
 
 
     })
@@ -52,6 +55,9 @@ function gasStationResponse(response, city_input) {
         var gas_city_name = response.stations[i].city;
         var gas_state = response.stations[i].region;
         var gas_zipcode = response.stations[i].zip;
+        var gas_id = response.stations[i].id;
+
+        console.log(response);
         // console.log('this is the city name' + i + ' ' + gas_city_name)
         //to return city name input with first letter upper case
         city_input = city_input.toLowerCase().replace(/\b[a-z]/g, function (letter) {
@@ -69,8 +75,11 @@ function gasStationResponse(response, city_input) {
             var source = 'assets/images/GasStationLogos/' + gas_station_name + '.png"'
             var test2 = '"gas_logo"'
             var gas_logo = $('<div class=' + test2 + ' style="background-image: url(' + source + ')"></div>')
-            var gas_fav_btn = $("<a id ='gasFav'><i class='material-icons’>favorite_border</i></a>")
+            var gas_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>").attr("id", gas_id).attr("value", "event").attr("city", city_input);
+
+            // $("<a id ='gasFav'><i class='material-icons’>favorite_border</i></a>")
             // var event_fav_btn = $("<a class=''><i class='material-icons'>favorite_border</i></a>")
+
 
             var gas_div_content = $("<div>").addClass("card-content")
             var prices = $('<h5>').addClass('gas-price').text("$" + gas_price + "/gal");
@@ -172,6 +181,7 @@ function eventFinder(city_input) {
             var event_link = response._embedded.events[i].url;
             var event_id = response._embedded.events[i].id;
 
+
             // creating the div for the gas station
             // create the element
             // create the text for element which will be variables below the for loop
@@ -181,7 +191,7 @@ function eventFinder(city_input) {
             var event_div_image = $("<div>").addClass("card-image")
             var event_main_img = $("<img>").attr("src", event_img)
             var event_name_span = $("<span>").addClass("card-title").text(event_name)
-            var event_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>").attr("id", event_id).attr("value", "event");
+            var event_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>").attr("id", event_id).attr("value", "event").attr("city", city_input);
             // var event_rating = $("<div class='btn-small rating-btn' style='background-color:#" + color_rating + "';>" + res_rating + "/5</div>")
             // console.log("this is the food rating " + event_rating)
             var event_div_content = $("<div>").addClass("card-content")
@@ -216,6 +226,7 @@ function restaurantResponse(response) {
         var menu_link = response.restaurants[i].restaurant.menu_url;
         var res_address = response.restaurants[i].restaurant.location.address;
         var res_id = response.restaurants[i].restaurant.id;
+        var res_city = response.restaurants[i].restaurant.location.city;
 
         var food_div_col = $("<div>").addClass("col s12 m6")
         var food_div = $("<div>").addClass("card")
@@ -227,7 +238,7 @@ function restaurantResponse(response) {
         }
 
         var food_name_span = $("<span>").addClass("card-title white-text-with-blue-shadow").text(res_name)
-        var food_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>").attr("id", res_id).attr("value", "restaurant");
+        var food_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>").attr("id", res_id).attr("value", "restaurant").attr("city", res_city);
         var food_rating = $("<div class='btn-small rating-btn' style='background-color:#" + color_rating + "';>" + res_rating + "/5</div>")
         // console.log("this is the food rating " + food_rating)
         var food_div_content = $("<div>").addClass("card-content")
@@ -252,11 +263,13 @@ $(document.body).on("click", ".fav-btn", function () {
 
     let eventId = this.getAttribute("id");
     let value = this.getAttribute("value");
-    let favKey = database.ref().child('users/' + userId + "/favorites/" + value).push({
+    let city = this.getAttribute("city");
+    let favKey = database.ref().child('users/' + userId + "/locations/" + city + "/" + value).push({
         id: eventId,
     }).getKey();
 
-    $(this).parent().find(".fav-btn").removeClass("fav-btn").addClass("rmv-btn").attr("databaseKey", favKey);
+    $(this).parent().find(".fav-btn").removeClass("fav-btn").addClass("rmv-btn").attr("databaseKey", favKey).attr("city", city);
+    console.log(this);
     $(this).parent().find(".material-icons").text("delete");
     var divParent = $(this).parent();
     var upperParent = divParent.parent().clone();
@@ -273,16 +286,16 @@ $(document.body).on("click", ".fav-btn", function () {
     // To remove the favorite from the database
 $(document.body).on("click", ".rmv-btn", function () {
 
-    let eventId = this.getAttribute("id");
     let value = this.getAttribute("value");
-    let favKey = this.getAttribute("databaseKey")
+    let favKey = this.getAttribute("databaseKey");
+    let city = this.getAttribute("city");
     let divParent = $(this).parent();
     let upperParent = divParent.parent()
     let cardParent = upperParent.parent();
 
     console.log("remove button clicked.");
 
-    database.ref('users/' + userId + "/favorites/" + value + "/" + favKey).update({
+    database.ref('users/' + userId + "/locations/" + city + "/" + value + "/" + favKey).update({
         id: null,
     });
 

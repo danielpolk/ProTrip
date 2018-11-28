@@ -172,6 +172,8 @@ $(document).on("click", "#Logout", function () {
   $(".account-info").text("Login");
   setTimeout(function(){$("#log-out-success").remove();}, 2000);
 
+  userFavorites.logout();
+
 });
 
 $(document).on("click", "#Favorites", function () {
@@ -207,6 +209,8 @@ firebase.auth().onAuthStateChanged(function(user) {
       $(".account-info").empty();
       $(".account-info").text(userName);
 
+      userFavorites.add();
+
     });
   
   } else {
@@ -218,6 +222,38 @@ firebase.auth().onAuthStateChanged(function(user) {
     };
   };
 });
+
+let userFavorites  = {
+
+
+  add: function() {
+    debugger;
+
+    let locations = currentUser.locations;
+    let size = locations.keys(myObj).length
+    console.log(size);
+    
+    
+    for (let i = 0; i < size; i ++) {
+      let favCity = locations[i];
+
+      for (let i = 0; i < favCity.length; i ++) {
+      let eventType = favCity[i];
+
+        for (let i = 0; i < eventType.length; i ++) {
+          let databaseKey = eventType[i].val();
+          console.log(databaseKey);
+
+        };
+      };
+    };
+  },
+
+  logout: function() {
+
+  },
+
+};
 
 //Signing a user out
 function logout() {
