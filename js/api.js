@@ -64,7 +64,7 @@ function gasStationResponse(response, city_input) {
             var source = 'assets/images/GasStationLogos/' + gas_station_name + '.png"'
             var test2 = '"gas_logo"'
             var gas_logo = $('<div class=' + test2 + ' style="background-image: url(' + source + ')"></div>')
-            var gas_fav_btn = $("<a id ='gasFav'><i class='material-icons’>favorite_border</i></a>").attr("id", gas_id).attr("value", "gas");
+            var gas_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite</i></a>").attr("id", gas_id).attr("value", "gas");
             // var event_fav_btn = $("<a class=''><i class='material-icons'>favorite_border</i></a>")
             var gas_div_content = $("<div>").addClass("card-content")
             var prices = $('<h5>').addClass('gas-price').text("$" + gas_price + "/gal");
@@ -99,7 +99,6 @@ function restaurantFinder() {
         $('#gas_cards').empty();
         $('#food_cards').empty();
         $('#event_cards').empty();
-        $("#gasText").append("<p class='center'> Here are the lowest gas prices we found in " + $("#city_input").val() + "</p>")
         //prevent errors?
         e.preventDefault();
         $('html, body').animate({
@@ -113,10 +112,6 @@ function restaurantFinder() {
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            if (response.location_suggestions = 0){
-                $('#selectedCity').text("Spelled it wrong, dummy.")
-                console.log("response null");
-            } 
             for (let index = 0; index < (response.location_suggestions.length); index++) {
                 var cityCheck = (JSON.stringify(response.location_suggestions[index].name)).toLowerCase();
                 var stateCheck = response.location_suggestions[index].state_name;
@@ -181,7 +176,7 @@ function eventFinder(city_input) {
             var event_div_image = $("<div>").addClass("card-image")
             var event_main_img = $("<img>").attr("src", event_img)
             var event_name_span = $("<span>").addClass("card-title").text(event_name)
-            var event_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>").attr("id", event_id).attr("value", "event");
+            var event_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite</i></a>").attr("id", event_id).attr("value", "event");
             // var event_rating = $("<div class='btn-small rating-btn' style='background-color:#" + color_rating + "';>" + res_rating + "/5</div>")
             // console.log("this is the food rating " + event_rating)
             var event_div_content = $("<div>").addClass("card-content")
@@ -227,7 +222,7 @@ function restaurantResponse(response) {
         }
 
         var food_name_span = $("<span>").addClass("card-title white-text-with-blue-shadow").text(res_name)
-        var food_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>").attr("id", res_id).attr("value", "restaurant");
+        var food_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite</i></a>").attr("id", res_id).attr("value", "restaurant");
         var food_rating = $("<div class='btn-small rating-btn' style='background-color:#" + color_rating + "';>" + res_rating + "/5</div>")
         var food_div_content = $("<div>").addClass("card-content")
         var food_menu = $("<a href='" + menu_link + "' class='left'>See Menu</a>")
@@ -257,7 +252,7 @@ $(document.body).on("click", ".fav-btn", function () {
     let favKey = database.ref().child('users/' + userId + "/favorites/" + value).push({
         id: eventId,
     }).getKey();
-
+    // .removeClass("fav-btn").addClass("rmv-btn")
     $(this).parent().find(".fav-btn").removeClass("fav-btn").addClass("rmv-btn").attr("databaseKey", favKey);
     $(this).parent().find(".material-icons").text("delete");
     var divParent = $(this).parent();

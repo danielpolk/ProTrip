@@ -174,17 +174,10 @@ $("#submit-button").click(function() {
   $(".hiddenInfo").removeClass("hidden");
 
   //Show selected city.
-  // var cityInput = $("#city_input").val();
-  // var cityInputCaps = cityInput.toUpperCase();
-  // var stateInput = $("#state_input").val();
-  // var stateInputCaps = stateInput.toUpperCase();
-  // $("#selectedCity").text(cityInputCaps + ", " + stateInputCaps);
-
-});
-
-$('#fav-icon').on("click", function(){
-    var favIcon = $('#fav-icon');
-    favIcon.removeClass('favorite')
-    favIcon.addClass('favorite-border');
+  var cityInput = $("#city_input").val();
+  var cityInputCaps = cityInput.toUpperCase();
+  var stateInput = $("#state_input").val();
+  var stateInputCaps = stateInput.toUpperCase();
+  $("#selectedCity").text(cityInputCaps + ", " + stateInputCaps);
 
 });
