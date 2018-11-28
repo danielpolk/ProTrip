@@ -53,7 +53,9 @@ function gasStationResponse(response, city_input) {
             return letter.toUpperCase();
         });
         //exclude gas station name is unbranded and no gas price and city name other than user input
-        if (gas_station_name !== "Unbranded" && gas_price !== "N/A") {
+        if (gas_station_name !== "Unbranded" && gas_price !== "N/A" && gas_city_name === city_input) {
+            // console.log("testing");
+            
             var gas_div_col = $("<div>").addClass("col s12 m6")
             var gas_div = $("<div>").addClass("card")
             var gas_div_image = $("<div>").addClass("card-image")
@@ -157,8 +159,8 @@ function eventFinder(city_input) {
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        var card_counter = 10;
-        for (var i = 0; i < card_counter; i++) {
+        // console.log(response);
+        for (var i = 0; i < (response._embedded.events.length); i++) {
             var event_name = response._embedded.events[i].name;
             var event_date = response._embedded.events[i].dates.start.localDate;
             var event_time = response._embedded.events[i].dates.start.localTime;
@@ -167,6 +169,8 @@ function eventFinder(city_input) {
             var event_venue_name = response._embedded.events[i]._embedded.venues[0].name;
             var event_img = response._embedded.events[i].images[0].url;
             var event_link = response._embedded.events[i].url;
+            var event_id = response._embedded.events[i].id;
+
             // creating the div for the gas station
             // create the element
             // create the text for element which will be variables below the for loop
@@ -176,7 +180,9 @@ function eventFinder(city_input) {
             var event_div_image = $("<div>").addClass("card-image")
             var event_main_img = $("<img>").attr("src", event_img)
             var event_name_span = $("<span>").addClass("card-title").text(event_name)
-            var event_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>")
+            var event_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>").attr("id", event_id).attr("value", "event");
+            // var event_rating = $("<div class='btn-small rating-btn' style='background-color:#" + color_rating + "';>" + res_rating + "/5</div>")
+            // console.log("this is the food rating " + event_rating)
             var event_div_content = $("<div>").addClass("card-content")
             var event_tickets = $("<a href='" + event_link + "' class='left'>Buy Tickets</a>")
             var line_break1 = $("<br>");
@@ -203,10 +209,13 @@ function restaurantResponse(response) {
     for (var i = 0; i < card_counter; i++) {
         var res_name = response.restaurants[i].restaurant.name;
         var res_main_img = response.restaurants[i].restaurant.featured_image;
+        // console.log("image source " + res_main_img)
         var color_rating = response.restaurants[i].restaurant.user_rating.rating_color;
         var res_rating = response.restaurants[i].restaurant.user_rating.aggregate_rating;
         var menu_link = response.restaurants[i].restaurant.menu_url;
         var res_address = response.restaurants[i].restaurant.location.address;
+        var res_id = response.restaurants[i].restaurant.id;
+
         var food_div_col = $("<div>").addClass("col s12 m6")
         var food_div = $("<div>").addClass("card")
         var food_div_image = $("<div>").addClass("card-image")
@@ -217,7 +226,7 @@ function restaurantResponse(response) {
         }
 
         var food_name_span = $("<span>").addClass("card-title white-text-with-blue-shadow").text(res_name)
-        var food_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>")
+        var food_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>").attr("id", res_id).attr("value", "restaurant");
         var food_rating = $("<div class='btn-small rating-btn' style='background-color:#" + color_rating + "';>" + res_rating + "/5</div>")
         var food_div_content = $("<div>").addClass("card-content")
         var food_menu = $("<a href='" + menu_link + "' class='left'>See Menu</a>")
@@ -234,34 +243,52 @@ function restaurantResponse(response) {
         food_div_col.append(food_div);
     
         $("#food_cards").append(food_div_col);
+
     }
 };
 
 // here push the text to the div using the id
 $(document.body).on("click", ".fav-btn", function () {
+    console.log($(this).parent())
 
-        $(this).parent().find(".fav-btn").removeClass("fav-btn").addClass("rmv-btn")
-        $(this).parent().find(".material-icons").text("delete");
+    let eventId = this.getAttribute("id");
+    let value = this.getAttribute("value");
+    let favKey = database.ref().child('users/' + userId + "/favorites/" + value).push({
+        id: eventId,
+    }).getKey();
+
+    $(this).parent().find(".fav-btn").removeClass("fav-btn").addClass("rmv-btn").attr("databaseKey", favKey);
+    $(this).parent().find(".material-icons").text("delete");
     var divParent = $(this).parent();
-    var upperParent = divParent.parent();
-    // var allUpperParents = upperParent.children()
+    var upperParent = divParent.parent().clone();
     var food_div_col = $("<div>").addClass("col s12 m6");
     var food_div = $("<div>").addClass("card");
     food_div.append(upperParent.children());
     food_div_col.append(food_div);
 
-
-    database.ref().child('users/' + userId).push({
-        food_div_col: food_div_col,
-        food_div: food_div,
-        divParent: divParent,
-        upperParent: upperParent
-    })
-
-    // $(food_div_col).clone(true, true).appendTo("#fav_cards");
-    $("#fav_cards").append(food_div_col);
-
-
+    food_div_col.appendTo("#fav_cards");
+   
+    //hide favorites paragraph
+    $("#favParagraph").addClass("hidden");
 });
 
 
+    // To remove the favorite from the database
+$(document.body).on("click", ".rmv-btn", function () {
+
+    let eventId = this.getAttribute("id");
+    let value = this.getAttribute("value");
+    let favKey = this.getAttribute("databaseKey")
+    let divParent = $(this).parent();
+    let upperParent = divParent.parent()
+    let cardParent = upperParent.parent();
+
+    console.log("remove button clicked.");
+
+    database.ref('users/' + userId + "/favorites/" + value + "/" + favKey).update({
+        id: null,
+    });
+
+    cardParent.remove();
+
+});
