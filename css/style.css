@@ -106,6 +106,38 @@ footer.page-footer {
   margin: 0;
 }
 
+#oopsie{
+  position: fixed;
+    left: 0;
+    right: 0;
+    top:40%;
+    background-color: rgba(87, 85, 85, 0.678);
+    padding: 10px;
+    max-height: 100%;
+    max-width: 50%;
+    width: fit-content;
+    margin: auto;
+    margin-top: 10px;
+    overflow-y: auto;
+    border-radius: 10px;
+    will-change: top, opacity;
+    z-index: 20;
+    border: .5px dotted black;
+    box-shadow: 0 0 0 .2rem rgba(255, 255, 255, 0.541);
+    color: white;
+
+}
+
+#close-btn{
+  position: absolute;
+  float: right;
+  right: 39px;
+  bottom: initial !important;
+}
+h4.close-text.center {
+    margin: 2.42rem 0 0.912rem 0;
+    line-height: 7vh;
+}
 
  #user-sign-in{
     position: fixed;

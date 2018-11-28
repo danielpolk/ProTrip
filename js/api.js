@@ -100,9 +100,7 @@ function restaurantFinder() {
         $("#gasText").append("<p class='center'> Here are the lowest gas prices we found in " + $("#city_input").val() + "</p>")
         //prevent errors?
         e.preventDefault();
-        $('html, body').animate({
-        scrollTop: $("#titleSection").offset().top
-        }, 800);
+        
         city_input = $("#city_input").val().trim().toLowerCase();
         state_input = $("#state_input").val();
         //getting the city ID for Zomato API
@@ -111,26 +109,38 @@ function restaurantFinder() {
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            for (let index = 0; index < (response.location_suggestions.length); index++) {
-                var cityCheck = (JSON.stringify(response.location_suggestions[index].name)).toLowerCase();
-                var stateCheck = response.location_suggestions[index].state_name;
-                if (cityCheck.includes(city_input) && stateCheck.toLowerCase().includes(state_input.toLowerCase())) {
-                    //getting the city ID from the first API call
-                    var storedCityID = response.location_suggestions[index].id;
-                    //get another API call from Zomato API
-                    var queryURL2 = "https://developers.zomato.com/api/v2.1/search?apikey=e54720b38895f113317f79aa68f4ca8e&entity_id=" + storedCityID + "&entity_type=city";
-                    $.ajax({
-                        url: queryURL2,
-                        method: "GET"
-                    }).then(function (response) {
-                        // get the longitude and latitude to use it for the Gas Feed API
-                        lon = response.restaurants[0].restaurant.location.longitude;
-                        lat = response.restaurants[0].restaurant.location.latitude
-                        gasStationFinder(lon, lat, city_input);
-                        eventFinder(city_input);
-                        restaurantResponse(response);
-                    })
+            if (response.location_suggestions.length != 0){
+                $('html, body').animate({
+                    scrollTop: $("#titleSection").offset().top
+                }, 800);
+                for (let index = 0; index < (response.location_suggestions.length); index++) {
+                    var cityCheck = (JSON.stringify(response.location_suggestions[index].name)).toLowerCase();
+                    var stateCheck = response.location_suggestions[index].state_name;
+                    if (cityCheck.includes(city_input) && stateCheck.toLowerCase().includes(state_input.toLowerCase())) {
+                        //getting the city ID from the first API call
+                        var storedCityID = response.location_suggestions[index].id;
+                        //get another API call from Zomato API
+                        var queryURL2 = "https://developers.zomato.com/api/v2.1/search?apikey=e54720b38895f113317f79aa68f4ca8e&entity_id=" + storedCityID + "&entity_type=city";
+                        $.ajax({
+                            url: queryURL2,
+                            method: "GET"
+                        }).then(function (response) {
+                            // get the longitude and latitude to use it for the Gas Feed API
+                            lon = response.restaurants[0].restaurant.location.longitude;
+                            lat = response.restaurants[0].restaurant.location.latitude
+                            gasStationFinder(lon, lat, city_input);
+                            eventFinder(city_input);
+                            restaurantResponse(response);
+                        })
+                    }
                 }
+            } else{
+                $("#main-section").addClass("blur-effect");
+                $('#oopsie').show();
+                $("#close-btn").on("click", function (e) {
+                    $("#main-section").removeClass("blur-effect");
+                    $('#oopsie').hide();
+                });
             }
         });
     });
@@ -138,6 +148,7 @@ function restaurantFinder() {
 restaurantFinder();
 
 
+$('#oopsie').hide();
 
 function eventFinder(city_input) {
     var city_name_nospace = city_input.split(' ').join('+');
