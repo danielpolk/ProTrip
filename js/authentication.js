@@ -138,7 +138,22 @@ $(".sidenav-trigger").on('click', function() {
   });
 });  
 
+// document.addEventListener('mouseup', function(e){
 
+//   let accountMenu = $(".account-info");
+//   let mobileAccountMenu = $(".sidenav-trigger");
+
+//   if (e.target === accountMenu)  {
+
+//     console.log("main menu");
+
+//   } else if (e.target === mobileAccountMenu) {
+
+//     console.log("mobile menu");
+
+//   }
+
+// });
 
 $(document).on("click", "#Logout", function () {
 

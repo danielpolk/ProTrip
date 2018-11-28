@@ -252,8 +252,11 @@ $(document.body).on("click", ".fav-btn", function () {
 
     let eventId = this.getAttribute("id");
     let value = this.getAttribute("value");
+    let favKey = database.ref().child('users/' + userId + "/favorites/" + value).push({
+        id: eventId,
+    }).getKey();
 
-    $(this).parent().find(".fav-btn").removeClass("fav-btn").addClass("rmv-btn")
+    $(this).parent().find(".fav-btn").removeClass("fav-btn").addClass("rmv-btn").attr("databaseKey", favKey);
     $(this).parent().find(".material-icons").text("delete");
     var divParent = $(this).parent();
     var upperParent = divParent.parent().clone();
@@ -261,10 +264,6 @@ $(document.body).on("click", ".fav-btn", function () {
     var food_div = $("<div>").addClass("card");
     food_div.append(upperParent.children());
     food_div_col.append(food_div);
-
-    database.ref().child('users/' + userId + "/locations/" + city_input + "/" + value).push({
-        id: eventId,
-    })
 
     food_div_col.appendTo("#fav_cards");
 
@@ -276,12 +275,18 @@ $(document.body).on("click", ".rmv-btn", function () {
 
     let eventId = this.getAttribute("id");
     let value = this.getAttribute("value");
+    let favKey = this.getAttribute("databaseKey")
+    let divParent = $(this).parent();
+    let upperParent = divParent.parent()
+    let cardParent = upperParent.parent();
 
     console.log("remove button clicked.");
 
-    database.ref().child('users/' + userId + "/locations/" + city_input + "/" + value).push({
-        id: eventId,
+    database.ref('users/' + userId + "/favorites/" + value + "/" + favKey).update({
+        id: null,
     });
+
+    cardParent.remove();
 
 });
 
