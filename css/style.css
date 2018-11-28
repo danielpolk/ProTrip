@@ -63,7 +63,7 @@ p {
     overflow-y: auto;
     border-radius: 23px;
     will-change: top, opacity;
-    z-index: 100000;
+    z-index: 20;
     border: .5px dotted black;
     box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.541);
     color: white;
@@ -121,7 +121,7 @@ footer.page-footer {
     overflow-y: auto;
     border-radius: 80px;
     will-change: top, opacity;
-    z-index: 100000;
+    z-index: 20;
     border: .5px dotted black;
     box-shadow: 0 0 0 .2rem rgba(255, 255, 255, 0.541);
     color: white;
@@ -158,7 +158,7 @@ footer.page-footer {
   position: absolute;
   border-bottom: none;
   border-top: none;
-  z-index: 99;
+  z-index: 15;
   width: 100%;
   top: 100%;
   margin-left: 43px;
