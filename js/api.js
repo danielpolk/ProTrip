@@ -264,7 +264,9 @@ $(document.body).on("click", ".fav-btn", function () {
     food_div_col.append(food_div);
 
     food_div_col.appendTo("#fav_cards");
-
+   
+    //hide favorites paragraph
+    $("#favParagraph").addClass("hidden");
 });
 
 
@@ -287,4 +289,3 @@ $(document.body).on("click", ".rmv-btn", function () {
     cardParent.remove();
 
 });
-
