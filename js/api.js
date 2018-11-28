@@ -69,8 +69,12 @@ function gasStationResponse(response, city_input) {
             var line_break2 = $("<br>");
             var line_break3 = $("<br>");
             var gas_address_span = $("<span>").addClass("left").text("Address: " + gas_address + " " + gas_city_name + ", " + gas_state + ", " + gas_zipcode);
+            var replaced = gas_address.split(' ').join('+');
+            console.log(replaced)
+            var gas_google_link = $("<a href='https://www.google.com/maps/place/" + replaced + "' target='_blank' class='left'>Map link</a>")
+
             gas_div_image.append(gas_main_img).append(gas_name_span).append(gas_logo).append(gas_fav_btn);
-            gas_div_content.append(prices).append(line_break2).append(gas_address_span).append(line_break3);
+            gas_div_content.append(prices).append(line_break2).append(gas_address_span).append(line_break3).append(gas_google_link);
             gas_div.append(gas_div_image).append(gas_div_content);
             gas_div_col.append(gas_div);
 
@@ -169,8 +173,11 @@ function eventFinder(city_input) {
             var event_date_span = $("<span>").addClass("left").text("Show Date: " + event_date + " at " + event_time_std);
             var line_break3 = $("<br>");
             var event_address_span = $("<span>").addClass("left").text("Event Address: " + event_venue + " at " + event_venue_name);
+            var replaced = event_venue.split(' ').join('+');
+            console.log(replaced)
+            var event_google_link = $("<a href='https://www.google.com/maps/place/" + replaced + "' target='_blank' class='left'>Map link</a>")
             event_div_image.append(event_main_img).append(event_name_span).append(event_fav_btn);
-            event_div_content.append(event_tickets).append(line_break1).append(event_date_span).append(line_break2).append(event_address_span).append(line_break3);
+            event_div_content.append(event_tickets).append(line_break1).append(event_date_span).append(line_break2).append(event_address_span).append(line_break3).append(event_google_link);
             event_div.append(event_div_image).append(event_div_content);
             event_div_col.append(event_div);
 
@@ -207,8 +214,11 @@ function restaurantResponse(response) {
         var line_break2 = $("<br>")
         var line_break3 = $("<br>")
         var food_address_span = $("<span>").addClass("left").text("Address: " + res_address)
+        var replaced = res_address.split(' ').join('+');
+        console.log(replaced)
+        var res_google_link = $("<a href='https://www.google.com/maps/place/" + replaced + "' target='_blank' class='left'>Map link</a>")
         food_div_image.append(food_main_img).append(food_name_span).append(food_fav_btn).append(food_rating);
-        food_div_content.append(food_menu).append(line_break1).append(line_break2).append(food_address_span).append(line_break3);
+        food_div_content.append(food_menu).append(line_break1).append(line_break2).append(food_address_span).append(line_break3).append(res_google_link);
         food_div.append(food_div_image).append(food_div_content);
         food_div_col.append(food_div);
     
