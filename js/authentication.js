@@ -31,8 +31,8 @@ $("#cancel-sign-in").on("click", function(event){
 
   document.getElementById("login-btns").style.display = "none";
   document.getElementById("user-sign-in").style.display = "none";
-    let ms = document.getElementById("main-section");
-    ms.classList.remove("blur-effect");
+  let ms = document.getElementById("main-section");
+  ms.classList.remove("blur-effect");
 });
 
 //Current user sign-in
@@ -42,7 +42,6 @@ $("#sign-in").on("click", function login(event) {
 
   let userEmail = $("#email").val().trim().toLowerCase();
   let userPassword = $("#password").val().trim().toLowerCase();
-
 
   //Current user sign-in
   firebase.auth().signInWithEmailAndPassword(userEmail, userPassword).catch(function(error) {
@@ -54,7 +53,6 @@ $("#sign-in").on("click", function login(event) {
     window.alert("Error: " + errorMessage);
   
   });
-
 });
 
 //Creating a new user
@@ -67,7 +65,6 @@ $("#new-member").on("click", function login(event) {
   let userPassword = $("#new-password").val().trim().toLowerCase();
   newMember = 1;
 
-
   //Creating a new user
   firebase.auth().createUserWithEmailAndPassword(userEmail, userPassword).catch(function(error) {
     // Handle Errors here.
@@ -77,14 +74,13 @@ $("#new-member").on("click", function login(event) {
     window.alert("Error: " + errorMessage);
     
   });
-
 });
 
 $(".account-info").on("click", function() {
 
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-      console.log("User");
+     
       newUserSignIn();
     } else {
 
@@ -93,59 +89,52 @@ $(".account-info").on("click", function() {
   });
 });
 
-// $(document).on('click', ".no-mobile", newUserSignIn());
-
 
 function newUserSignIn() {
 
   
   let listValue = $(".no-mobile").attr("value");
-  console.log(listValue);
 
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       
-        if (listValue === "0") {
+      if (listValue === "0") {
 
-          for (let i = 0; i < dropdownItems.length; i++) {
-          let newList = $("<li>");
-          let a = $("<a>").addClass("dropdown-item right").attr("id", dropdownItems[i]).text(dropdownItems[i]);
-          newList.html(a);
-          $("#dropdown-menu").append(newList);
-          $(".no-mobile").attr("value", "1");
-            };
+        for (let i = 0; i < dropdownItems.length; i++) {
+        let newList = $("<li>");
+        let a = $("<a>").addClass("dropdown-item right").attr("id", dropdownItems[i]).text(dropdownItems[i]);
+        newList.html(a);
+        $("#dropdown-menu").append(newList);
+        $(".no-mobile").attr("value", "1");
+          };
 
-        } else {
-          $(".dropdown-item").remove();
-          $(".no-mobile").attr("value", "0");
-        };
+      } else {
+        $(".dropdown-item").remove();
+        $(".no-mobile").attr("value", "0");
+      };
     };
   });
 };  
 
 $(".sidenav-trigger").on('click', function() {
 
-  // let dropdownItems = ["Favorites", "Logout"];
   let listValue = this.getAttribute("value");
+  console.log(listValue);
 
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       
-        if (listValue !== "0") {
+      if (listValue === "0") {
 
-          for (let i = 0; i < dropdownItems.length; i++) {
-          let newList = $("<li>");
-          let a = $("<a>").addClass("dropdown-item left").attr("id", dropdownItems[i]).text(dropdownItems[i]);
-          newList.html(a);
-          $("#nav-mobile").append(newList);
-          $(".sidenav-trigger").attr("value", "1");
-          };
-
-        } else {
-
+        for (let i = 0; i < dropdownItems.length; i++) {
+        let newList = $("<li>");
+        let a = $("<a>").addClass("dropdown-item left").attr("id", dropdownItems[i]).text(dropdownItems[i]);
+        newList.html(a);
+        $("#nav-mobile").append(newList);
+        $(".sidenav-trigger").attr("value", "1");
         };
-
-       };
+      };
+    };
   });
 });  
 
@@ -164,9 +153,17 @@ $(document).on("click", "#Logout", function () {
   $("body").prepend(newDiv);
 
   signedOut = 1;
+  console.log("signedOut: ", signedOut);
   $(".account-info").text("Login");
   setTimeout(function(){$("#log-out-success").remove();}, 2000);
 
+});
+
+$(document).on("click", "#Favorites", function () {
+
+    $('html, body').animate({
+        scrollTop: $("#favoritesSection").offset().top
+    }, 800);
 });
 
 
@@ -179,6 +176,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     let ms = document.getElementById("main-section");
     ms.classList.remove("blur-effect");
     userId = user.uid;
+
     if (newMember === 1) {
       writeUserData(userId, userName);
       newMember = null;
@@ -187,14 +185,14 @@ firebase.auth().onAuthStateChanged(function(user) {
     return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
       currentUser = snapshot.val();
       userName = currentUser.userName;
+      console.log("current user:");
+      console.log(currentUser);
 
       $(".account-info").removeAttr("onclick");
       $(".account-info").empty();
       $(".account-info").text(userName);
 
     });
-
-    // `/users/${userId}`
   
   } else {
 
@@ -202,8 +200,8 @@ firebase.auth().onAuthStateChanged(function(user) {
     if (signedOut === null) {
 
     setTimeout(noUserSignedIn, 3000);
-    }
-  }
+    };
+  };
 });
 
 //Signing a user out

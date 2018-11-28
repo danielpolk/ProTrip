@@ -274,20 +274,14 @@ $(document.body).on("click", ".fav-btn", function () {
     // To remove the favorite from the database
 $(document.body).on("click", ".rmv-btn", function () {
 
-let eventId = this.getAttribute("id");
-let value = this.getAttribute("value");
+    let eventId = this.getAttribute("id");
+    let value = this.getAttribute("value");
 
-console.log("remove button clicked.");
+    console.log("remove button clicked.");
 
-database.ref().child('users/' + userId + "/locations/" + city_input + "/" + value).push({
-    id: eventId,
-})
-
-
+    database.ref().child('users/' + userId + "/locations/" + city_input + "/" + value).push({
+        id: eventId,
+    });
 
 });
 
-
-
-
-// database.ref().orderByChild("dateAdded")
