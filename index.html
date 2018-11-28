@@ -11,20 +11,25 @@
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+  <!-- Moment.js CDN-->
+ <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+
 </head>
 
 <body>
   <nav class="white" role="navigation">
     <div class="nav-wrapper container">
       <a id="logo-container" href="#" class="brand-logo">PitStop</a>
-      <ul class="right hide-on-med-and-down">
+      <div class="dropdown">
+        <ul class="right hide-on-med-and-down" id="dropdown-menu">
+          <li><a class="account-info no-mobile " onclick="noUserSignedIn()" href="#" value="0">Login</a></li>
+        </ul>
+      </div>
+
+      <ul id="nav-mobile" class="sidenav" value="0">
         <li><a class="account-info" onclick="noUserSignedIn()" href="#">Login</a></li>
       </ul>
-
-      <ul id="nav-mobile" class="sidenav">
-        <li><a class="account-info" onclick="noUserSignedIn()" href="#">Account Login</a></li>
-      </ul>
-      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">account_circle</i></a>
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger" value="0"><i class="material-icons">account_circle</i></a>
     </div>
   </nav>
 
@@ -353,7 +358,7 @@
             
             </div>
           <!-- API food card ends -->
-          <p class="left-align light initialInfo"><br>After logging in, all of your favorited gas stations, restaurants, and activities will be stored for you here. Come back to your favorites to reference the info you need to make your next pit stop the best one yet.</p>
+          <p id="favParagraph" class="left-align light"><br>Once logged in, you can save all of your favorite gas stations, restaurants, and activities here. Come back to your favorites to reference the info you need to make your next pit stop the best one yet.</p>
         </div>
       </div>
 
@@ -412,7 +417,7 @@
   <script src="js/main.js"></script>
   <script src="js/firebase2.js"></script>
   <script src="js/authentication.js"></script>
-
+  
 
 </body>
 
