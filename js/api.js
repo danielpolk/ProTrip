@@ -69,7 +69,7 @@ function gasStationResponse(response, city_input) {
             var source = 'assets/images/GasStationLogos/' + gas_station_name + '.png"'
             var test2 = '"gas_logo"'
             var gas_logo = $('<div class=' + test2 + ' style="background-image: url(' + source + ')"></div>')
-            var gas_fav_btn = $("<a id ='gasFav'><i class='material-icons’>favorite_border</i></a>")
+            var gas_fav_btn = $("<a id='fav-icon' class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite</i></a>")
             // var event_fav_btn = $("<a class=''><i class='material-icons'>favorite_border</i></a>")
 
             var gas_div_content = $("<div>").addClass("card-content")
@@ -95,12 +95,9 @@ function gasStationResponse(response, city_input) {
 function restaurantFinder() {
     //get started button
     $("#submit-button").on("click", function (e) {
-        // $('#gas_cards').clear();
-        // $('#food_cards').clear();
-        // $('#event_cards').clear();
-        // console.log("working")
-        $("#gasText").append("<p class='center'> Here are the lowest gas prices we found in " + $("#city_input").val() + "</p>")
-        //prevent errors?
+        
+        
+        //prevent errors
         e.preventDefault();
         $('html, body').animate({
         scrollTop: $("#titleSection").offset().top
@@ -117,6 +114,10 @@ function restaurantFinder() {
             url: queryURL,
             method: "GET"
         }).then(function (response) {
+            if (response.location_suggestions = 0){
+                $('#selectedCity').text("Spelled it wrong, dummy.")
+                console.log("response null");
+            } 
             for (let index = 0; index < (response.location_suggestions.length); index++) {
                 var cityCheck = (JSON.stringify(response.location_suggestions[index].name)).toLowerCase();
                 // console.log(cityCheck)
@@ -185,7 +186,7 @@ function eventFinder(city_input) {
             var event_div_image = $("<div>").addClass("card-image")
             var event_main_img = $("<img>").attr("src", event_img)
             var event_name_span = $("<span>").addClass("card-title").text(event_name)
-            var event_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>")
+            var event_fav_btn = $("<a id='fav-icon' class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite</i></a>")
             // var event_rating = $("<div class='btn-small rating-btn' style='background-color:#" + color_rating + "';>" + res_rating + "/5</div>")
             // console.log("this is the food rating " + event_rating)
             var event_div_content = $("<div>").addClass("card-content")
@@ -230,7 +231,7 @@ function restaurantResponse(response) {
         }
 
         var food_name_span = $("<span>").addClass("card-title white-text-with-blue-shadow").text(res_name)
-        var food_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>")
+        var food_fav_btn = $("<a id='fav-icon' class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite</i></a>")
         var food_rating = $("<div class='btn-small rating-btn' style='background-color:#" + color_rating + "';>" + res_rating + "/5</div>")
         // console.log("this is the food rating " + food_rating)
         var food_div_content = $("<div>").addClass("card-content")
