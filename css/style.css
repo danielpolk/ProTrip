@@ -253,8 +253,13 @@ a.btn-floating.halfway-fab.rmv-btn{
     left: 20px;
 }
 
-.card .card-image img {
-  height: 212px;
+.card-content {
+  height: auto;
+}
+
+.card-image img {
+  height: auto;
+  width: 100%;
 }
 
 .card .card-image .card-title {
