@@ -32,7 +32,7 @@ function gasStationFinder(lon, lat, city_input) {
     }).then(function (response) {
         // console.log("gas response" + JSON.stringify(response));
         gasStationResponse(response, city_input);
-        console.log(city_input);
+        // console.log(city_input);
         console.log(response);
  
 
@@ -54,7 +54,7 @@ function gasStationResponse(response, city_input) {
         var gas_zipcode = response.stations[i].zip;
         var gas_id = response.stations[i].id;
 
-        console.log(response);
+        // console.log(response);
         // console.log('this is the city name' + i + ' ' + gas_city_name)
         //to return city name input with first letter upper case
         city_input = city_input.toLowerCase().replace(/\b[a-z]/g, function (letter) {
@@ -72,7 +72,7 @@ function gasStationResponse(response, city_input) {
             var source = 'assets/images/GasStationLogos/' + gas_station_name + '.png"'
             var test2 = '"gas_logo"'
             var gas_logo = $('<div class=' + test2 + ' style="background-image: url(' + source + ')"></div>')
-            var gas_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>").attr("id", gas_id).attr("value", "gas").attr("city", city_input);
+            var gas_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>").attr("id", gas_id).attr("value", "gas");
 
             // $("<a id ='gasFav'><i class='material-icons’>favorite_border</i></a>")
             // var event_fav_btn = $("<a class=''><i class='material-icons'>favorite_border</i></a>")
@@ -84,15 +84,13 @@ function gasStationResponse(response, city_input) {
             var line_break3 = $("<br>");
             var gas_address_span = $("<span>").addClass("left").text("Address: " + gas_address + " " + gas_city_name + ", " + gas_state + ", " + gas_zipcode);
             var replaced = gas_address.split(' ').join('+');
-            console.log(replaced)
+            // console.log(replaced)
             var gas_google_link = $("<a href='https://www.google.com/maps/place/" + replaced + "' target='_blank' class='left'>Map link</a>")
 
             gas_div_image.append(gas_main_img).append(gas_name_span).append(gas_logo).append(gas_fav_btn);
             gas_div_content.append(prices).append(line_break2).append(gas_address_span).append(line_break3).append(gas_google_link);
             gas_div.append(gas_div_image).append(gas_div_content);
             gas_div_col.append(gas_div);
-
-
 
 
         } else if (gas_station_name === "Unbranded" || gas_price === "N/A"){
@@ -136,14 +134,14 @@ function restaurantFinder() {
                 if (cityCheck.includes(city_input) && stateCheck.toLowerCase().includes(state_input.toLowerCase())) {
                     //getting the city ID from the first API call
                     var storedCityID = response.location_suggestions[index].id;
-                    console.log("city id " + storedCityID);
+                    // console.log("city id " + storedCityID);
                     //get another API call from Zomato API
                     var queryURL2 = "https://developers.zomato.com/api/v2.1/search?apikey=e54720b38895f113317f79aa68f4ca8e&entity_id=" + storedCityID + "&entity_type=city";
                     $.ajax({
                         url: queryURL2,
                         method: "GET"
                     }).then(function (response) {
-                        console.log(response.restaurants);
+                        // console.log(response.restaurants);
                         // console.log("before for loop" + response.restaurants[0].restaurant)
                         // get the longitude and latitude to use it for the Gas Feed API
                         lon = response.restaurants[0].restaurant.location.longitude;
@@ -190,7 +188,7 @@ function eventFinder(city_input) {
             var event_div_image = $("<div>").addClass("card-image")
             var event_main_img = $("<img>").attr("src", event_img)
             var event_name_span = $("<span>").addClass("card-title").text(event_name)
-            var event_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>").attr("id", event_id).attr("value", "event").attr("city", city_input);
+            var event_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>").attr("id", event_id).attr("value", "event");
             // var event_rating = $("<div class='btn-small rating-btn' style='background-color:#" + color_rating + "';>" + res_rating + "/5</div>")
             // console.log("this is the food rating " + event_rating)
             var event_div_content = $("<div>").addClass("card-content")
@@ -201,7 +199,7 @@ function eventFinder(city_input) {
             var line_break3 = $("<br>");
             var event_address_span = $("<span>").addClass("left").text("Event Address: " + event_venue + " at " + event_venue_name);
             var replaced = event_venue.split(' ').join('+');
-            console.log(replaced)
+            // console.log(replaced)
             var event_google_link = $("<a href='https://www.google.com/maps/place/" + replaced + "' target='_blank' class='left'>Map link</a>")
             event_div_image.append(event_main_img).append(event_name_span).append(event_fav_btn);
             event_div_content.append(event_tickets).append(line_break1).append(event_date_span).append(line_break2).append(event_address_span).append(line_break3).append(event_google_link);
@@ -237,7 +235,7 @@ function restaurantResponse(response) {
         }
 
         var food_name_span = $("<span>").addClass("card-title white-text-with-blue-shadow").text(res_name)
-        var food_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>").attr("id", res_id).attr("value", "restaurant").attr("city", res_city);
+        var food_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>").attr("id", res_id).attr("value", "restaurant");
         var food_rating = $("<div class='btn-small rating-btn' style='background-color:#" + color_rating + "';>" + res_rating + "/5</div>")
         var food_div_content = $("<div>").addClass("card-content")
         var food_menu = $("<a href='" + menu_link + "' class='left'>See Menu</a>")
@@ -246,7 +244,7 @@ function restaurantResponse(response) {
         var line_break3 = $("<br>")
         var food_address_span = $("<span>").addClass("left").text("Address: " + res_address)
         var replaced = res_address.split(' ').join('+');
-        console.log(replaced)
+        // console.log(replaced)
         var res_google_link = $("<a href='https://www.google.com/maps/place/" + replaced + "' target='_blank' class='left'>Map link</a>")
         food_div_image.append(food_main_img).append(food_name_span).append(food_fav_btn).append(food_rating);
         food_div_content.append(food_menu).append(line_break1).append(line_break2).append(food_address_span).append(line_break3).append(res_google_link);
@@ -260,17 +258,16 @@ function restaurantResponse(response) {
 
 // here push the text to the div using the id
 $(document.body).on("click", ".fav-btn", function () {
-    console.log($(this).parent())
+    // console.log($(this).parent())
 
     let eventId = this.getAttribute("id");
     let value = this.getAttribute("value");
-    let city = this.getAttribute("city");
-    let favKey = database.ref().child('users/' + userId + "/locations/" + city + "/" + value).push({
+    let favKey = database.ref().child('users/' + userId + "/locations/" + city_input + "/" + value).push({
         id: eventId,
     }).getKey();
 
-    $(this).parent().find(".fav-btn").removeClass("fav-btn").addClass("rmv-btn").attr("databaseKey", favKey).attr("city", city);
-    console.log(this);
+    $(this).parent().find(".fav-btn").removeClass("fav-btn").addClass("rmv-btn").attr("databaseKey", favKey).attr("city", city_input);
+    // console.log(this);
     $(this).parent().find(".material-icons").text("delete");
     var divParent = $(this).parent();
     var upperParent = divParent.parent().clone();
