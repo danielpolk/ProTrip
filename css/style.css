@@ -45,10 +45,41 @@ p {
   }
 }
 
-@media only screen and (max-width : 600px) {
+@media screen and (max-width : 600px) {
   #index-banner .section {
     top: 0;
   }
+  div#user-sign-in.container{
+    position: fixed;
+    left: 0;
+    right: 0;
+    background-color: rgba(87, 85, 85, 0.678);
+    padding: 10px;
+    max-height: 100%;
+    max-width: 90%;
+    width: 90%;
+    margin: auto;
+    margin-top: 10px;
+    overflow-y: auto;
+    border-radius: 23px;
+    will-change: top, opacity;
+    z-index: 20;
+    border: .5px dotted black;
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.541);
+    color: white;
+
+ }
+ #user-sign-in h4{
+   font-size: 1.5rem;
+
+ }
+
+ button#first-sign-in, button#first-sign-in-new {
+    margin: 0 auto;
+    border-radius: 15px;
+}
+
+
 }
 
 
@@ -75,6 +106,38 @@ footer.page-footer {
   margin: 0;
 }
 
+#oopsie{
+  position: fixed;
+    left: 0;
+    right: 0;
+    top:40%;
+    background-color: rgba(87, 85, 85, 0.678);
+    padding: 10px;
+    max-height: 100%;
+    max-width: 50%;
+    width: fit-content;
+    margin: auto;
+    margin-top: 10px;
+    overflow-y: auto;
+    border-radius: 10px;
+    will-change: top, opacity;
+    z-index: 20;
+    border: .5px dotted black;
+    box-shadow: 0 0 0 .2rem rgba(255, 255, 255, 0.541);
+    color: white;
+
+}
+
+#close-btn{
+  position: absolute;
+  float: right;
+  right: 39px;
+  bottom: initial !important;
+}
+h4.close-text.center {
+    margin: 2.42rem 0 0.912rem 0;
+    line-height: 7vh;
+}
 
  #user-sign-in{
     position: fixed;
@@ -90,15 +153,20 @@ footer.page-footer {
     overflow-y: auto;
     border-radius: 80px;
     will-change: top, opacity;
-    z-index: 100000;
+    z-index: 20;
     border: .5px dotted black;
     box-shadow: 0 0 0 .2rem rgba(255, 255, 255, 0.541);
     color: white;
  }
 
  .blur-effect {
-     /* Blur and de-color */
+  /* Blur and de-color */
   -webkit-filter: blur(5px) grayscale(50%);
+  -moz-filter: blur(5px) grayscale(50%);
+  -ms-filter: blur(5px) grayscale(50%);
+  -o-filter: blur(5px) grayscale(50%);
+  filter: blur(5px) grayscale(50%);
+  
  }
 
  #cancel-sign-in {
@@ -122,7 +190,7 @@ footer.page-footer {
   position: absolute;
   border-bottom: none;
   border-top: none;
-  z-index: 99;
+  z-index: 15;
   width: 100%;
   top: 100%;
   margin-left: 43px;
@@ -160,7 +228,6 @@ footer.page-footer {
   position: absolute;
   top: 10px !important;
   right: 11px !important;
-  color: red;
 }
 
 .heart-icon {
@@ -218,14 +285,18 @@ a.btn-floating.halfway-fab.rmv-btn{
     left: 20px;
 }
 
-.card .card-image img {
-  height: 212px;
+.card-content {
+  height: auto;
+}
+
+.card-image img {
+  height: auto;
+  width: 100%;
 }
 
 .card .card-image .card-title {
   text-shadow: 1px 1px 2px black, 0 0 1em #d1d1d1, 0 0 0.2em #5a5a5a;
   color: white;
-
  
 }
 
@@ -255,28 +326,25 @@ img#test {
 }
 
 
-
-.dropdown {
-  width: 100%;
-  position: absolute;
+.scrollToTop{
+    text-decoration: none;
+    position: fixed;
+    bottom: 22px;
+    left: 4px;
+    display:none;
 }
 
-#dropdown-menu {
-  width: 70px;
+/* preloader styling starts */
+.preloader{
+  width:100px
 }
+/* preloader styling ends */
 
-.dropdown-item {
-    display: block;
-    background-color: white;
-    position: relative;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1000;
-    opacity: 1;
-    color: black;
-}
-.dropdown-item:hover {
-  background-color: rgb(238, 234, 234);
+
+.card .card-content {
+    padding: 24px;
+    border-radius: 0 0 2px 2px;
+    display: inline-block;
 }
 
 #log-out-success {
@@ -293,12 +361,10 @@ img#test {
   overflow-y: auto;
   border-radius: 80px;
   will-change: top, opacity;
-  z-index: 100000;
+  z-index: 20;
   border: .5px dotted black;
-  font-size: 20px;
   box-shadow: 0 0 0 .2rem rgba(255, 255, 255, 0.541);
   color: white;
-
 }
 
 .sidenav {
