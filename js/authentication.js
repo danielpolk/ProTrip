@@ -2,6 +2,8 @@ let userId;
 let userName;
 let currentUser;
 let newMember = null;
+let signedOut = null;
+let dropdownItems = ["Favorites", "Logout"];
 
 $(document).ready(function() {
 
@@ -29,10 +31,9 @@ $("#cancel-sign-in").on("click", function(event){
 
   document.getElementById("login-btns").style.display = "none";
   document.getElementById("user-sign-in").style.display = "none";
-    let ms = document.getElementById("main-section");
-    ms.classList.remove("blur-effect");
+  let ms = document.getElementById("main-section");
+  ms.classList.remove("blur-effect");
 });
-
 
 //Current user sign-in
 $("#sign-in").on("click", function login(event) {
@@ -41,7 +42,6 @@ $("#sign-in").on("click", function login(event) {
 
   let userEmail = $("#email").val().trim().toLowerCase();
   let userPassword = $("#password").val().trim().toLowerCase();
-
 
   //Current user sign-in
   firebase.auth().signInWithEmailAndPassword(userEmail, userPassword).catch(function(error) {
@@ -53,7 +53,6 @@ $("#sign-in").on("click", function login(event) {
     window.alert("Error: " + errorMessage);
   
   });
-
 });
 
 //Creating a new user
@@ -66,7 +65,6 @@ $("#new-member").on("click", function login(event) {
   let userPassword = $("#new-password").val().trim().toLowerCase();
   newMember = 1;
 
-
   //Creating a new user
   firebase.auth().createUserWithEmailAndPassword(userEmail, userPassword).catch(function(error) {
     // Handle Errors here.
@@ -76,13 +74,113 @@ $("#new-member").on("click", function login(event) {
     window.alert("Error: " + errorMessage);
     
   });
+});
+
+$(".account-info").on("click", function() {
+
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+     
+      newUserSignIn();
+    } else {
+
+  noUserSignedIn();
+    };
+  });
+});
+
+
+function newUserSignIn() {
+
+  
+  let listValue = $(".no-mobile").attr("value");
+
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      
+      if (listValue === "0") {
+
+        for (let i = 0; i < dropdownItems.length; i++) {
+        let newList = $("<li>");
+        let a = $("<a>").addClass("dropdown-item right").attr("id", dropdownItems[i]).text(dropdownItems[i]);
+        newList.html(a);
+        $("#dropdown-menu").append(newList);
+        $(".no-mobile").attr("value", "1");
+          };
+
+      } else {
+        $(".dropdown-item").remove();
+        $(".no-mobile").attr("value", "0");
+      };
+    };
+  });
+};  
+
+$(".sidenav-trigger").on('click', function() {
+
+  let listValue = this.getAttribute("value");
+  console.log(listValue);
+
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      
+      if (listValue === "0") {
+
+        for (let i = 0; i < dropdownItems.length; i++) {
+        let newList = $("<li>");
+        let a = $("<a>").addClass("dropdown-item left").attr("id", dropdownItems[i]).text(dropdownItems[i]);
+        newList.html(a);
+        $("#nav-mobile").append(newList);
+        $(".sidenav-trigger").attr("value", "1");
+        };
+      };
+    };
+  });
+});  
+
+// document.addEventListener('mouseup', function(e){
+
+//   let accountMenu = $(".account-info");
+//   let mobileAccountMenu = $(".sidenav-trigger");
+
+//   if (e.target === accountMenu)  {
+
+//     console.log("main menu");
+
+//   } else if (e.target === mobileAccountMenu) {
+
+//     console.log("mobile menu");
+
+//   }
+
+// });
+
+$(document).on("click", "#Logout", function () {
+
+  logout();
+
+  $(".dropdown-item").remove();
+  $(".no-mobile").attr("value", "0");
+
+  let newDiv = $("<div>").attr("id", "log-out-success").addClass("container");
+  let newText = $("<span>").text("Log out successful.")
+  newDiv.append(newText);
+  $("body").prepend(newDiv);
+
+  signedOut = 1;
+  console.log("signedOut: ", signedOut);
+  $(".account-info").text("Login");
+  setTimeout(function(){$("#log-out-success").remove();}, 2000);
 
 });
 
-$("#new-account").on("click", function() {
+$(document).on("click", "#Favorites", function () {
 
-  noUserSignedIn();
-})
+    $('html, body').animate({
+        scrollTop: $("#favoritesSection").offset().top
+    }, 800);
+});
+
 
 //This is a listener for if the user is logged in or not
 firebase.auth().onAuthStateChanged(function(user) {
@@ -93,29 +191,32 @@ firebase.auth().onAuthStateChanged(function(user) {
     let ms = document.getElementById("main-section");
     ms.classList.remove("blur-effect");
     userId = user.uid;
+
     if (newMember === 1) {
       writeUserData(userId, userName);
+      newMember = null;
     };
 
     return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
       currentUser = snapshot.val();
       userName = currentUser.userName;
+      console.log("current user:");
+      console.log(currentUser);
 
       $(".account-info").removeAttr("onclick");
       $(".account-info").empty();
       $(".account-info").text(userName);
 
     });
-
-    // `/users/${userId}`
   
   } else {
 
     console.log("user is NOT signed in");
+    if (signedOut === null) {
 
     setTimeout(noUserSignedIn, 3000);
-
-  }
+    };
+  };
 });
 
 //Signing a user out
@@ -138,6 +239,8 @@ function writeUserData(userId, userName) {
 //This is for the modal display to pop up if they aren't signed in
 function noUserSignedIn() {
 
+  console.log("noUserSignedIn");
+
   // No user is signed in.
   document.getElementById("user-sign-in").style.display = "block";
   document.getElementById("login-btns").style.display = "block";
@@ -158,4 +261,3 @@ function noUserSignedIn() {
   $(".account-info").text("Login");
 };
 
-// var database = firebase.database();
