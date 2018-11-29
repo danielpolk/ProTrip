@@ -366,3 +366,14 @@ img#test {
   box-shadow: 0 0 0 .2rem rgba(255, 255, 255, 0.541);
   color: white;
 }
+
+
+/* .bioPic {
+  height: auto;
+  width: 100%;
+} */
+
+.bioText {
+  margin-top: -5px;
+  font-size: 12px;
+}
