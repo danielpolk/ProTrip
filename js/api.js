@@ -72,9 +72,7 @@ function gasStationResponse(response, city_input) {
             var source = 'assets/images/GasStationLogos/' + gas_station_name + '.png"'
             var test2 = '"gas_logo"'
             var gas_logo = $('<div class=' + test2 + ' style="background-image: url(' + source + ')"></div>')
-            var gas_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>").attr("id", gas_id).attr("value", "gas");
-
-            // $("<a id ='gasFav'><i class='material-icons’>favorite_border</i></a>")
+            var gas_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite</i></a>").attr("id", gas_id).attr("value", "gas");
             // var event_fav_btn = $("<a class=''><i class='material-icons'>favorite_border</i></a>")
 
 
@@ -109,7 +107,6 @@ function restaurantFinder() {
         $('#gas_cards').empty();
         $('#food_cards').empty();
         $('#event_cards').empty();
-        $("#gasText").append("<p class='center'> Here are the lowest gas prices we found in " + $("#city_input").val() + "</p>")
         //prevent errors?
         e.preventDefault();
         $('html, body').animate({
@@ -188,7 +185,7 @@ function eventFinder(city_input) {
             var event_div_image = $("<div>").addClass("card-image")
             var event_main_img = $("<img>").attr("src", event_img)
             var event_name_span = $("<span>").addClass("card-title").text(event_name)
-            var event_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>").attr("id", event_id).attr("value", "event");
+            var event_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite</i></a>").attr("id", event_id).attr("value", "event");
             // var event_rating = $("<div class='btn-small rating-btn' style='background-color:#" + color_rating + "';>" + res_rating + "/5</div>")
             // console.log("this is the food rating " + event_rating)
             var event_div_content = $("<div>").addClass("card-content")
@@ -227,7 +224,7 @@ function restaurantResponse(response) {
 
         var food_div_col = $("<div>").addClass("col s12 m6")
         var food_div = $("<div>").addClass("card")
-        var food_div_image = $("<div>").addClass("card-image")
+        var food_div_image = $("<div>").addClass("card-image responsive-img")
         if (res_main_img == "") {
             var food_main_img = $("<img>").attr("src", "assets/images/sub-res-image.jpeg")
         } else {
@@ -235,19 +232,20 @@ function restaurantResponse(response) {
         }
 
         var food_name_span = $("<span>").addClass("card-title white-text-with-blue-shadow").text(res_name)
-        var food_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite_border</i></a>").attr("id", res_id).attr("value", "restaurant");
+        var food_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite</i></a>").attr("id", res_id).attr("value", "restaurant");
         var food_rating = $("<div class='btn-small rating-btn' style='background-color:#" + color_rating + "';>" + res_rating + "/5</div>")
         var food_div_content = $("<div>").addClass("card-content")
         var food_menu = $("<a href='" + menu_link + "' class='left'>See Menu</a>")
         var line_break1 = $("<br>")
         var line_break2 = $("<br>")
         var line_break3 = $("<br>")
+        var line_break4 = $("<br>")
         var food_address_span = $("<span>").addClass("left").text("Address: " + res_address)
         var replaced = res_address.split(' ').join('+');
         // console.log(replaced)
         var res_google_link = $("<a href='https://www.google.com/maps/place/" + replaced + "' target='_blank' class='left'>Map link</a>")
         food_div_image.append(food_main_img).append(food_name_span).append(food_fav_btn).append(food_rating);
-        food_div_content.append(food_menu).append(line_break1).append(line_break2).append(food_address_span).append(line_break3).append(res_google_link);
+        food_div_content.append(food_menu).append(line_break1).append(line_break2).append(food_address_span).append(line_break3).append(line_break4).append(res_google_link);
         food_div.append(food_div_image).append(food_div_content);
         food_div_col.append(food_div);
     

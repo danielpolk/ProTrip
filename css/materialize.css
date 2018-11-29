@@ -6135,7 +6135,7 @@ textarea.materialize-textarea {
   width: 100%;
   font-size: 30px;
   color: white;
-  margin: 0 0 8px 0;
+  margin: 0 0 1px 0;
   padding: 5px;
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -6522,7 +6522,7 @@ textarea.materialize-textarea + label:after, .select-wrapper + label:after {
 .input-field > label {
   color: white;
   position: absolute;
-  top: 12px !important;
+  top: 14px !important;
   left: 20px !important;
   /* margin-left: 50px !important; */
   font-size: 1.5rem;
