@@ -126,7 +126,6 @@ $(document).on("click", "#Logout", function () {
   $("body").prepend(newDiv);
 
   signedOut = 1;
-  console.log("signedOut: ", signedOut);
   $(".account-info").text("Login");
   setTimeout(function(){$("#log-out-success").remove();}, 2000);
 
@@ -149,7 +148,6 @@ firebase.auth().onAuthStateChanged(function(user) {
     let ms = document.getElementById("main-section");
     ms.classList.remove("blur-effect");
     userId = user.uid;
-    console.log("user");
 
     if (newMember === 1) {
       accountFunctions.writeUserData(userId, userName);
@@ -159,10 +157,8 @@ firebase.auth().onAuthStateChanged(function(user) {
     return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
       currentUser = snapshot.val();
       userName = currentUser.userName;
-      console.log("current user:");
       console.log(currentUser);
       console.log("---------------------------------");
-
 
       $(".account-info").removeAttr("onclick");
       $(".account-info").empty();
@@ -173,11 +169,13 @@ firebase.auth().onAuthStateChanged(function(user) {
     });
   
   } else {
-    console.log("user is NOT signed in");
     if (signedOut === null) {
 
     setTimeout(accountFunctions.noUserSignedIn, 3000);
     } else {
+
+      $("#fav_cards").empty();
+      $("#favParagraph").removeClass("hidden");
 
     };
   };
@@ -239,14 +237,12 @@ let userFavorites  = {
   },
 
   gasAPI: function(eventAPIId, eventDatabaseKey, cityName) {
-    console.log("gas: " + eventAPIId + " " + eventDatabaseKey+ " " + cityName);
 
     let queryURL = "http://api.mygasfeed.com/stations/details/" + eventAPIId + "/bpxxw96ps2.json";
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-      console.log(response);
 
       let gas_station_name = response.details.station;
       let gas_price = response.details.reg_price;
