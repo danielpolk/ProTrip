@@ -200,7 +200,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
       currentUser = snapshot.val();
       userName = currentUser.userName;
-      console.log("current user:");
+      console.log("current user:" +currentUser);
       console.log(currentUser);
 
       $(".account-info").removeAttr("onclick");

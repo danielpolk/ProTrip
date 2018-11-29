@@ -11,25 +11,20 @@
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
-  <!-- Moment.js CDN-->
- <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-
 </head>
 
 <body>
   <nav class="white" role="navigation">
     <div class="nav-wrapper container">
       <a id="logo-container" href="#" class="brand-logo">PitStop</a>
-      <div class="dropdown">
-        <ul class="right hide-on-med-and-down" id="dropdown-menu">
-          <li><a class="account-info no-mobile " onclick="noUserSignedIn()" href="#" value="0">Login</a></li>
-        </ul>
-      </div>
-
-      <ul id="nav-mobile" class="sidenav" value="0">
+      <ul class="right hide-on-med-and-down">
         <li><a class="account-info" onclick="noUserSignedIn()" href="#">Login</a></li>
       </ul>
-      <a href="#" data-target="nav-mobile" class="sidenav-trigger" value="0"><i class="material-icons">account_circle</i></a>
+
+      <ul id="nav-mobile" class="sidenav">
+        <li><a class="account-info" onclick="noUserSignedIn()" href="#">Account Login</a></li>
+      </ul>
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">account_circle</i></a>
     </div>
   </nav>
 
@@ -69,7 +64,7 @@
           </div>
           <div class="row" style="margin-bottom: 0px;">
               
-                  <div class="center">
+                  <div class="center"></div>
                       <p>OR</p>
                   </div>  
               
@@ -96,13 +91,12 @@
           <span>Create a new account</span>
 
           <form class="new-user">
-              <label for="username" >Username</label>
               <input placeholder="Username" id="new-username" type="text" class="validate">
-              <label for="email">Email</label>
+              <label for="username" >Username</label>
               <input placeholder="Email" id="new-email" type="email" class="validate">
-              <label for="password">Password</label>  
+              <label for="email">Email</label>
               <input placeholder="Password" id="new-password" type="password" class="validate">
-              <br>
+              <label for="password">Password</label>  
               <div class="center">
                   <button class="btn waves-effect waves-light blue lighten-1" id="new-member" type="submit" name="action">Create New Account
                   </button>  
@@ -114,10 +108,10 @@
           <span>Log In</span>
 
           <form class="existing-user">
-              <label for="email">Email</label>
               <input placeholder="Email" id="email" type="email" class="validate">
-              <label for="password">Password</label>   
+              <label for="email">Email</label>
               <input placeholder="Password" id="password" type="password" class="validate">
+              <label for="password">Password</label>   
               <br>
               <div class="center">
                 <button class="btn waves-effect waves-light blue lighten-1" id="sign-in" type="submit" name="action">Log In
@@ -169,7 +163,7 @@
 
       </div>
     </div>
-    <div class="parallax"><img src="assets/images/background19.jpg" alt="Unsplashed background img 1"></div>
+    <div class="parallax"><img src="/assets/images/background19.jpg" alt="Unsplashed background img 1"></div>
   </div>
 
 
@@ -232,7 +226,7 @@
         </div>
       </div>
     </div>
-    <div class="parallax"><img src="assets/images/background15.jpg" alt="Unsplashed background img 3"></div>
+    <div class="parallax"><img src="/assets/images/background15.jpg" alt="Unsplashed background img 3"></div>
   </div>
 
   <div id="foodSection" class="container">
@@ -246,15 +240,10 @@
             <div id="food_cards">
             
             </div>
-          <!-- API food card ends -->  
-                  
+          <!-- API food card ends -->
           <p class="left-align light initialInfo"><br>Don't settle for stopping at a fast food chain at your next pit stop. One of the best ways to make a road trip memorable is to discover some of the best local food places as you travel through towns. We'll help you discover those places by giving you some of the highest rated local restaurants. Favorite the ones you're interested in and browse the menu before you get there.</p>
-          <!-- preloader image starts -->
-          <img class="preloader" src="assets/images/preloader.gif" alt="loading image">
-          <!-- preloader image ends -->
         </div>
       </div>
-     
     </div>
 
   </div>
@@ -270,7 +259,7 @@
           </div>
         </div>
       </div>
-      <div class="parallax"><img src="assets/images/background21.jpg" alt="Unsplashed background img 2"></div>
+      <div class="parallax"><img src="/assets/images/background21.jpg" alt="Unsplashed background img 2"></div>
     </div>
   
     <div id="gasSection" class="container">
@@ -285,9 +274,6 @@
               
             </div>
             <p class="left-align light initialInfo" id="gasText"><br>Let us help you find the cheapest gas prices at your next pit stop. Think of what you could spend those extra dollars on as you travel. Using our real-time gas price locator, we will help you save time and money finding the right gas pump to keep you fueled on your journey.</p>
-          <!-- preloader image starts -->
-            <img class="preloader" src="assets/images/preloader.gif" alt="loading image">
-          <!-- preloader image ends -->
           <!-- API gas card ends -->
           </div>
         </div>
@@ -306,7 +292,7 @@
         </div>
       </div>
     </div>
-    <div class="parallax"><img src="assets/images/background17.jpg" alt="Unsplashed background img 3"></div>
+    <div class="parallax"><img src="/assets/images/background17.jpg" alt="Unsplashed background img 3"></div>
   </div>
 
   <div id="activitiesSection" class="container">
@@ -322,9 +308,6 @@
             </div>
           <!-- API event card ends -->
           <p class="left-align light initialInfo"><br>Chances are wherever you're headed there could be great local events and activities happening. From exciting sports events to phenomonal concerts, we'll highlight some of the activities happening at this pit stop. Check out the dates and maybe make plans to come back to this pit stop in the future so you don't miss out on these activities.</p>
-          <!-- preloader image starts -->
-          <img class="preloader" src="assets/images/preloader.gif" alt="loading_image">
-          <!-- preloader image ends -->
         </div>
       </div>
 
@@ -342,7 +325,7 @@
         </div>
       </div>
     </div>
-    <div class="parallax"><img src="assets/images/background13.jpg" alt="Unsplashed background img 3"></div>
+    <div class="parallax"><img src="/assets/images/background13.jpg" alt="Unsplashed background img 3"></div>
   </div>
 
 
@@ -358,7 +341,7 @@
             
             </div>
           <!-- API food card ends -->
-          <p id="favParagraph" class="left-align light"><br>Once logged in, you can save all of your favorite gas stations, restaurants, and activities here. Come back to your favorites to reference the info you need to make your next pit stop the best one yet.</p>
+          <p class="left-align light initialInfo"><br>After logging in, all of your favorited gas stations, restaurants, and activities will be stored for you here. Come back to your favorites to reference the info you need to make your next pit stop the best one yet.</p>
         </div>
       </div>
 
@@ -417,7 +400,7 @@
   <script src="js/main.js"></script>
   <script src="js/firebase2.js"></script>
   <script src="js/authentication.js"></script>
-  
+
 
 </body>
 
