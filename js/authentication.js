@@ -81,40 +81,15 @@ $(".account-info").on("click", function() {
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
      
-      newUserSignIn();
+      accountFunctions.newUserSignIn();
     } else {
+      if (signedOut === null) {
 
-  noUserSignedIn();
-    };
-  });
-});
-
-
-function newUserSignIn() {
-
-  
-  let listValue = $(".no-mobile").attr("value");
-
-  firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      
-      if (listValue === "0") {
-
-        for (let i = 0; i < dropdownItems.length; i++) {
-        let newList = $("<li>");
-        let a = $("<a>").addClass("dropdown-item right").attr("id", dropdownItems[i]).text(dropdownItems[i]);
-        newList.html(a);
-        $("#dropdown-menu").append(newList);
-        $(".no-mobile").attr("value", "1");
-          };
-
-      } else {
-        $(".dropdown-item").remove();
-        $(".no-mobile").attr("value", "0");
+  accountFunctions.noUserSignedIn();
       };
     };
   });
-};  
+});
 
 $(".sidenav-trigger").on('click', function() {
 
@@ -138,26 +113,9 @@ $(".sidenav-trigger").on('click', function() {
   });
 });  
 
-// document.addEventListener('mouseup', function(e){
-
-//   let accountMenu = $(".account-info");
-//   let mobileAccountMenu = $(".sidenav-trigger");
-
-//   if (e.target === accountMenu)  {
-
-//     console.log("main menu");
-
-//   } else if (e.target === mobileAccountMenu) {
-
-//     console.log("mobile menu");
-
-//   }
-
-// });
-
 $(document).on("click", "#Logout", function () {
 
-  logout();
+  accountFunctions.logout();
 
   $(".dropdown-item").remove();
   $(".no-mobile").attr("value", "0");
@@ -172,8 +130,6 @@ $(document).on("click", "#Logout", function () {
   $(".account-info").text("Login");
   setTimeout(function(){$("#log-out-success").remove();}, 2000);
 
-  userFavorites.logout();
-
 });
 
 $(document).on("click", "#Favorites", function () {
@@ -182,7 +138,6 @@ $(document).on("click", "#Favorites", function () {
         scrollTop: $("#favoritesSection").offset().top
     }, 800);
 });
-
 
 //This is a listener for if the user is logged in or not
 firebase.auth().onAuthStateChanged(function(user) {
@@ -197,7 +152,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     console.log("user");
 
     if (newMember === 1) {
-      writeUserData(userId, userName);
+      accountFunctions.writeUserData(userId, userName);
       newMember = null;
     };
 
@@ -221,7 +176,9 @@ firebase.auth().onAuthStateChanged(function(user) {
     console.log("user is NOT signed in");
     if (signedOut === null) {
 
-    setTimeout(noUserSignedIn, 3000);
+    setTimeout(accountFunctions.noUserSignedIn, 3000);
+    } else {
+
     };
   };
 });
@@ -261,10 +218,6 @@ let userFavorites  = {
         };
       };
     };
-  },
-
-  logout: function() {
-
   },
 
   eventSorter: function(eventType, eventAPIId, eventDatabaseKey, cityName) {
@@ -326,6 +279,8 @@ let userFavorites  = {
       gas_div_col.append(gas_div);
 
       $("#fav_cards").append(gas_div_col);
+      $("#favParagraph").addClass("hidden");
+
 
     });
 
@@ -371,6 +326,8 @@ let userFavorites  = {
       event_div_col.append(event_div);
 
       $("#fav_cards").append(event_div_col);
+      $("#favParagraph").addClass("hidden");
+
 
     });
   },
@@ -423,45 +380,69 @@ let userFavorites  = {
   },
 };
 
-//Signing a user out
-function logout() {
-  firebase.auth().signOut().then(function() {
-    // Sign-out successful.
-  }).catch(function(error) {
-    // An error happened.
-  });
-};
+let accountFunctions = {
 
-//Writes new members info into database
-function writeUserData(userId, userName) {
-  firebase.database().ref('users/' + userId).set({
-    userName: userName,
-    locations: "",
-  });
-}
+  newUserSignIn: function() {
 
-//This is for the modal display to pop up if they aren't signed in
-function noUserSignedIn() {
+    let listValue = $(".no-mobile").attr("value");
+  
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        
+        if (listValue === "0") {
+  
+          for (let i = 0; i < dropdownItems.length; i++) {
+          let newList = $("<li>");
+          let a = $("<a>").addClass("dropdown-item right").attr("id", dropdownItems[i]).text(dropdownItems[i]);
+          newList.html(a);
+          $("#dropdown-menu").append(newList);
+          $(".no-mobile").attr("value", "1");
+            };
+  
+        } else {
+          $(".dropdown-item").remove();
+          $(".no-mobile").attr("value", "0");
+        };
+      };
+    });
+  }, 
 
-  console.log("noUserSignedIn");
-
-  // No user is signed in.
-  document.getElementById("user-sign-in").style.display = "block";
-  document.getElementById("login-btns").style.display = "block";
-  document.getElementById("create-account").style.display = "none";
-  document.getElementById("current-user").style.display = "none";
-
-
-  let ms = document.getElementById("main-section");
-  ms.classList.add("blur-effect");
-
-  userId;
-  userName;
-  currentUser;
-  newMember = null;
-
-  $(".account-info").attr("onclick", "noUserSignedIn()");
-  $(".account-info").empty();
-  $(".account-info").text("Login");
+  logout: function() {
+    firebase.auth().signOut().then(function() {
+      // Sign-out successful.
+    }).catch(function(error) {
+      // An error happened.
+    });
+  },
+  
+  writeUserData: function(userId, userName) {
+    firebase.database().ref('users/' + userId).set({
+      userName: userName,
+      locations: "",
+    });
+  },
+  
+  noUserSignedIn: function() {
+  
+    // No user is signed in.
+    document.getElementById("user-sign-in").style.display = "block";
+    document.getElementById("login-btns").style.display = "block";
+    document.getElementById("create-account").style.display = "none";
+    document.getElementById("current-user").style.display = "none";
+    $("#fav_cards").empty();
+  
+    let ms = document.getElementById("main-section");
+    ms.classList.add("blur-effect");
+  
+    userId;
+    userName;
+    currentUser;
+    newMember = null;
+  
+    $(".account-info").attr("onclick", "noUserSignedIn()");
+    $(".account-info").empty();
+    $(".account-info").text("Login");
+  
+  }
 };
 

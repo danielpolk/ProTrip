@@ -261,7 +261,6 @@ a.btn-floating.halfway-fab.rmv-btn{
 .card .card-image .card-title {
   text-shadow: 1px 1px 2px black, 0 0 1em #d1d1d1, 0 0 0.2em #5a5a5a;
   color: white;
-
  
 }
 
@@ -310,4 +309,24 @@ img#test {
     padding: 24px;
     border-radius: 0 0 2px 2px;
     display: inline-block;
+}
+
+#log-out-success {
+  position: fixed;
+  left: 0;
+  right: 0;
+  background-color: rgba(87, 85, 85, 0.678);
+  padding: 10px;
+  max-height: 100%;
+  max-width: 50%;
+  width: fit-content;
+  margin: auto;
+  margin-top: 10px;
+  overflow-y: auto;
+  border-radius: 80px;
+  will-change: top, opacity;
+  z-index: 20;
+  border: .5px dotted black;
+  box-shadow: 0 0 0 .2rem rgba(255, 255, 255, 0.541);
+  color: white;
 }
