@@ -30,7 +30,11 @@ function gasStationFinder(lon, lat, city_input) {
         url: queryURL,
         method: "GET"
     }).then(function (response) {
+        // console.log("gas response" + JSON.stringify(response));
         gasStationResponse(response, city_input);
+        // console.log(city_input);
+        console.log(response);
+ 
 
 
     })
@@ -48,6 +52,10 @@ function gasStationResponse(response, city_input) {
         var gas_city_name = response.stations[i].city;
         var gas_state = response.stations[i].region;
         var gas_zipcode = response.stations[i].zip;
+        var gas_id = response.stations[i].id;
+
+        // console.log(response);
+        // console.log('this is the city name' + i + ' ' + gas_city_name)
         //to return city name input with first letter upper case
         city_input = city_input.toLowerCase().replace(/\b[a-z]/g, function (letter) {
             return letter.toUpperCase();
@@ -66,21 +74,21 @@ function gasStationResponse(response, city_input) {
             var gas_logo = $('<div class=' + test2 + ' style="background-image: url(' + source + ')"></div>')
             var gas_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite</i></a>").attr("id", gas_id).attr("value", "gas");
             // var event_fav_btn = $("<a class=''><i class='material-icons'>favorite_border</i></a>")
+
+
             var gas_div_content = $("<div>").addClass("card-content")
             var prices = $('<h5>').addClass('gas-price').text("$" + gas_price + "/gal");
             var line_break2 = $("<br>");
             var line_break3 = $("<br>");
             var gas_address_span = $("<span>").addClass("left").text("Address: " + gas_address + " " + gas_city_name + ", " + gas_state + ", " + gas_zipcode);
             var replaced = gas_address.split(' ').join('+');
-            console.log(replaced)
+            // console.log(replaced)
             var gas_google_link = $("<a href='https://www.google.com/maps/place/" + replaced + "' target='_blank' class='left'>Map link</a>")
 
             gas_div_image.append(gas_main_img).append(gas_name_span).append(gas_logo).append(gas_fav_btn);
             gas_div_content.append(prices).append(line_break2).append(gas_address_span).append(line_break3).append(gas_google_link);
             gas_div.append(gas_div_image).append(gas_div_content);
             gas_div_col.append(gas_div);
-
-
 
 
         } else if (gas_station_name === "Unbranded" || gas_price === "N/A"){
@@ -101,9 +109,7 @@ function restaurantFinder() {
         $('#event_cards').empty();
         //prevent errors?
         e.preventDefault();
-        $('html, body').animate({
-        scrollTop: $("#titleSection").offset().top
-        }, 800);
+        
         city_input = $("#city_input").val().trim().toLowerCase();
         state_input = $("#state_input").val();
         //getting the city ID for Zomato API
@@ -112,34 +118,38 @@ function restaurantFinder() {
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            for (let index = 0; index < (response.location_suggestions.length); index++) {
-                var cityCheck = (JSON.stringify(response.location_suggestions[index].name)).toLowerCase();
-                var stateCheck = response.location_suggestions[index].state_name;
-                // console.log(String(stateCheck))
-                // console.log("first statement " + stateCheck.toLowerCase().includes(state_input.toLowerCase()))
-                // console.log("second statement "+(state_input == stateCheck))
-                //    var helo= hello.toLowerCase();
-                // var hithere=cityCheck.includes(city_input)
-                if (cityCheck.includes(city_input) && stateCheck.toLowerCase().includes(state_input.toLowerCase())) {
-                    //getting the city ID from the first API call
-                    var storedCityID = response.location_suggestions[index].id;
-                    console.log("city id " + storedCityID);
-                    //get another API call from Zomato API
-                    var queryURL2 = "https://developers.zomato.com/api/v2.1/search?apikey=e54720b38895f113317f79aa68f4ca8e&entity_id=" + storedCityID + "&entity_type=city";
-                    $.ajax({
-                        url: queryURL2,
-                        method: "GET"
-                    }).then(function (response) {
-                        console.log(response.restaurants);
-                        // console.log("before for loop" + response.restaurants[0].restaurant)
-                        // get the longitude and latitude to use it for the Gas Feed API
-                        lon = response.restaurants[0].restaurant.location.longitude;
-                        lat = response.restaurants[0].restaurant.location.latitude
-                        gasStationFinder(lon, lat, city_input);
-                        eventFinder(city_input);
-                        restaurantResponse(response);
-                    })
+            if (response.location_suggestions.length != 0){
+                $('html, body').animate({
+                    scrollTop: $("#titleSection").offset().top
+                }, 800);
+                for (let index = 0; index < (response.location_suggestions.length); index++) {
+                    var cityCheck = (JSON.stringify(response.location_suggestions[index].name)).toLowerCase();
+                    var stateCheck = response.location_suggestions[index].state_name;
+                    if (cityCheck.includes(city_input) && stateCheck.toLowerCase().includes(state_input.toLowerCase())) {
+                        //getting the city ID from the first API call
+                        var storedCityID = response.location_suggestions[index].id;
+                        //get another API call from Zomato API
+                        var queryURL2 = "https://developers.zomato.com/api/v2.1/search?apikey=e54720b38895f113317f79aa68f4ca8e&entity_id=" + storedCityID + "&entity_type=city";
+                        $.ajax({
+                            url: queryURL2,
+                            method: "GET"
+                        }).then(function (response) {
+                            // get the longitude and latitude to use it for the Gas Feed API
+                            lon = response.restaurants[0].restaurant.location.longitude;
+                            lat = response.restaurants[0].restaurant.location.latitude
+                            gasStationFinder(lon, lat, city_input);
+                            eventFinder(city_input);
+                            restaurantResponse(response);
+                        })
+                    }
                 }
+            } else{
+                $("#main-section").addClass("blur-effect");
+                $('#oopsie').show();
+                $("#close-btn").on("click", function (e) {
+                    $("#main-section").removeClass("blur-effect");
+                    $('#oopsie').hide();
+                });
             }
         });
     });
@@ -147,6 +157,7 @@ function restaurantFinder() {
 restaurantFinder();
 
 
+$('#oopsie').hide();
 
 function eventFinder(city_input) {
     var city_name_nospace = city_input.split(' ').join('+');
@@ -166,6 +177,7 @@ function eventFinder(city_input) {
             var event_img = response._embedded.events[i].images[0].url;
             var event_link = response._embedded.events[i].url;
             var event_id = response._embedded.events[i].id;
+
 
             // creating the div for the gas station
             // create the element
@@ -187,7 +199,7 @@ function eventFinder(city_input) {
             var line_break3 = $("<br>");
             var event_address_span = $("<span>").addClass("left").text("Event Address: " + event_venue + " at " + event_venue_name);
             var replaced = event_venue.split(' ').join('+');
-            console.log(replaced)
+            // console.log(replaced)
             var event_google_link = $("<a href='https://www.google.com/maps/place/" + replaced + "' target='_blank' class='left'>Map link</a>")
             event_div_image.append(event_main_img).append(event_name_span).append(event_fav_btn);
             event_div_content.append(event_tickets).append(line_break1).append(event_date_span).append(line_break2).append(event_address_span).append(line_break3).append(event_google_link);
@@ -211,10 +223,11 @@ function restaurantResponse(response) {
         var menu_link = response.restaurants[i].restaurant.menu_url;
         var res_address = response.restaurants[i].restaurant.location.address;
         var res_id = response.restaurants[i].restaurant.id;
+        var res_city = response.restaurants[i].restaurant.location.city;
 
         var food_div_col = $("<div>").addClass("col s12 m6")
         var food_div = $("<div>").addClass("card")
-        var food_div_image = $("<div>").addClass("card-image")
+        var food_div_image = $("<div>").addClass("card-image responsive-img")
         if (res_main_img == "") {
             var food_main_img = $("<img>").attr("src", "assets/images/sub-res-image.jpeg")
         } else {
@@ -229,12 +242,13 @@ function restaurantResponse(response) {
         var line_break1 = $("<br>")
         var line_break2 = $("<br>")
         var line_break3 = $("<br>")
+        var line_break4 = $("<br>")
         var food_address_span = $("<span>").addClass("left").text("Address: " + res_address)
         var replaced = res_address.split(' ').join('+');
-        console.log(replaced)
+        // console.log(replaced)
         var res_google_link = $("<a href='https://www.google.com/maps/place/" + replaced + "' target='_blank' class='left'>Map link</a>")
         food_div_image.append(food_main_img).append(food_name_span).append(food_fav_btn).append(food_rating);
-        food_div_content.append(food_menu).append(line_break1).append(line_break2).append(food_address_span).append(line_break3).append(res_google_link);
+        food_div_content.append(food_menu).append(line_break1).append(line_break2).append(food_address_span).append(line_break3).append(line_break4).append(res_google_link);
         food_div.append(food_div_image).append(food_div_content);
         food_div_col.append(food_div);
     
@@ -245,15 +259,16 @@ function restaurantResponse(response) {
 
 // here push the text to the div using the id
 $(document.body).on("click", ".fav-btn", function () {
-    console.log($(this).parent())
+    // console.log($(this).parent())
 
     let eventId = this.getAttribute("id");
     let value = this.getAttribute("value");
-    let favKey = database.ref().child('users/' + userId + "/favorites/" + value).push({
+    let favKey = database.ref().child('users/' + userId + "/locations/" + city_input + "/" + value).push({
         id: eventId,
     }).getKey();
-    // .removeClass("fav-btn").addClass("rmv-btn")
-    $(this).parent().find(".fav-btn").removeClass("fav-btn").addClass("rmv-btn").attr("databaseKey", favKey);
+
+    $(this).parent().find(".fav-btn").removeClass("fav-btn").addClass("rmv-btn").attr("databaseKey", favKey).attr("city", city_input);
+    // console.log(this);
     $(this).parent().find(".material-icons").text("delete");
     var divParent = $(this).parent();
     var upperParent = divParent.parent().clone();
@@ -272,16 +287,16 @@ $(document.body).on("click", ".fav-btn", function () {
     // To remove the favorite from the database
 $(document.body).on("click", ".rmv-btn", function () {
 
-    let eventId = this.getAttribute("id");
     let value = this.getAttribute("value");
-    let favKey = this.getAttribute("databaseKey")
+    let favKey = this.getAttribute("databaseKey");
+    let city = this.getAttribute("city");
     let divParent = $(this).parent();
     let upperParent = divParent.parent()
     let cardParent = upperParent.parent();
 
     console.log("remove button clicked.");
 
-    database.ref('users/' + userId + "/favorites/" + value + "/" + favKey).update({
+    database.ref('users/' + userId + "/locations/" + city + "/" + value + "/" + favKey).update({
         id: null,
     });
 
