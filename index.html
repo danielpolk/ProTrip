@@ -16,6 +16,9 @@
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+  <!-- Moment.js CDN-->
+ <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+
 </head>
 
 <body>
@@ -31,11 +34,7 @@
       <ul id="nav-mobile" class="sidenav" value="0">
         <li><a class="account-info" onclick="noUserSignedIn()" href="#">Login</a></li>
       </ul>
-
-      <ul id="nav-mobile" class="sidenav">
-        <li><a class="account-info" onclick="noUserSignedIn()" href="#">Account Login</a></li>
-      </ul>
-      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">account_circle</i></a>
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger" value="0"><i class="material-icons">account_circle</i></a>
     </div>
   </nav>
 
@@ -87,7 +86,7 @@
           </div>
           <div class="row" style="margin-bottom: 0px;">
               
-                  <div class="center"></div>
+                  <div class="center">
                       <p>OR</p>
                   </div>  
               
@@ -114,12 +113,13 @@
           <span>Create a new account</span>
 
           <form class="new-user">
-              <input placeholder="Username" id="new-username" type="text" class="validate">
               <label for="username" >Username</label>
-              <input placeholder="Email" id="new-email" type="email" class="validate">
+              <input placeholder="Username" id="new-username" type="text" class="validate">
               <label for="email">Email</label>
-              <input placeholder="Password" id="new-password" type="password" class="validate">
+              <input placeholder="Email" id="new-email" type="email" class="validate">
               <label for="password">Password</label>  
+              <input placeholder="Password" id="new-password" type="password" class="validate">
+              <br>
               <div class="center">
                   <button class="btn waves-effect waves-light blue lighten-1" id="new-member" type="submit" name="action">Create New Account
                   </button>  
@@ -131,10 +131,10 @@
           <span>Log In</span>
 
           <form class="existing-user">
-              <input placeholder="Email" id="email" type="email" class="validate">
               <label for="email">Email</label>
-              <input placeholder="Password" id="password" type="password" class="validate">
+              <input placeholder="Email" id="email" type="email" class="validate">
               <label for="password">Password</label>   
+              <input placeholder="Password" id="password" type="password" class="validate">
               <br>
               <div class="center">
                 <button class="btn waves-effect waves-light blue lighten-1" id="sign-in" type="submit" name="action">Log In
@@ -186,7 +186,7 @@
 
       </div>
     </div>
-    <div class="parallax"><img src="/assets/images/background19.jpg" alt="Unsplashed background img 1"></div>
+    <div class="parallax"><img src="assets/images/background19.jpg" alt="Unsplashed background img 1"></div>
   </div>
 
 
@@ -249,7 +249,7 @@
         </div>
       </div>
     </div>
-    <div class="parallax"><img src="/assets/images/background15.jpg" alt="Unsplashed background img 3"></div>
+    <div class="parallax"><img src="assets/images/background15.jpg" alt="Unsplashed background img 3"></div>
   </div>
 
   <div id="foodSection" class="container">
@@ -276,6 +276,7 @@
           <!-- preloader image ends -->
         </div>
       </div>
+     
     </div>
 
   </div>
@@ -291,7 +292,7 @@
           </div>
         </div>
       </div>
-      <div class="parallax"><img src="/assets/images/background21.jpg" alt="Unsplashed background img 2"></div>
+      <div class="parallax"><img src="assets/images/background21.jpg" alt="Unsplashed background img 2"></div>
     </div>
   
     <div id="gasSection" class="container">
@@ -332,7 +333,7 @@
         </div>
       </div>
     </div>
-    <div class="parallax"><img src="/assets/images/background17.jpg" alt="Unsplashed background img 3"></div>
+    <div class="parallax"><img src="assets/images/background17.jpg" alt="Unsplashed background img 3"></div>
   </div>
 
   <div id="activitiesSection" class="container">
@@ -373,7 +374,7 @@
         </div>
       </div>
     </div>
-    <div class="parallax"><img src="/assets/images/background13.jpg" alt="Unsplashed background img 3"></div>
+    <div class="parallax"><img src="assets/images/background13.jpg" alt="Unsplashed background img 3"></div>
   </div>
 
 
@@ -448,7 +449,7 @@
   <script src="js/main.js"></script>
   <script src="js/firebase2.js"></script>
   <script src="js/authentication.js"></script>
-
+  
 
 </body>
 
