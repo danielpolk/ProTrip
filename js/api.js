@@ -214,7 +214,7 @@ function restaurantResponse(response) {
 
         var food_div_col = $("<div>").addClass("col s12 m6")
         var food_div = $("<div>").addClass("card")
-        var food_div_image = $("<div>").addClass("card-image")
+        var food_div_image = $("<div>").addClass("card-image responsive-img")
         if (res_main_img == "") {
             var food_main_img = $("<img>").attr("src", "assets/images/sub-res-image.jpeg")
         } else {
@@ -229,12 +229,13 @@ function restaurantResponse(response) {
         var line_break1 = $("<br>")
         var line_break2 = $("<br>")
         var line_break3 = $("<br>")
+        var line_break4 = $("<br>")
         var food_address_span = $("<span>").addClass("left").text("Address: " + res_address)
         var replaced = res_address.split(' ').join('+');
         console.log(replaced)
         var res_google_link = $("<a href='https://www.google.com/maps/place/" + replaced + "' target='_blank' class='left'>Map link</a>")
         food_div_image.append(food_main_img).append(food_name_span).append(food_fav_btn).append(food_rating);
-        food_div_content.append(food_menu).append(line_break1).append(line_break2).append(food_address_span).append(line_break3).append(res_google_link);
+        food_div_content.append(food_menu).append(line_break1).append(line_break2).append(food_address_span).append(line_break3).append(line_break4).append(res_google_link);
         food_div.append(food_div_image).append(food_div_content);
         food_div_col.append(food_div);
     
