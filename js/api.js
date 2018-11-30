@@ -249,23 +249,35 @@ function restaurantResponse(response) {
             // if API has img, use it
             var food_main_img = $("<img>").attr("src", res_main_img)
         }
+        // create span for restaurant name with added classes and restaurant name as text
         var food_name_span = $("<span>").addClass("card-title white-text-with-blue-shadow").text(res_name)
+        // creating the favorite button for the food
         var food_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite</i></a>").attr("id", res_id).attr("value", "restaurant");
+        // creating the foot rating div with the rating color as the background
         var food_rating = $("<div class='btn-small rating-btn' style='background-color:#" + color_rating + "';>" + res_rating + "/5</div>")
         var food_div_content = $("<div>").addClass("card-content")
+        // creating an a tag with text for the menu link
         var food_menu = $("<a href='" + menu_link + "' class='left'>See Menu</a>")
+        // breaks used for spacing in the cards
         var line_break1 = $("<br>")
         var line_break2 = $("<br>")
         var line_break3 = $("<br>")
         var line_break4 = $("<br>")
+        // creating span for restaurant address
         var food_address_span = $("<span>").addClass("left").text("Address: " + res_address)
+        // eliminating the spaces between the address so we can insert into Google Maps URL
         var replaced = res_address.split(' ').join('+');
+        // insert spaceless address into Google Maps URL
         var res_google_link = $("<a href='https://www.google.com/maps/place/" + replaced + "' target='_blank' class='left'>Map link</a>")
+        // appending API img, name span, favorite button, and rating to the card top
         food_div_image.append(food_main_img).append(food_name_span).append(food_fav_btn).append(food_rating);
+        // appending menu link, address, and Google Maps link - breaks included for spacing
         food_div_content.append(food_menu).append(line_break1).append(line_break2).append(food_address_span).append(line_break3).append(line_break4).append(res_google_link);
+        // appending the food image and content to the main food div card
         food_div.append(food_div_image).append(food_div_content);
+        // appending the main card to the main column
         food_div_col.append(food_div);
-
+        // Lastly, appending the column with completed card into the main HTML
         $("#food_cards").append(food_div_col);
 
     }
@@ -282,9 +294,7 @@ $(document.body).on("click", ".fav-btn", function () {
         id: eventId,
     }).getKey();
 
-    // ===== editing here ANDREW =====
-    // .removeClass("fav-btn").addClass("rmv-btn")
-
+    // 
     $(this).parent().find(".fav-btn").removeClass("fav-btn").addClass("rmv-btn").attr("databaseKey", favKey).attr("city", city_input);
     $(this).parent().find(".material-icons").text("delete");
     var divParent = $(this).parent().removeClass("fav-btn").addClass("rmv-btn");
