@@ -16,6 +16,7 @@ $("#first-sign-in-new").on("click", function(event){
   event.preventDefault();
 
   document.getElementById("login-btns").style.display = "none";
+  document.getElementById("top-exit-btn").style.display = "block";
   document.getElementById("create-account").style.display = "block";
 });
 
@@ -23,10 +24,11 @@ $("#first-sign-in").on("click", function(event){
   event.preventDefault();
 
   document.getElementById("login-btns").style.display = "none";
+  document.getElementById("top-exit-btn").style.display = "block";
   document.getElementById("current-user").style.display = "block";
 });
 
-$("#cancel-sign-in").on("click", function(event){
+$(".no-signin").on("click", function(event){
   event.preventDefault();
 
   document.getElementById("login-btns").style.display = "none";
@@ -177,8 +179,6 @@ firebase.auth().onAuthStateChanged(function(user) {
       $("#favParagraph").removeClass("hidden");
       $(".no-mobile").attr("value", "0");
       $(".account-info").attr("onclick", "accountFunctions.noUserSignedIn()");
-
-
 
     };
   };
@@ -430,7 +430,6 @@ let accountFunctions = {
     document.getElementById("current-user").style.display = "none";
     $("#fav_cards").empty();
 
-  
     let ms = document.getElementById("main-section");
     ms.classList.add("blur-effect");
   
