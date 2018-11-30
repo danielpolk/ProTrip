@@ -264,6 +264,11 @@ function eventFinder(city_input) {
                 event_div.append(event_div_image).append(event_div_content);
                 // pushing parent event div to its parent col div
                 event_div_col.append(event_div);
+            } else {
+                $("#event_cards").text("Sorry, there are no events this month in " + city_input.toLowerCase().replace(/\b[a-z]/g, function (letter) {
+                    return letter.toUpperCase();
+                }));
+
             }
             // append the card we created above to the HTML
             $("#event_cards").append(event_div_col);
