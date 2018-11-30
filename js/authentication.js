@@ -12,6 +12,7 @@ $(document).ready(function() {
     ms.classList.remove("blur-effect");
 });
 
+//New user needs to make an account
 $("#first-sign-in-new").on("click", function(event){
   event.preventDefault();
 
@@ -20,6 +21,7 @@ $("#first-sign-in-new").on("click", function(event){
   document.getElementById("create-account").style.display = "block";
 });
 
+//User already has an account and needs to sign in
 $("#first-sign-in").on("click", function(event){
   event.preventDefault();
 
@@ -28,6 +30,7 @@ $("#first-sign-in").on("click", function(event){
   document.getElementById("current-user").style.display = "block";
 });
 
+//User wants to use the site without signing in
 $(".no-signin").on("click", function(event){
   event.preventDefault();
 
@@ -78,6 +81,7 @@ $("#new-member").on("click", function login(event) {
   });
 });
 
+//Login button for desktop 
 $(".no-mobile").on("click", function() {
 
   firebase.auth().onAuthStateChanged(function(user) {
@@ -93,6 +97,7 @@ $(".no-mobile").on("click", function() {
   });
 });
 
+//Login button for mobile
 $(".sidenav-trigger").on('click', function() {
 
   let listValue = this.getAttribute("value");
@@ -114,6 +119,7 @@ $(".sidenav-trigger").on('click', function() {
   });
 });  
 
+// Logout button
 $(document).on("click", "#Logout", function () {
 
   accountFunctions.logout();
@@ -132,6 +138,7 @@ $(document).on("click", "#Logout", function () {
 
 });
 
+//Button that takes the user to the favorites area
 $(document).on("click", "#Favorites", function () {
 
     $('html, body').animate({
@@ -139,7 +146,7 @@ $(document).on("click", "#Favorites", function () {
     }, 800);
 });
 
-//This is a listener for if the user is logged in or not
+//This listens to changes in the users authentication 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
 
@@ -181,6 +188,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   };
 });
 
+// Functions for adding or removing the users stored favorites to the page 
 let userFavorites  = {
 
   delay: 0,
@@ -375,6 +383,7 @@ let userFavorites  = {
   },
 };
 
+// Functions that write or remove users information to firebase and changes the page content based on if the user is signed on or not 
 let accountFunctions = {
 
   newUserSignIn: function() {
