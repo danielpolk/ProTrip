@@ -311,8 +311,6 @@ $(document.body).on("click", ".rmv-btn", function () {
     let upperParent = divParent.parent()
     let cardParent = upperParent.parent();
 
-    console.log("remove button clicked.");
-
     database.ref('users/' + userId + "/locations/" + city + "/" + value + "/" + favKey).update({
         id: null,
     });
