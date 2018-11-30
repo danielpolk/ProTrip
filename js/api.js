@@ -32,6 +32,9 @@ function gasStationFinder(lon, lat, city_input) {
         method: "GET"
     }).then(function (response) {
         gasStationResponse(response, city_input);
+ 
+
+
     })
 };
 
@@ -310,8 +313,6 @@ $(document.body).on("click", ".rmv-btn", function () {
     let divParent = $(this).parent();
     let upperParent = divParent.parent()
     let cardParent = upperParent.parent();
-
-    console.log("remove button clicked.");
 
     database.ref('users/' + userId + "/locations/" + city + "/" + value + "/" + favKey).update({
         id: null,
