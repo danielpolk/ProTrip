@@ -367,16 +367,13 @@ img#test {
   color: white;
 }
 
-.sidenav {
-  height: auto;
-  width: auto;
-  padding-bottom: 0;
-}
 
-.scrollToTop {
-    text-decoration: none;
-    position: fixed;
-    bottom: 22px;
-    left: 4px;
-    display:none;
+/* .bioPic {
+  height: auto;
+  width: 100%;
+} */
+
+.bioText {
+  margin-top: -5px;
+  font-size: 12px;
 }
