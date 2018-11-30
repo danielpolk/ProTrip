@@ -76,7 +76,7 @@ $("#new-member").on("click", function login(event) {
   });
 });
 
-$(".account-info").on("click", function() {
+$(".no-mobile").on("click", function() {
 
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
@@ -142,7 +142,6 @@ $(document).on("click", "#Favorites", function () {
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
 
-   
     // User is signed in.
     document.getElementById("user-sign-in").style.display = "none";
     let ms = document.getElementById("main-section");
@@ -176,6 +175,10 @@ firebase.auth().onAuthStateChanged(function(user) {
 
       $("#fav_cards").empty();
       $("#favParagraph").removeClass("hidden");
+      $(".no-mobile").attr("value", "0");
+      $(".account-info").attr("onclick", "accountFunctions.noUserSignedIn()");
+
+
 
     };
   };
@@ -426,6 +429,7 @@ let accountFunctions = {
     document.getElementById("create-account").style.display = "none";
     document.getElementById("current-user").style.display = "none";
     $("#fav_cards").empty();
+
   
     let ms = document.getElementById("main-section");
     ms.classList.add("blur-effect");
@@ -434,6 +438,7 @@ let accountFunctions = {
     userName;
     currentUser;
     newMember = null;
+    signedOut = null;
   
     $(".account-info").attr("onclick", "noUserSignedIn()");
     $(".account-info").empty();
