@@ -182,12 +182,12 @@ function eventFinder(city_input) {
             var event_img = response._embedded.events[i].images[0].url;
             var event_link = response._embedded.events[i].url;
             var event_id = response._embedded.events[i].id;
-            var now = new Date();
+            var this_month = new Date();
             var dates = new Date(event_date);
             var event_months = dates.getMonth();
 
             // check if event date is within the same month as now
-            if (event_months == now.getMonth()) {
+            if (event_months == this_month.getMonth()) {
                 // creating a card to display the events within the month
                 var event_div_col = $("<div>").addClass("col s12 m6")
                 var event_div = $("<div>").addClass("card")
@@ -285,8 +285,8 @@ $(document.body).on("click", ".fav-btn", function () {
     // ===== editing here ANDREW =====
     // .removeClass("fav-btn").addClass("rmv-btn")
 
-    $(this).parent().find(".fav-btn").attr("databaseKey", favKey).attr("city", city_input);
-    $(this).parent().find(".material-icons").text("favorite_border");
+    $(this).parent().find(".fav-btn").removeClass("fav-btn").addClass("rmv-btn").attr("databaseKey", favKey).attr("city", city_input);
+    $(this).parent().find(".material-icons").text("delete");
     var divParent = $(this).parent().removeClass("fav-btn").addClass("rmv-btn");
     var upperParent = divParent.parent().clone();
     var food_div_col = $("<div>").addClass("col s12 m6");
