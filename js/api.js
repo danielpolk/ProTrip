@@ -143,6 +143,7 @@ function restaurantFinder() {
                 }
             } else { // run this if there are no reponses from API
                 // blur main section
+
                 $("#main-section").addClass("blur-effect");
                 // show the spell wrong modal in front of blurred main
                 $('#oopsie').show();
@@ -152,6 +153,7 @@ function restaurantFinder() {
                     $("#main-section").removeClass("blur-effect");
                     // hide the spell wrong modal
                     $('#oopsie').hide();
+                    $('#selectedCity').empty();
                 });
             }
         });
