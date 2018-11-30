@@ -96,7 +96,6 @@ $(".no-mobile").on("click", function() {
 $(".sidenav-trigger").on('click', function() {
 
   let listValue = this.getAttribute("value");
-  console.log(listValue);
 
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
@@ -158,8 +157,6 @@ firebase.auth().onAuthStateChanged(function(user) {
     return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
       currentUser = snapshot.val();
       userName = currentUser.userName;
-      console.log(currentUser);
-      console.log("---------------------------------");
 
       $(".account-info").removeAttr("onclick");
       $(".account-info").empty();
@@ -191,7 +188,6 @@ let userFavorites  = {
   add: function() {
     
     let locations = Object.entries(currentUser.locations);
-    // console.log(locations);    
     
     for (let i = 0; i < locations.length; i ++) {
       let favCity = locations[i];
@@ -200,18 +196,13 @@ let userFavorites  = {
 
       for (let i = 0; i < eventObj.length; i ++) {
         let venue = eventObj[i];
-        // console.log(venue);
         let eventType = venue[0];
-        // console.log(eventType);
         let propertyObj = Object.entries(venue[1]);
        
         for (let i = 0; i < propertyObj.length; i ++) {
           let property = propertyObj[i];
-          // console.log(property);
           let eventDatabaseKey = property[0];
-          // console.log(eventDatabaseKey);
           let eventAPIId = Object.values(property[1])[0];
-          // console.log(eventAPIId);
           this.eventSorter(eventType, eventAPIId, eventDatabaseKey, cityName);
 
         };
@@ -295,7 +286,6 @@ let userFavorites  = {
         url: queryURL,
         method: "GET"
     }).then(function (response, status, req) {
-      // console.log(response);
       let event_name = response._embedded.events[0].name;
       let event_date = response._embedded.events[0].dates.start.localDate;
       let event_time = response._embedded.events[0].dates.start.localTime;
@@ -332,7 +322,7 @@ let userFavorites  = {
 
     })
     .fail((req, status, err) => {
-      console.log(req.status);
+      // console.log(req.status);
       // TODO Handle errors/failures on request
     })
   },
