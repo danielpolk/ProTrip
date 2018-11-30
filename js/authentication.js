@@ -186,6 +186,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 let userFavorites  = {
 
+  delay: 0,
 
   add: function() {
     
@@ -196,7 +197,6 @@ let userFavorites  = {
       let favCity = locations[i];
       let cityName = favCity[0];
       let eventObj = Object.entries(favCity[1]);
-      // console.log(eventObj);
 
       for (let i = 0; i < eventObj.length; i ++) {
         let venue = eventObj[i];
@@ -204,7 +204,6 @@ let userFavorites  = {
         let eventType = venue[0];
         // console.log(eventType);
         let propertyObj = Object.entries(venue[1]);
-        // console.log(propertyObj);
        
         for (let i = 0; i < propertyObj.length; i ++) {
           let property = propertyObj[i];
@@ -213,7 +212,6 @@ let userFavorites  = {
           // console.log(eventDatabaseKey);
           let eventAPIId = Object.values(property[1])[0];
           // console.log(eventAPIId);
-
           this.eventSorter(eventType, eventAPIId, eventDatabaseKey, cityName);
 
         };
@@ -229,7 +227,11 @@ let userFavorites  = {
 
     } else if (eventType === "event") {
 
-      this.eventAPI(eventAPIId, eventDatabaseKey, cityName);
+      this.delay += 200;
+
+      setTimeout(() => {
+        this.eventAPI(eventAPIId, eventDatabaseKey, cityName);
+      }, this.delay);
 
     } else if (eventType === "restaurant") {
 
@@ -292,8 +294,8 @@ let userFavorites  = {
     $.ajax({
         url: queryURL,
         method: "GET"
-    }).then(function (response) { 
-
+    }).then(function (response, status, req) {
+      // console.log(response);
       let event_name = response._embedded.events[0].name;
       let event_date = response._embedded.events[0].dates.start.localDate;
       let event_time = response._embedded.events[0].dates.start.localTime;
@@ -328,7 +330,11 @@ let userFavorites  = {
       $("#favParagraph").addClass("hidden");
 
 
-    });
+    })
+    .fail((req, status, err) => {
+      console.log(req.status);
+      // TODO Handle errors/failures on request
+    })
   },
 
   restaurantAPI: function(eventAPIId, eventDatabaseKey, cityName) {
