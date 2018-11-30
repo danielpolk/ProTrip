@@ -16,6 +16,7 @@ $("#first-sign-in-new").on("click", function(event){
   event.preventDefault();
 
   document.getElementById("login-btns").style.display = "none";
+  document.getElementById("top-exit-btn").style.display = "block";
   document.getElementById("create-account").style.display = "block";
 });
 
@@ -23,10 +24,11 @@ $("#first-sign-in").on("click", function(event){
   event.preventDefault();
 
   document.getElementById("login-btns").style.display = "none";
+  document.getElementById("top-exit-btn").style.display = "block";
   document.getElementById("current-user").style.display = "block";
 });
 
-$("#cancel-sign-in").on("click", function(event){
+$(".no-signin").on("click", function(event){
   event.preventDefault();
 
   document.getElementById("login-btns").style.display = "none";
@@ -76,7 +78,7 @@ $("#new-member").on("click", function login(event) {
   });
 });
 
-$(".account-info").on("click", function() {
+$(".no-mobile").on("click", function() {
 
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
@@ -126,7 +128,6 @@ $(document).on("click", "#Logout", function () {
   $("body").prepend(newDiv);
 
   signedOut = 1;
-  console.log("signedOut: ", signedOut);
   $(".account-info").text("Login");
   setTimeout(function(){$("#log-out-success").remove();}, 2000);
 
@@ -143,13 +144,11 @@ $(document).on("click", "#Favorites", function () {
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
 
-   
     // User is signed in.
     document.getElementById("user-sign-in").style.display = "none";
     let ms = document.getElementById("main-section");
     ms.classList.remove("blur-effect");
     userId = user.uid;
-    console.log("user");
 
     if (newMember === 1) {
       accountFunctions.writeUserData(userId, userName);
@@ -159,10 +158,8 @@ firebase.auth().onAuthStateChanged(function(user) {
     return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
       currentUser = snapshot.val();
       userName = currentUser.userName;
-      console.log("current user:");
       console.log(currentUser);
       console.log("---------------------------------");
-
 
       $(".account-info").removeAttr("onclick");
       $(".account-info").empty();
@@ -173,11 +170,15 @@ firebase.auth().onAuthStateChanged(function(user) {
     });
   
   } else {
-    console.log("user is NOT signed in");
     if (signedOut === null) {
 
     setTimeout(accountFunctions.noUserSignedIn, 3000);
     } else {
+
+      $("#fav_cards").empty();
+      $("#favParagraph").removeClass("hidden");
+      $(".no-mobile").attr("value", "0");
+      $(".account-info").attr("onclick", "accountFunctions.noUserSignedIn()");
 
     };
   };
@@ -239,14 +240,12 @@ let userFavorites  = {
   },
 
   gasAPI: function(eventAPIId, eventDatabaseKey, cityName) {
-    console.log("gas: " + eventAPIId + " " + eventDatabaseKey+ " " + cityName);
 
     let queryURL = "http://api.mygasfeed.com/stations/details/" + eventAPIId + "/bpxxw96ps2.json";
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-      console.log(response);
 
       let gas_station_name = response.details.station;
       let gas_price = response.details.reg_price;
@@ -430,7 +429,7 @@ let accountFunctions = {
     document.getElementById("create-account").style.display = "none";
     document.getElementById("current-user").style.display = "none";
     $("#fav_cards").empty();
-  
+
     let ms = document.getElementById("main-section");
     ms.classList.add("blur-effect");
   
@@ -438,6 +437,7 @@ let accountFunctions = {
     userName;
     currentUser;
     newMember = null;
+    signedOut = null;
   
     $(".account-info").attr("onclick", "noUserSignedIn()");
     $(".account-info").empty();
