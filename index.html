@@ -11,13 +11,13 @@
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Materialize CDN -->
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
   <!-- Style Sheet -->
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
   <!-- Moment.js CDN-->
- <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 
 </head>
 
@@ -30,7 +30,6 @@
           <li><a class="account-info no-mobile " onclick="noUserSignedIn()" href="#" value="0">Login</a></li>
         </ul>
       </div>
-
       <ul id="nav-mobile" class="sidenav" value="0">
         <li><a class="account-info" onclick="noUserSignedIn()" href="#">Login</a></li>
       </ul>
@@ -61,15 +60,15 @@
           <h4 class="close-text center">Oops! you misspelled something. Please Try Again.</h4>
         </div>
       </div>
-      </div>
-      </div>
+    </div>
+  </div>
 
-<!-- Sign-in pop-up -->
+  <!-- Sign-in pop-up -->
   <div class="container" id="user-sign-in">
     <div class="modal-content">
       <div class="row">
         <div class="col s12">
-            <button class="btn-small right no-signin" id="top-exit-btn" type="submit" name="action" style="display: none">X</button> 
+          <button class="btn-small right no-signin" id="top-exit-btn" type="submit" name="action" style="display: none">X</button>
           <h4 class="center">Sign in to save your favorite searches.</h4>
         </div>
       </div>
@@ -77,35 +76,38 @@
 
         <div id="login-btns">
           <div class="row" style="margin-bottom: 10px;">
-              <div class="col s12">
-                  <div class="center">
-                      <button id="first-sign-in-new" class="btn-large waves-effect waves-light blue lighten-1" type="submit" name="action">Create a New Account
-                      </button>  
-                  </div>  
+            <div class="col s12">
+              <div class="center">
+                <button id="first-sign-in-new" class="btn-large waves-effect waves-light blue lighten-1" type="submit"
+                  name="action">Create a New Account
+                </button>
               </div>
+            </div>
           </div>
           <div class="row" style="margin-bottom: 0px;">
-              
-                  <div class="center">
-                      <p>OR</p>
-                  </div>  
-              
+
+            <div class="center">
+              <p>OR</p>
+            </div>
+
           </div>
           <div class="row" style="margin-bottom: 20px;">
-              <div class="col s12">
-                  <div class="center">
-                      <button id="first-sign-in" class="btn-large waves-effect waves-light blue lighten-1" type="submit" name="action">Log In
-                      </button>  
-                  </div>  
+            <div class="col s12">
+              <div class="center">
+                <button id="first-sign-in" class="btn-large waves-effect waves-light blue lighten-1" type="submit" name="action">Log
+                  In
+                </button>
               </div>
+            </div>
           </div>
           <div class="row" style="margin-bottom: 0px;">
-              <div class="col s12">
-                  <div class="center">
-                      <button id="cancel-sign-in" class="btn-small no-signin" type="submit" name="action">Continue Without Signing In
-                      </button>  
-                  </div>  
+            <div class="col s12">
+              <div class="center">
+                <button id="cancel-sign-in" class="btn-small no-signin" type="submit" name="action">Continue Without
+                  Signing In
+                </button>
               </div>
+            </div>
           </div>
         </div>
 
@@ -113,17 +115,18 @@
           <span>Create a new account</span>
 
           <form class="new-user">
-              <label for="username" >Username</label>
-              <input placeholder="Username" id="new-username" type="text" class="validate">
-              <label for="email">Email</label>
-              <input placeholder="Email" id="new-email" type="email" class="validate">
-              <label for="password">Password</label>  
-              <input placeholder="Password" id="new-password" type="password" class="validate">
-              <br>
-              <div class="center">
-                  <button class="btn waves-effect waves-light blue lighten-1" id="new-member" type="submit" name="action">Create New Account
-                  </button>  
-              </div>               
+            <label for="username">Username</label>
+            <input placeholder="Username" id="new-username" type="text" class="validate">
+            <label for="email">Email</label>
+            <input placeholder="Email" id="new-email" type="email" class="validate">
+            <label for="password">Password</label>
+            <input placeholder="Password" id="new-password" type="password" class="validate">
+            <br>
+            <div class="center">
+              <button class="btn waves-effect waves-light blue lighten-1" id="new-member" type="submit" name="action">Create
+                New Account
+              </button>
+            </div>
           </form>
         </div>
 
@@ -131,100 +134,108 @@
           <span>Log In</span>
 
           <form class="existing-user">
-              <label for="email">Email</label>
-              <input placeholder="Email" id="email" type="email" class="validate">
-              <label for="password">Password</label>   
-              <input placeholder="Password" id="password" type="password" class="validate">
-              <br>
-              <div class="center">
-                <button class="btn waves-effect waves-light blue lighten-1" id="sign-in" type="submit" name="action">Log In
-                </button>  
-              </div>  
+            <label for="email">Email</label>
+            <input placeholder="Email" id="email" type="email" class="validate">
+            <label for="password">Password</label>
+            <input placeholder="Password" id="password" type="password" class="validate">
+            <br>
+            <div class="center">
+              <button class="btn waves-effect waves-light blue lighten-1" id="sign-in" type="submit" name="action">Log
+                In
+              </button>
+            </div>
           </form>
         </div>
 
       </div>
     </div>
   </div>
-<div id="main-section">
-  <div id="index-banner" class="parallax-container">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <br><br>
-        <h1 class="header center white-text text-lighten-1">Where's your next pit stop?</h1>
-        <div class="row center">
-          <div class="row">
-            <form class="col s12">
-              <div class="row">
-                <div class="input-field col s12">
-                  <i class="material-icons prefix">location_city</i>
-                  <input id="city_input" type="text" class="validate">
-                  <label for="city_input">City</label>
-                </div>
-
-
-                <form autocomplete="off" action="/action_page.php">
-                  <div class="autocomplete input-field col s12">
-                    <i class="material-icons prefix">filter_hdr</i>
-                    <input id="state_input" type="text" name="myState">
-                    <label for="state_input">State</label>
-
+  <div id="main-section">
+    <div id="index-banner" class="parallax-container">
+      <div class="section no-pad-bot">
+        <div class="container">
+          <br><br>
+          <h1 class="header center white-text text-lighten-1">Where's your next pit stop?</h1>
+          <div class="row center">
+            <div class="row">
+              <form class="col s12">
+                <div class="row">
+                  <div class="input-field col s12">
+                    <i class="material-icons prefix">location_city</i>
+                    <input id="city_input" type="text" class="validate">
+                    <label for="city_input">City</label>
                   </div>
-                </form>
-                <!-- </div> -->
-              </div>
-            </form>
+
+
+                  <form autocomplete="off" action="/action_page.php">
+                    <div class="autocomplete input-field col s12">
+                      <i class="material-icons prefix">filter_hdr</i>
+                      <input id="state_input" type="text" name="myState">
+                      <label for="state_input">State</label>
+
+                    </div>
+                  </form>
+                  <!-- </div> -->
+                </div>
+              </form>
+            </div>
+
           </div>
+          <div class="row center">
+
+            <a href="#" id="submit-button" class="btn-large waves-effect waves-light blue lighten-1">Get Started</a>
+
+          </div>
+          <br><br>
 
         </div>
-        <div class="row center">
-
-          <a href="#" id="submit-button" class="btn-large waves-effect waves-light blue lighten-1">Get Started</a>
-
-        </div>
-        <br><br>
-
       </div>
+      <div class="parallax"><img src="assets/images/background19.jpg" alt="Unsplashed background img 1"></div>
     </div>
-    <div class="parallax"><img src="assets/images/background19.jpg" alt="Unsplashed background img 1"></div>
-  </div>
 
 
-  <div id="titleSection" class="container">
-    <div class="section">
+    <div id="titleSection" class="container">
+      <div class="section">
 
-      <!--   Icon Section   -->
-      <div class="row initialInfo">
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center"><i class="material-icons">drive_eta</i></h2>
-            <h5 class="center ">Tell us where <br> you're going</h5>
+        <!--   Icon Section   -->
+        <div class="row initialInfo">
+          <div class="col s12 m4">
+            <div class="icon-block">
+              <h2 class="center"><i class="material-icons">drive_eta</i></h2>
+              <h5 class="center ">Tell us where <br> you're going</h5>
 
-            <p class="light">We've designed ProTrip to be your perfect road trip companion. Let us know where you plan on taking your next pit stop and we will do the rest. No matter how far you are from your next city, we will give you the information you need right now to make that next stop the best one yet.</p>
+              <p class="light">We've designed ProTrip to be your perfect road trip companion. Let us know where you
+                plan on taking your next pit stop and we will do the rest. No matter how far you are from your next
+                city, we will give you the information you need right now to make that next stop the best one yet.</p>
+            </div>
           </div>
+
+          <div class="col s12 m4">
+            <div class="icon-block">
+              <h2 class="center"><i class="material-icons">local_dining</i><i class="material-icons">local_gas_station</i><i
+                  class="material-icons">local_activity</i></h2>
+              <h5 class="center">We'll pick the<br>best spots</h5>
+
+              <p class="light">If you're on a road trip, it's easy to waste money. ProTrip helps you save money and
+                spend it at the right places. We've make sure to get you the best gas prices, so you can spend that
+                extra cash on the best local food and activities at your next pit stop.</p>
+            </div>
+          </div>
+
+          <div class="col s12 m4">
+            <div class="icon-block">
+              <h2 class="center"><i class="material-icons">favorite</i></h2>
+              <h5 class="center">Save your<br>favorites</h5>
+
+              <p class="light">ProTrip finds you the best options and lets you decide. As you browse the choices at
+                your next pit stop, select the ones you like and quickly save them to your favorites. From there you
+                can compare menus, prices, and addresses to make the best decision.</p>
+            </div>
+          </div>
+
         </div>
 
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center"><i class="material-icons">local_dining</i><i class="material-icons">local_gas_station</i><i class="material-icons">local_activity</i></h2>
-            <h5 class="center">We'll pick the<br>best spots</h5>
-
-            <p class="light">If you're on a road trip, it's easy to waste money. ProTrip helps you save money and spend it at the right places. We've make sure to get you the best gas prices, so you can spend that extra cash on the best local food and activities at your next pit stop.</p>
-          </div>
-        </div>
-
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center"><i class="material-icons">favorite</i></h2>
-            <h5 class="center">Save your<br>favorites</h5>
-
-            <p class="light">ProTrip finds you the best options and lets you decide. As you browse the choices at your next pit stop, select the ones you like and quickly save them to your favorites. From there you can compare menus, prices, and addresses to make the best decision.</p>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="row hiddenInfo hidden">
+        <div class="row hiddenInfo hidden">
           <div class="col s12">
             <div class="icon-block">
               <h1 class="center"><i class="material-icons">place</i></h1>
@@ -232,59 +243,63 @@
               <br><br><br><br>
             </div>
           </div>
+        </div>
+
+
       </div>
-
-
     </div>
-  </div>
 
 
-<!-- Begin Food Section -->
-  
-  <div class="parallax-container valign-wrapper"  id="photoSection">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <div class="row center">
-          <h5 class="header col s12 light"><i class="material-icons" id="diningIcon">local_dining</i></h5>
+    <!-- Begin Food Section -->
+
+    <div class="parallax-container valign-wrapper" id="photoSection">
+      <div class="section no-pad-bot">
+        <div class="container">
+          <div class="row center">
+            <h5 class="header col s12 light"><i class="material-icons" id="diningIcon">local_dining</i></h5>
+          </div>
         </div>
       </div>
+      <div class="parallax"><img src="assets/images/background15.jpg" alt="Unsplashed background img 3"></div>
     </div>
-    <div class="parallax"><img src="assets/images/background15.jpg" alt="Unsplashed background img 3"></div>
-  </div>
 
-  <div id="foodSection" class="container">
-    <div class="section">
+    <div id="foodSection" class="container">
+      <div class="section">
 
-      <div class="row">
-        <div class="col s12 center">
-          <h3><i class="mdi-content-send brown-text"></i></h3>
-          <h4>Food</h4>
-          <!-- API food card starts -->
+        <div class="row">
+          <div class="col s12 center">
+            <h3><i class="mdi-content-send brown-text"></i></h3>
+            <h4>Food</h4>
+            <!-- API food card starts -->
             <div id="food_cards">
-            
+
             </div>
-          <!-- API food card ends -->  
-                  
-          <p class="left-align light initialInfo"><br>Don't settle for stopping at a fast food chain at your next pit stop. One of the best ways to make a road trip memorable is to discover some of the best local food places as you travel through towns. ProTrip helps you discover those places by giving you some of the highest rated local restaurants. Favorite the ones you're interested in and browse the menu before you get there.</p>
-          <!-- preloader image starts -->
-        <div class="preloader col s12 center">
-          <div class="progress  light-blue">
-            <div class="indeterminate"></div>
+            <!-- API food card ends -->
+
+            <p class="left-align light initialInfo"><br>Don't settle for stopping at a fast food chain at your next pit
+              stop. One of the best ways to make a road trip memorable is to discover some of the best local food
+              places as you travel through towns. ProTrip helps you discover those places by giving you some of the
+              highest rated local restaurants. Favorite the ones you're interested in and browse the menu before you
+              get there.</p>
+            <!-- preloader image starts -->
+            <div class="preloader col s12 center">
+              <div class="progress  light-blue">
+                <div class="indeterminate"></div>
+              </div>
+              <h5>Searching for the best food...</h5>
+            </div>
+            <!-- preloader image ends -->
+          </div>
         </div>
-        <h5>Searching for the best food...</h5>
+
       </div>
-          <!-- preloader image ends -->
-        </div>
-      </div>
-     
+
     </div>
 
-  </div>
 
+    <!-- Begin Gas Section -->
 
-  <!-- Begin Gas Section -->
-
-  <div class="parallax-container valign-wrapper" id="photoSection">
+    <div class="parallax-container valign-wrapper" id="photoSection">
       <div class="section no-pad-bot">
         <div class="container">
           <div class="row center">
@@ -294,147 +309,156 @@
       </div>
       <div class="parallax"><img src="assets/images/background21.jpg" alt="Unsplashed background img 2"></div>
     </div>
-  
+
     <div id="gasSection" class="container">
       <div class="section">
-  
+
         <div class="row">
           <div class="col s12 center">
             <h3><i class="mdi-content-send brown-text"></i></h3>
             <h4>Gas</h4>
             <!-- API gas card starts -->
             <div id="gas_cards">
-              
+
             </div>
-            <p class="left-align light initialInfo" id="gasText"><br>ProTrip helps you find the cheapest gas prices at your next pit stop. Think of what you could spend those extra dollars on as you travel. Using our real-time gas price locator, we will help you save time and money finding the right gas pump to keep you fueled on your journey.</p>
-          <!-- preloader image starts -->
-          <div class="preloader col s12 center">
-            <div class="progress  light-blue">
-              <div class="indeterminate"></div>
-          </div>
-          <h5>Searching for the cheapest gas...</h5>
-        </div>          
-        <!-- preloader image ends -->
-          <!-- API gas card ends -->
+            <p class="left-align light initialInfo" id="gasText"><br>ProTrip helps you find the cheapest gas prices at
+              your next pit stop. Think of what you could spend those extra dollars on as you travel. Using our
+              real-time gas price locator, we will help you save time and money finding the right gas pump to keep you
+              fueled on your journey.</p>
+            <!-- preloader image starts -->
+            <div class="preloader col s12 center">
+              <div class="progress  light-blue">
+                <div class="indeterminate"></div>
+              </div>
+              <h5>Searching for the cheapest gas...</h5>
+            </div>
+            <!-- preloader image ends -->
+            <!-- API gas card ends -->
           </div>
         </div>
-  
+
       </div>
     </div>
-  
 
-  <!-- Begin activities section. -->
 
-  <div class="parallax-container valign-wrapper"  id="photoSection">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <div class="row center">
-          <h5 class="header col s12 light"><i class="material-icons" id="activityIcon">local_activity</i></h5>
+    <!-- Begin activities section. -->
+
+    <div class="parallax-container valign-wrapper" id="photoSection">
+      <div class="section no-pad-bot">
+        <div class="container">
+          <div class="row center">
+            <h5 class="header col s12 light"><i class="material-icons" id="activityIcon">local_activity</i></h5>
+          </div>
         </div>
       </div>
+      <div class="parallax"><img src="assets/images/background17.jpg" alt="Unsplashed background img 3"></div>
     </div>
-    <div class="parallax"><img src="assets/images/background17.jpg" alt="Unsplashed background img 3"></div>
-  </div>
 
-  <div id="activitiesSection" class="container">
-    <div class="section">
+    <div id="activitiesSection" class="container">
+      <div class="section">
 
-      <div class="row">
-        <div class="col s12 center">
-          <h3><i class="mdi-content-send brown-text"></i></h3>
-          <h4>Events</h4>
-           <!-- API event card starts -->
+        <div class="row">
+          <div class="col s12 center">
+            <h3><i class="mdi-content-send brown-text"></i></h3>
+            <h4>Events</h4>
+            <!-- API event card starts -->
             <div id="event_cards">
-            
+
             </div>
-          <!-- API event card ends -->
-          <p class="left-align light initialInfo"><br>Chances are wherever you're headed there could be great local events and activities happening. From exciting sports events to phenomonal concerts, ProTrip highlights some of the activities happening at this next stop. Check out the dates and make plans to come back to this pit stop in the future so you don't miss out on these activities.</p>
-          <!-- preloader image starts -->
-          <div class="preloader col s12 center">
-            <div class="progress  light-blue">
-              <div class="indeterminate"></div>
+            <!-- API event card ends -->
+            <p class="left-align light initialInfo"><br>Chances are wherever you're headed there could be great local
+              events and activities happening. From exciting sports events to phenomonal concerts, ProTrip highlights
+              some of the activities happening at this next stop. Check out the dates and make plans to come back to
+              this pit stop in the future so you don't miss out on these activities.</p>
+            <!-- preloader image starts -->
+            <div class="preloader col s12 center">
+              <div class="progress  light-blue">
+                <div class="indeterminate"></div>
+              </div>
+              <h5>Searching for available events...</h5>
+            </div>
+            <!-- preloader image ends -->
           </div>
-          <h5>Searching for available events...</h5>
-        </div>          
-        <!-- preloader image ends -->
         </div>
-      </div>
 
-    </div>
-  </div>
-
-
-  <!-- Begin favorites section. -->
-
-  <div class="parallax-container valign-wrapper"  id="photoSection">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <div class="row center">
-          <h5 class="header col s12 light"><i class="material-icons" id="favoriteIcon">favorite</i></h5>
-        </div>
       </div>
     </div>
-    <div class="parallax"><img src="assets/images/background13.jpg" alt="Unsplashed background img 3"></div>
-  </div>
 
 
-  <div id="favoritesSection" class="container">
-    <div class="section">
+    <!-- Begin favorites section. -->
 
-      <div class="row">
-        <div class="col s12 center">
-          <h3><i class="mdi-content-send brown-text"></i></h3>
-          <h4>Favorites</h4>
-          <!-- API food card starts -->
+    <div class="parallax-container valign-wrapper" id="photoSection">
+      <div class="section no-pad-bot">
+        <div class="container">
+          <div class="row center">
+            <h5 class="header col s12 light"><i class="material-icons" id="favoriteIcon">favorite</i></h5>
+          </div>
+        </div>
+      </div>
+      <div class="parallax"><img src="assets/images/background13.jpg" alt="Unsplashed background img 3"></div>
+    </div>
+
+
+    <div id="favoritesSection" class="container">
+      <div class="section">
+
+        <div class="row">
+          <div class="col s12 center">
+            <h3><i class="mdi-content-send brown-text"></i></h3>
+            <h4>Favorites</h4>
+            <!-- API food card starts -->
             <div id="fav_cards">
-            
-            </div>
-          <!-- API food card ends -->
-          <p id="favParagraph" class="left-align light"><br>Once logged in, ProTrip will save all of your favorite gas stations, restaurants, and activities here. Come back to your favorites to reference the info you need to make your next pit stop the best one yet.</p>
-        </div>
-      </div>
 
+            </div>
+            <!-- API food card ends -->
+            <p id="favParagraph" class="left-align light"><br>Once logged in, ProTrip will save all of your favorite
+              gas stations, restaurants, and activities here. Come back to your favorites to reference the info you
+              need to make your next pit stop the best one yet.</p>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
-</div>
 
   <footer class="page-footer blue blue darken-1">
     <div class="container">
       <div class="row">
         <div class="col m12 l4 s12">
           <h6 class="white-text">Our Team</h6>
-          <p class="grey-text text-lighten-4">We are a team of developers who love building tools to make life better. We welcome any feedback, development ideas, problems or opportunities. Thanks for using ProTrip.</p>
+          <p class="grey-text text-lighten-4">We are a team of developers who love building tools to make life better.
+            We welcome any feedback, development ideas, problems or opportunities. Thanks for using ProTrip.</p>
         </div>
         <div class="col s3 m3 l2">
           <h6 class="white-text center">Mark</h6>
-                <div class="bioPic center">
-                  <img src="assets/images/TeamPics/mark.jpg" alt="Mark" class="circle responsive-img">
-                </div>
+          <div class="bioPic center">
+            <img src="assets/images/TeamPics/mark.jpg" alt="Mark" class="circle responsive-img">
+          </div>
           <p class="center bioText"><a class="white-text" href="https://markpython86.github.io/">Portfolio</a></p>
         </div>
         <div class="col s3 m3 l2">
           <h6 class="white-text center">Andrew</h6>
-                <div class="bioPic center">
-                  <img src="assets/images/TeamPics/Andrew.jpg" alt="Andrew" class="circle responsive-img">
-                </div>
+          <div class="bioPic center">
+            <img src="assets/images/TeamPics/Andrew.jpg" alt="Andrew" class="circle responsive-img">
+          </div>
           <p class="center bioText"><a class="white-text" href="https://aalbrecht17235.github.io/">Portfolio</a></p>
         </div>
         <div class="col s3 m3 l2">
           <h6 class="white-text center">Madelyn</h6>
-                <div class="bioPic center">
-                  <img src="assets/images/TeamPics/madelyn.jpg" alt="Madelyn" class="circle responsive-img">
-                </div>
+          <div class="bioPic center">
+            <img src="assets/images/TeamPics/madelyn.jpg" alt="Madelyn" class="circle responsive-img">
+          </div>
           <p class="center bioText"><a class="white-text" href="https://madelyneh.github.io/">Portfolio</a></p>
         </div>
 
-      <div class="col s3 m3 l2">
-        <h6 class="white-text center">Daniel</h6>
-              <div class="bioPic center">
-                <img src="assets/images/TeamPics/daniel.jpg" alt="Daniel" class="circle responsive-img">
-              </div>
-        <p class="center bioText"><a class="white-text" href="https://danielpolk.github.io/">Portfolio</a></p>
+        <div class="col s3 m3 l2">
+          <h6 class="white-text center">Daniel</h6>
+          <div class="bioPic center">
+            <img src="assets/images/TeamPics/daniel.jpg" alt="Daniel" class="circle responsive-img">
+          </div>
+          <p class="center bioText"><a class="white-text" href="https://danielpolk.github.io/">Portfolio</a></p>
+        </div>
       </div>
-    </div>
     </div>
     <div class="col s12 m12 l12">
       <div class="footer-copyright">
@@ -454,7 +478,7 @@
   <script src="js/main.js"></script>
   <script src="js/firebase2.js"></script>
   <script src="js/authentication.js"></script>
-  
+
 
 </body>
 
