@@ -271,20 +271,23 @@ function restaurantResponse(response) {
     }
 };
 
-// here push the text to the div using the id
+// clicking the FAVORITE button on the info cards =========================
 $(document.body).on("click", ".fav-btn", function () {
-    // console.log($(this).parent())
-
+    // storing event ID for firebase
     let eventId = this.getAttribute("id");
+    // storing value for firebase
     let value = this.getAttribute("value");
+
     let favKey = database.ref().child('users/' + userId + "/locations/" + city_input + "/" + value).push({
         id: eventId,
     }).getKey();
 
-    $(this).parent().find(".fav-btn").removeClass("fav-btn").addClass("rmv-btn").attr("databaseKey", favKey).attr("city", city_input);
-    // console.log(this);
-    $(this).parent().find(".material-icons").text("delete");
-    var divParent = $(this).parent();
+    // ===== editing here ANDREW =====
+    // .removeClass("fav-btn").addClass("rmv-btn")
+
+    $(this).parent().find(".fav-btn").attr("databaseKey", favKey).attr("city", city_input);
+    $(this).parent().find(".material-icons").text("favorite_border");
+    var divParent = $(this).parent().removeClass("fav-btn").addClass("rmv-btn");
     var upperParent = divParent.parent().clone();
     var food_div_col = $("<div>").addClass("col s12 m6");
     var food_div = $("<div>").addClass("card");
