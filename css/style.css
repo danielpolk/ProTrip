@@ -295,6 +295,7 @@ a.btn-floating.halfway-fab.rmv-btn{
 
 .card-content {
   height: auto;
+  width: 100%;
 }
 
 .card-image img {
@@ -384,4 +385,9 @@ img#test {
 .bioText {
   margin-top: -5px;
   font-size: 12px;
+}
+
+
+button#first-sign-in, button#first-sign-in-new{
+  margin:0 auto;
 }
