@@ -169,7 +169,7 @@ firebase.auth().onAuthStateChanged(function(user) {
       $(".account-info").empty();
       $(".account-info").text(userName);
 
-      userFavorites.add();
+      userFavorites.get();
 
     });
   
@@ -193,7 +193,7 @@ let userFavorites  = {
 
   delay: 0,
 
-  add: function() {
+  get: function() {
     
     let locations = Object.entries(currentUser.locations);
     
@@ -226,7 +226,7 @@ let userFavorites  = {
 
     } else if (eventType === "event") {
 
-      this.delay += 200;
+      this.delay += 250;
 
       setTimeout(() => {
         this.eventAPI(eventAPIId, eventDatabaseKey, cityName);
