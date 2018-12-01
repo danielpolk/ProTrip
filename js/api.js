@@ -157,7 +157,7 @@ function restaurantFinder() {
                         }).then(function (response) {
                             // get the longitude and latitude to use it for the Gas Feed API
                             lon = response.restaurants[0].restaurant.location.longitude;
-                            lat = response.restaurants[0].restaurant.location.latitude
+                            lat = response.restaurants[0].restaurant.location.latitude;
                             // now call the gas station apu to run
                             gasStationFinder(lon, lat, city_input);
                             // now call event finder to run with city name input
@@ -191,91 +191,103 @@ restaurantFinder();
 $('#oopsie').hide();
 
 function eventFinder(city_input) {
+    
     // eliminating spaces in city if there are any
-    var city_name_nospace = city_input.split(' ').join('+');
+    var city_name_nospace = city_input.split(' ').join('-');
+    
     // inserting the spaceless city name into the ticket master API URL
     var queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?city=" + city_name_nospace + "&apikey=hhGX8q6JtGAAl35uFcsEeWLTAuCdjSVc&size=10";
+    console.log(queryURL)
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        // run for loop through the ticket master response
-        for (var i = 0; i < (response._embedded.events.length); i++) {
-            // store event names
-            var event_name = response._embedded.events[i].name;
-            // store event dates
-            var event_date = response._embedded.events[i].dates.start.localDate;
-            // store event times (military time)
-            var event_time = response._embedded.events[i].dates.start.localTime;
-            // convert event times to standard time
-            var event_time_std = moment(event_time, 'HH:mm').format('hh:mm A');
-            // store event venue's addresses
-            var event_venue = response._embedded.events[i]._embedded.venues[0].address.line1;
-            // store event venue name
-            var event_venue_name = response._embedded.events[i]._embedded.venues[0].name;
-            // store images associated with event
-            var event_img = response._embedded.events[i].images[0].url;
-            // store link to ticketmaster event URL
-            var event_link = response._embedded.events[i].url;
-            // store unique event ID
-            var event_id = response._embedded.events[i].id;
-            // store current date to be compared later
-            var this_month = new Date();
-            // stores dates of all events in response
-            var dates = new Date(event_date);
-            // stores the months of the events in response
-            var event_months = dates.getMonth();
+            if (response.page.totalElements !== 0) {
+                // run for loop through the ticket master response
+                for (var i = 0; i < (response._embedded.events.length); i++) {
+                    // store event names
+                    var event_name = response._embedded.events[i].name;
+                    // store event dates
+                    var event_date = response._embedded.events[i].dates.start.localDate;
+                    // store event times (military time)
+                    var event_time = response._embedded.events[i].dates.start.localTime;
+                    // convert event times to standard time
+                    var event_time_std = moment(event_time, 'HH:mm').format('hh:mm A');
+                    // store event venue's addresses
+                    var event_venue = response._embedded.events[i]._embedded.venues[0].address.line1;
+                    // store event venue name
+                    var event_venue_name = response._embedded.events[i]._embedded.venues[0].name;
+                    // store images associated with event
+                    var event_img = response._embedded.events[i].images[0].url;
+                    // store link to ticketmaster event URL
+                    var event_link = response._embedded.events[i].url;
+                    // store unique event ID
+                    var event_id = response._embedded.events[i].id;
+                    // store current date to be compared later
+                    var this_month = new Date();
+                    // stores dates of all events in response
+                    var dates = new Date(event_date);
+                    // stores the months of the events in response
+                    var event_months = dates.getMonth();
 
-            // check if event date is within the same month as now using vars above
-            if (event_months == this_month.getMonth()) {
-                // creating a card to display the events within the month
-                var event_div_col = $("<div>").addClass("col s12 m6")
-                // creating div for card structure
-                var event_div = $("<div>").addClass("card")
-                // creating div for card structure that will hold info
-                var event_div_image = $("<div>").addClass("card-image")
-                // creating img element with api event img and storing it
-                var event_main_img = $("<img>").attr("src", event_img)
-                // creating span for event name and inserting even name as text
-                var event_name_span = $("<span>").addClass("card-title").text(event_name)
-                // creating event favorite button
-                var event_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite</i></a>").attr("id", event_id).attr("value", "event");
-                // creating div for card structure
-                var event_div_content = $("<div>").addClass("card-content")
-                // creating link to buy tickets
-                var event_tickets = $("<a href='" + event_link + "' class='left'>Buy Tickets</a>")
-                // line breaks for spacing
-                var line_break1 = $("<br>");
-                var line_break2 = $("<br>");
-                // creating span for event date and time
-                var event_date_span = $("<span>").addClass("left").text("Show Date: " + event_date + " at " + event_time_std);
-                var line_break3 = $("<br>");
-                // creating span for event address
-                var event_address_span = $("<span>").addClass("left").text("Event Address: " + event_venue + " at " + event_venue_name);
-                // eliminating spaces between even venue address to insert into Google Maps URL
-                var replaced = event_venue.split(' ').join('+');
-                // inserting spaceless venue address into Google Maps URL
-                var event_google_link = $("<a href='https://www.google.com/maps/place/" + replaced + "' target='_blank' class='left'>Map link</a>")
-                // Appending event image, name, and favorite button to event div for the image
-                event_div_image.append(event_main_img).append(event_name_span).append(event_fav_btn);
-                // appending ticket link, line breaks, date, address, and Google Maps link to event div for the content
-                event_div_content.append(event_tickets).append(line_break1).append(event_date_span).append(line_break2).append(event_address_span).append(line_break3).append(event_google_link);
-                // appending image and content div to parent event div
-                event_div.append(event_div_image).append(event_div_content);
-                // pushing parent event div to its parent col div
-                event_div_col.append(event_div);
-                } else {
-                    $("#event_cards").text("Sorry, there are no events this month in " + city_input.toLowerCase().replace(/\b[a-z]/g, function (letter) {
-                        return letter.toUpperCase();
-                    }));
-    
+                    // check if event date is within the same month as now using vars above
+                    if (event_months === (this_month.getMonth())) {
+                        // creating a card to display the events within the month
+                        var event_div_col = $("<div>").addClass("col s12 m6")
+                        // creating div for card structure
+                        var event_div = $("<div>").addClass("card")
+                        // creating div for card structure that will hold info
+                        var event_div_image = $("<div>").addClass("card-image")
+                        // creating img element with api event img and storing it
+                        var event_main_img = $("<img>").attr("src", event_img)
+                        // creating span for event name and inserting even name as text
+                        var event_name_span = $("<span>").addClass("card-title").text(event_name)
+                        // creating event favorite button
+                        var event_fav_btn = $("<a class='fav-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>favorite</i></a>").attr("id", event_id).attr("value", "event");
+                        // creating div for card structure
+                        var event_div_content = $("<div>").addClass("card-content")
+                        // creating link to buy tickets
+                        var event_tickets = $("<a href='" + event_link + "' class='left'>Buy Tickets</a>")
+                        // line breaks for spacing
+                        var line_break1 = $("<br>");
+                        var line_break2 = $("<br>");
+                        // creating span for event date and time
+                        var event_date_span = $("<span>").addClass("left").text("Show Date: " + event_date + " at " + event_time_std);
+                        var line_break3 = $("<br>");
+                        // creating span for event address
+                        var event_address_span = $("<span>").addClass("left").text("Event Address: " + event_venue + " at " + event_venue_name);
+                        // eliminating spaces between even venue address to insert into Google Maps URL
+                        var replaced = event_venue.split(' ').join('+');
+                        // inserting spaceless venue address into Google Maps URL
+                        var event_google_link = $("<a href='https://www.google.com/maps/place/" + replaced + "' target='_blank' class='left'>Map link</a>")
+                        // Appending event image, name, and favorite button to event div for the image
+                        event_div_image.append(event_main_img).append(event_name_span).append(event_fav_btn);
+                        // appending ticket link, line breaks, date, address, and Google Maps link to event div for the content
+                        event_div_content.append(event_tickets).append(line_break1).append(event_date_span).append(line_break2).append(event_address_span).append(line_break3).append(event_google_link);
+                        // appending image and content div to parent event div
+                        event_div.append(event_div_image).append(event_div_content);
+                        // pushing parent event div to its parent col div
+                        event_div_col.append(event_div);
+                    } else if (event_months === (this_month.getMonth()) + 1) {
+                        $("#event_cards").html("<h6>Sorry, there are no events this month in " + city_input.toLowerCase().replace(/\b[a-z]/g, function (letter) {
+                            return letter.toUpperCase();
+                        }) + ".</h6>");
+                    }
+                    $("#event_cards").append(event_div_col);
+
                 }
 
-            // append the card we created above to the HTML
-            $("#event_cards").append(event_div_col);
-        }
-    })
-};
+            } else {
+                $("#event_cards").html("<h6>Sorry, there are no events this month in " + city_input.toLowerCase().replace(/\b[a-z]/g, function (letter) {
+                    return letter.toUpperCase();
+                }) + ".</h6>");
+
+            };
+
+        });
+
+}
+
 
 
 function restaurantResponse(response) {
