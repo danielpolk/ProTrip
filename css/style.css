@@ -61,10 +61,9 @@ p {
     margin: auto;
     margin-top: 10px;
     overflow-y: auto;
-    border-radius: 23px;
+    border-radius: 3px;
     will-change: top, opacity;
     z-index: 20;
-    border: .5px dotted black;
     box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.541);
     color: white;
 
@@ -76,7 +75,7 @@ p {
 
  button#first-sign-in, button#first-sign-in-new {
     margin: 0 auto;
-    border-radius: 15px;
+    border-radius: 3px;
 }
 
 
@@ -119,7 +118,7 @@ footer.page-footer {
     margin: auto;
     margin-top: 10px;
     overflow-y: auto;
-    border-radius: 10px;
+    border-radius: 3px;
     will-change: top, opacity;
     z-index: 20;
     border: .5px dotted black;
@@ -151,10 +150,9 @@ h4.close-text.center {
     margin: auto;
     margin-top: 10px;
     overflow-y: auto;
-    border-radius: 80px;
+    border-radius: 3px;
     will-change: top, opacity;
     z-index: 20;
-    border: .5px dotted black;
     box-shadow: 0 0 0 .2rem rgba(255, 255, 255, 0.541);
     color: white;
  }
@@ -172,7 +170,7 @@ h4.close-text.center {
  #cancel-sign-in {
    border: none;
    background: none;
-   border-bottom: 1px dotted white;
+   border-bottom: .5px solid white;
  }
 
  #top-exit-btn {
@@ -369,10 +367,10 @@ img#test {
   margin: auto;
   margin-top: 10px;
   overflow-y: auto;
-  border-radius: 80px;
+  border-radius: 3px;
   will-change: top, opacity;
   z-index: 20;
-  border: .5px dotted black;
+  border: .5px black;
   box-shadow: 0 0 0 .2rem rgba(255, 255, 255, 0.541);
   color: white;
 }
