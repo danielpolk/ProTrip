@@ -5460,11 +5460,11 @@ button.btn-floating {
 }
 
 .fixed-action-btn ul {
-  left: 0;
+  left: 17px;
   right: 0;
   text-align: center;
   position: absolute;
-  bottom: 64px;
+  bottom: 55px;
   margin: 0;
   visibility: hidden;
 }
