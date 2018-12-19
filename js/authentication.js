@@ -8,7 +8,7 @@ let dropdownItems = ["Favorites", "Logout"];
 $(document).ready(function() {
 
     document.getElementById("user-sign-in").style.display = "none";
-    let ms = document.getElementById("main-section");
+    const ms = document.getElementById("main-section");
     ms.classList.remove("blur-effect");
 });
 
@@ -108,7 +108,7 @@ $(".sidenav-trigger").on('click', function() {
       if (listValue === "0") {
 
         for (let i = 0; i < dropdownItems.length; i++) {
-        let newList = $("<li>");
+        const newList = $("<li>");
         let a = $("<a>").addClass("dropdown-item left").attr("id", dropdownItems[i]).text(dropdownItems[i]);
         newList.html(a);
         $("#nav-mobile").append(newList);
@@ -127,8 +127,8 @@ $(document).on("click", "#Logout", function () {
   $(".dropdown-item").remove();
   $(".no-mobile").attr("value", "0");
 
-  let newDiv = $("<div>").attr("id", "log-out-success").addClass("container");
-  let newText = $("<span>").text("Log out successful.")
+  const newDiv = $("<div>").attr("id", "log-out-success").addClass("container");
+  const newText = $("<span>").text("Log out successful.")
   newDiv.append(newText);
   $("body").prepend(newDiv);
 
@@ -152,7 +152,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
     // User is signed in.
     document.getElementById("user-sign-in").style.display = "none";
-    let ms = document.getElementById("main-section");
+    const ms = document.getElementById("main-section");
     ms.classList.remove("blur-effect");
     userId = user.uid;
 
@@ -255,23 +255,23 @@ let userFavorites  = {
       let gas_state = response.details.region;
       let gas_zipcode = response.details.zip;
 
-      var gas_div_col = $("<div>").addClass("col s12 m6");
-      var gas_div = $("<div>").addClass("card");
-      var gas_div_image = $("<div>").addClass("card-image");
-      var gas_main_img = $("<img>").attr("src", "assets/images/GasStationLogos/GasBackground.jpeg");
-      var gas_name_span = $("<h2>").addClass("card-title").text(gas_station_name);
-      var source = 'assets/images/GasStationLogos/' + gas_station_name + '.png"'
-      var test2 = '"gas_logo"';
-      var gas_logo = $('<div class=' + test2 + ' style="background-image: url(' + source + ')"></div>');
-      var gas_rmv_btn = $("<a class='rmv-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>delete</i></a>").attr("id", eventAPIId).attr("value", "gas").attr("databaseKey", eventDatabaseKey).attr("city", cityName);
+      let gas_div_col = $("<div>").addClass("col s12 m6");
+      let gas_div = $("<div>").addClass("card");
+      let gas_div_image = $("<div>").addClass("card-image");
+      let gas_main_img = $("<img>").attr("src", "assets/images/GasStationLogos/GasBackground.jpeg");
+      let gas_name_span = $("<h2>").addClass("card-title").text(gas_station_name);
+      let source = 'assets/images/GasStationLogos/' + gas_station_name + '.png"'
+      let test2 = '"gas_logo"';
+      let gas_logo = $('<div class=' + test2 + ' style="background-image: url(' + source + ')"></div>');
+      let gas_rmv_btn = $("<a class='rmv-btn btn-floating halfway-fab waves-effect waves-light red'><i class='material-icons'>delete</i></a>").attr("id", eventAPIId).attr("value", "gas").attr("databaseKey", eventDatabaseKey).attr("city", cityName);
 
-      var gas_div_content = $("<div>").addClass("card-content");
-      var prices = $('<h5>').addClass('gas-price').text("$" + gas_price + "/gal");
-      var line_break2 = $("<br>");
-      var line_break3 = $("<br>");
-      var gas_address_span = $("<span>").addClass("left").text("Address: " + gas_address + " " + gas_city_name + ", " + gas_state + ", " + gas_zipcode);
-      var replaced = gas_address.split(' ').join('+');
-      var gas_google_link = $("<a href='https://www.google.com/maps/place/" + replaced + "' target='_blank' class='left'>Map link</a>");
+      let gas_div_content = $("<div>").addClass("card-content");
+      let prices = $('<h5>').addClass('gas-price').text("$" + gas_price + "/gal");
+      let line_break2 = $("<br>");
+      let line_break3 = $("<br>");
+      let gas_address_span = $("<span>").addClass("left").text("Address: " + gas_address + " " + gas_city_name + ", " + gas_state + ", " + gas_zipcode);
+      let replaced = gas_address.split(' ').join('+');
+      let gas_google_link = $("<a href='https://www.google.com/maps/place/" + replaced + "' target='_blank' class='left'>Map link</a>");
 
       gas_div_image.append(gas_main_img).append(gas_name_span).append(gas_logo).append(gas_rmv_btn);
       gas_div_content.append(prices).append(line_break2).append(gas_address_span).append(line_break3).append(gas_google_link);
