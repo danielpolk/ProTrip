@@ -45,9 +45,9 @@
 
 <a name="stories"></a>
 ## User Stories
-* "Pit Stop helped me save money at the gas pump during my road trip stops."
-* "You won't believe the restaurant we found using Pit Stop. The local, hole in the wall food was incredible. It was one of our favorite memories from the road trip."
-* "Pit Stop was so easy to use. We mapped out our stops, found restaurants we liked, and were able to call in reservations right from the app!"
+* "As a driver, I can quickly find the cheapest gas stations near me so I can save money."
+* "As a visitor, I can find really good local food in whatever city I'm in."
+* "As a user, the experience feels inuitive so I can get back to my road trip with the info I need."
 
 
 <a name="experience"></a>
